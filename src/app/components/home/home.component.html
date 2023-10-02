@@ -4,43 +4,7 @@
   </header>
 
   <main>
-    <section class="search-section">
-      <h2>Search for Trains</h2>
-      <form class="row">
-        <div class="col-md-4">
-          <div class="dropdown" [class.show]="fromsuggestions.length > 0">
-            <label for="from">From:</label>
-            <input type="text" id="from" name="from" class="form-control" placeholder="Enter origin" [(ngModel)]="frominputValue" (keyup)="onInput('from')">
-              <ul class="dropdown-menu dropdown-menu-start" [class.show]="fromsuggestions.length > 0">
-                <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
-              </ul>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <!-- <label for="to">To:</label> -->
-          <!-- <input type="text" id="to" class="form-control" placeholder="Enter destination"> -->
-
-          <div class="dropdown" [class.show]="tosuggestions.length > 0">
-            <label for="to">To:</label>
-            <input type="text" id="to" name="to" class="form-control" placeholder="Enter destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')">
-              <ul class="dropdown-menu dropdown-menu-start" [class.show]="tosuggestions.length > 0">
-                <li class="dropdown-item" *ngFor="let suggestion of tosuggestions" (click)="onSelectSuggestion(suggestion, 'to')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
-              </ul>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <label for="date">Date of Travel:</label>
-          <input type="date" id="date" class="form-control">
-        </div>
-
-        <div class="col-md-12 mt-3">
-          <button type="submit" class="btn btn-primary">Search Trains</button>
-        </div>
-      </form>
-    </section>
-
+    <app-search></app-search>
     <section class="booking-section">
       <h2>Book Your Tickets</h2>
       <p>Select your preferred train and book your tickets.</p>

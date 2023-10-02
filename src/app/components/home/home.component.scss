@@ -10,40 +10,15 @@ header {
   padding: 20px;
   text-align: center;
 }
-
-main {
-  padding: 20px 0;
-}
-
-.search-section,
 .booking-section {
   background-color: #f0f0f0;
   padding: 20px;
   margin-bottom: 20px;
 }
 
-form label {
-  display: block;
-  margin-bottom: 5px;
+main {
+  padding: 20px 0;
 }
 
-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
 
-form {
-  .dropdown {
-    ul {
-      width: 100%;
-      li {
-        &:hover {
-          background: f0f0f0;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-}
 

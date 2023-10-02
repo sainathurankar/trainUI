@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutocompleteService } from 'src/app/services/autocomplete.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
   frominputValue = '';
   toinputValue = '';
@@ -69,4 +68,5 @@ export class HomeComponent implements OnInit {
       doj: this.dateOfTravel
     }});
   }
+
 }

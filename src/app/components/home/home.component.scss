@@ -33,12 +33,17 @@ form input {
   margin-bottom: 10px;
 }
 
-footer {
-  background-color: #34495e;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+form {
+  .dropdown {
+    ul {
+      width: 100%;
+      li {
+        &:hover {
+          background: f0f0f0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
+

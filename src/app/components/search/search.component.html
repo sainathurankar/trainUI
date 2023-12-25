@@ -26,7 +26,7 @@
 
       <div class="col-md-4">
         <label for="date">Date of Travel:</label>
-        <input type="date" id="date" #date class="form-control" (input)="onDateChange(date.value)">
+        <input type="date" id="date" #date class="form-control" (input)="onDateChange(date.value)" [min]="minDate">
       </div>
 
       <div class="col-md-12 mt-3">

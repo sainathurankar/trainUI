@@ -17,8 +17,15 @@ export class SearchComponent {
 
   fromsuggestions: any[] = [];
   tosuggestions: any[] = [];
+  minDate?: string;
 
-  constructor(private autocompleteService: AutocompleteService, private router: Router) { }
+  constructor(private autocompleteService: AutocompleteService, private router: Router) {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2);
+    this.minDate = `${year}-${month}-${day}`;
+  }
 
 
   onInput(key: string): void {
@@ -27,7 +34,6 @@ export class SearchComponent {
       // this.suggestions = this.autocompleteService.getSuggestions()
       // .filter(suggestion => suggestion.toLowerCase().includes(this.inputValue.toLowerCase()));
       this.autocompleteService.getSuggestions(input.trim()).subscribe((data) => {
-        console.log(data);
         if (key === 'from') {
           this.fromsuggestions = data.results;
         } else {
@@ -54,12 +60,9 @@ export class SearchComponent {
 
   onDateChange(date: string) {
     this.dateOfTravel = date.split('-').join('');
-    console.log(date);
-    console.log(this.dateOfTravel);
   }
 
   onClickSearch() {
-    console.log('click')
     this.router.navigate(['results'], {queryParams: {
       src: this.frominputObject.stationCode,
       dst: this.toinputObject.stationCode,

@@ -1,0 +1,10 @@
+.container {
+  margin-top: 10px;
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .quota-card {
+    min-height: 128px; /* Adjust the height as needed */
+  }
+}

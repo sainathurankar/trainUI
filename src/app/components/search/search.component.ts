@@ -17,8 +17,15 @@ export class SearchComponent {
 
   fromsuggestions: any[] = [];
   tosuggestions: any[] = [];
+  minDate?: string;
 
-  constructor(private autocompleteService: AutocompleteService, private router: Router) { }
+  constructor(private autocompleteService: AutocompleteService, private router: Router) {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2);
+    this.minDate = `${year}-${month}-${day}`;
+  }
 
 
   onInput(key: string): void {

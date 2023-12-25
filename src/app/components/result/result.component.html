@@ -24,21 +24,21 @@
           </div>
 
           <div class="row">
-            <div *ngFor="let avail of train.availabilitiesList" class="col-md-2 mb-2">
+            <div *ngFor="let avail of train.availabilitiesList" class="col-md-2">
               <div class="card bg-light rounded quota-card"
-                [ngClass]="{'border-success': avail.status === 'Available' || avail.status === 'CURR_AVBL', 'border-warning': avail.status?.indexOf('WL') > 0, 'border-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE'}">
+                [ngClass]="{'border-success': avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC', 'border-warning': avail.status?.indexOf('WL') > 0, 'border-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE'}">
                 <div class="card-body">
-                  <h4 class="card-subtitle mb-2 text-dark">{{ avail.quota }}</h4>
-                  <div class="card-text d-flex justify-content-between mb-3">
+                  <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
+                  <div class="card-text d-flex justify-content-between">
                     <div class="text-start">
-                      <p class=""><b>{{ avail.className }}</b></p>
-                      <p
+                      <p class="mb-1"><b>{{ avail.className }}</b></p>
+                      <p class="mb-1"
                         [ngClass]="{'text-success': avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC', 'text-warning': avail.status?.indexOf('WL') > 0, 'text-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE'}">
                         <b>{{ avail.seats }}</b> {{ avail.status }}</p>
                       <span class="text-muted">{{ avail.lastUpdatedOn }}</span>
                     </div>
                     <div class="text-end">
-                      <p *ngIf="avail.fare !== 'null'"><b>₹ {{ avail.fare }}</b></p>
+                      <p class="mb-1" *ngIf="avail.fare !== 'null'"><b>₹ {{ avail.fare }}</b></p>
                     </div>
                   </div>
                 </div>

@@ -6,21 +6,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Build Docker Image
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To build the Docker image, use the following command:
 
-## Build
+```bash
+docker build -t train-booking-app:latest .
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Run Docker Container
 
-## Running unit tests
+To run the Docker container and expose the Spring Boot application on port 8080, use the following command:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+docker run -p 80:80 train-booking-app:latest
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 

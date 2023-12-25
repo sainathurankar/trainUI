@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <div class="dropdown" [class.show]="fromsuggestions.length > 0">
           <label for="from">From:</label>
-          <input type="text" id="from" name="from" class="form-control" placeholder="Enter origin" [(ngModel)]="frominputValue" (keyup)="onInput('from')">
+          <input type="text" id="from" name="from" class="form-control" placeholder="Enter origin" [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
             <ul class="dropdown-menu dropdown-menu-start" [class.show]="fromsuggestions.length > 0">
               <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
             </ul>
@@ -17,7 +17,7 @@
 
         <div class="dropdown" [class.show]="tosuggestions.length > 0">
           <label for="to">To:</label>
-          <input type="text" id="to" name="to" class="form-control" placeholder="Enter destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')">
+          <input type="text" id="to" name="to" class="form-control" placeholder="Enter destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
             <ul class="dropdown-menu dropdown-menu-start" [class.show]="tosuggestions.length > 0">
               <li class="dropdown-item" *ngFor="let suggestion of tosuggestions" (click)="onSelectSuggestion(suggestion, 'to')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
             </ul>

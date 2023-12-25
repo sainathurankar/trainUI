@@ -1,0 +1,25 @@
+<div class="card bg-light rounded quota-card" [ngClass]="getQuotaCardClass(avail.status)">
+  <div class="card-body">
+    <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
+    <div class="card-text d-flex justify-content-between">
+      <div class="text-start">
+        <p class="mb-1"><b>{{ avail.className }}</b></p>
+        <p class="mb-1" [ngClass]="getAvailabilityClass(avail.status)">
+          <b>{{ avail.seats }}</b> {{ avail.status }}
+        </p>
+        <span class="text-muted">{{ avail.lastUpdatedOn }}</span>
+      </div>
+      <div class="text-end">
+        <p class="mb-1" *ngIf="avail.fare !== 'null'"><b>₹ {{ avail.fare }}</b></p>
+
+        <span *ngIf="updating" class="spinner-border spinner-border-sm text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </span>
+        
+        <span *ngIf="!updating" class="icon refresh" (click)="update()">
+          <i class="fas fa-sync-alt"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

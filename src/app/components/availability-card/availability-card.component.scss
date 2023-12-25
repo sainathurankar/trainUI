@@ -1,0 +1,17 @@
+.card {
+  margin-bottom: 10px;
+}
+
+.quota-card {
+  min-height: 128px;
+}
+
+.refresh {
+  cursor: pointer;
+  color: #846cca;
+
+  &:hover {
+    color: #351398;
+    font-weight: 700;
+  }
+}

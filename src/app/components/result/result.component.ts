@@ -13,6 +13,7 @@ export class ResultComponent implements OnInit {
   dst: string = '';
   doj: string = '';
   searchResponse: any;
+  loading = true;
 
   constructor(
     private searchService: SearchService,
@@ -39,27 +40,13 @@ export class ResultComponent implements OnInit {
     this.searchService.getSearchResults(searchInput, "false").subscribe(data => {
       console.log(data);
       this.searchResponse = data;
+      this.loading = false;
     })
 
     // this.searchService.getSearchResults(searchInput, "true").subscribe(data => {
     //   console.log(data);
     //   this.searchResponse = data;
+    //   this.loading = false;
     // })
-  }
-
-  getQuotaCardClass(status: string): { [key: string]: boolean } {
-    return {
-      'border-available': status === 'Available' || status === 'CURR_AVBL',
-      'border-waiting': status?.indexOf('WL') > 0,
-      'border-regret': status === 'REGRET' || status === 'NOT AVAILABLE',
-    };
-  }
-
-  getAvailabilityClass(status: string): { [key: string]: boolean } {
-    return {
-      'text-success': status === 'Available' || status === 'CURR_AVBL' || status === 'RAC',
-      'text-warning': status?.indexOf('WL') > 0,
-      'text-danger': status === 'REGRET' || status === 'NOT AVAILABLE',
-    };
   }
 }

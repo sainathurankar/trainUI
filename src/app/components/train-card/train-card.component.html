@@ -1,0 +1,27 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h4 class="card-title text-primary">
+      <span class="fw-bold text-uppercase">{{ train.trainName }}</span> ({{ train.trainNumber }})
+    </h4>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="text-start">
+        <p class="card-text text-muted">
+          <span>{{ train.fromStation }} ({{ train.fromStationCode }})</span>
+        </p>
+        <p class="fs-5 fw-bold">{{ train.departureTime }}</p>
+      </div>
+      <div class="text-end">
+        <p class="card-text text-muted">
+          <span>{{ train.toStation }} ({{ train.toStationCode }})</span>
+        </p>
+        <p class="fs-5 fw-bold">{{ train.arrivalTime }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div *ngFor="let avail of train.availabilitiesList" class="col-md-2">
+        <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -35,7 +35,9 @@
               "src/styles.scss",
               "bootstrap/dist/css/bootstrap.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -106,9 +108,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "trainUI"
+  "defaultProject": "trainUI",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

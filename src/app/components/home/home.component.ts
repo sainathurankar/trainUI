@@ -8,7 +8,7 @@ import { AutocompleteService } from 'src/app/services/autocomplete.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   frominputValue = '';
   toinputValue = '';
@@ -21,8 +21,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private autocompleteService: AutocompleteService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
 
   onInput(key: string): void {
     const input = key === 'from' ? this.frominputValue : this.toinputValue;

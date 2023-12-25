@@ -3,50 +3,14 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div *ngFor="let train of searchResponse?.trains" class="card mb-3">
-        <div class="card-body">
-          <h4 class="card-title text-primary">
-            <span class="fw-bold text-uppercase">{{ train.trainName }}</span> ({{ train.trainNumber }})
-          </h4>
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="text-start">
-              <p class="card-text text-muted">
-                <span>{{ train.fromStation }} ({{ train.fromStationCode }})</span>
-              </p>
-              <p class="fs-5 fw-bold">{{ train.departureTime }}</p>
-            </div>
-            <div class="text-end">
-              <p class="card-text text-muted">
-                <span>{{ train.toStation }} ({{ train.toStationCode }})</span>
-              </p>
-              <p class="fs-5 fw-bold">{{ train.arrivalTime }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div *ngFor="let avail of train.availabilitiesList" class="col-md-2">
-              <div class="card bg-light rounded quota-card"
-                [ngClass]="{'border-success': avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC', 'border-warning': avail.status?.indexOf('WL') > 0, 'border-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE'}">
-                <div class="card-body">
-                  <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
-                  <div class="card-text d-flex justify-content-between">
-                    <div class="text-start">
-                      <p class="mb-1"><b>{{ avail.className }}</b></p>
-                      <p class="mb-1"
-                        [ngClass]="{'text-success': avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC', 'text-warning': avail.status?.indexOf('WL') > 0, 'text-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE'}">
-                        <b>{{ avail.seats }}</b> {{ avail.status }}</p>
-                      <span class="text-muted">{{ avail.lastUpdatedOn }}</span>
-                    </div>
-                    <div class="text-end">
-                      <p class="mb-1" *ngIf="avail.fare !== 'null'"><b>₹ {{ avail.fare }}</b></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div *ngIf="!loading; else loader">
+        <div *ngFor="let train of searchResponse?.trains">
+          <app-train-card [train] = "train"></app-train-card>
         </div>
       </div>
+      <ng-template #loader>
+        <app-loader></app-loader>
+      </ng-template>
     </div>
   </div>
 </div>

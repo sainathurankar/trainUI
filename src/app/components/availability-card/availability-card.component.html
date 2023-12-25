@@ -1,0 +1,19 @@
+<div class="card bg-light rounded quota-card"
+  [ngClass]="{'border-success': avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC', 'border-warning': avail.status?.indexOf('WL') > 0, 'border-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE' || avail.status === 'CLASS NOT EXIST'}">
+  <div class="card-body">
+    <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
+    <div class="card-text d-flex justify-content-between">
+      <div class="text-start">
+        <p class="mb-1"><b>{{ avail.className }}</b></p>
+        <p class="mb-1"
+          [ngClass]="{'text-success': avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC', 'text-warning': avail.status?.indexOf('WL') > 0, 'text-danger': avail.status === 'REGRET' || avail.status ==='NOT AVAILABLE' || avail.status === 'CLASS NOT EXIST'}">
+          <b>{{ avail.seats }}</b> {{ avail.status }}
+        </p>
+        <span class="text-muted">{{ avail.lastUpdatedOn }}</span>
+      </div>
+      <div class="text-end">
+        <p class="mb-1" *ngIf="avail.fare !== 'null'"><b>₹ {{ avail.fare }}</b></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TrainUpdateInput } from 'src/app/services/search/search-input';
+import { SearchService } from 'src/app/services/search/search.service';
 
 @Component({
   selector: 'app-availability-card',
@@ -8,7 +10,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AvailabilityCardComponent {
   @Input() avail: any;
 
-  constructor() {}
+  @Input() train: any;
+
+  @Input() doj: any;
+
+  updating = false;
+
+  constructor(private searchService: SearchService) {}
 
   getQuotaCardClass(status: string): { [key: string]: boolean } {
     return {
@@ -32,5 +40,23 @@ export class AvailabilityCardComponent {
         status === 'NOT AVAILABLE' ||
         status === 'CLASS NOT EXIST',
     };
+  }
+
+  update() {
+    this.updating = true;
+    const trainUpdateInput: TrainUpdateInput =
+    {
+      source: this.train.fromStationCode,
+      destination: this.train.toStationCode,
+      doj: this.doj,
+      quota: this.avail.quota,
+      trainNumber: this.train.trainNumber,
+      class: this.avail.className
+    };
+
+    this.searchService.getTrainUpdate(trainUpdateInput).subscribe((response) => {
+      this.avail = response;
+      this.updating = false;
+    })
   }
 }

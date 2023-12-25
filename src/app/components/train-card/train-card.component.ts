@@ -9,5 +9,7 @@ export class TrainCardComponent {
 
   @Input() train: any;
 
+  @Input() doj?: string;
+
   constructor() { }
 }

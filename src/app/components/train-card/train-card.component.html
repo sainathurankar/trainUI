@@ -20,7 +20,7 @@
 
     <div class="row">
       <div *ngFor="let avail of train.availabilitiesList" class="col-md-2">
-        <app-availability-card [avail]="avail"></app-availability-card>
+        <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
       </div>
     </div>
   </div>

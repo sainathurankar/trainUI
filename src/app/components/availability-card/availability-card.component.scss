@@ -5,3 +5,13 @@
 .quota-card {
   min-height: 128px;
 }
+
+.refresh {
+  cursor: pointer;
+  color: rgb(79, 103, 103);
+
+  &:hover {
+    color: red;
+    font-weight: 700;
+  }
+}

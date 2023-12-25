@@ -5,10 +5,10 @@ export interface SearchInput {
 }
 
 export interface TrainUpdateInput {
+  source: string;
+  destination: string;
+  doj: string;
   quota: string;
-  className: string;
-  status: string;
-  seats: string;
-  fare: string;
-  lastUpdatedOn: string;
+  trainNumber: string;
+  class: string;
 }

@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div *ngIf="!loading; else loader">
         <div *ngFor="let train of searchResponse?.trains">
-          <app-train-card [train] = "train"></app-train-card>
+          <app-train-card [train] = "train" [doj]="doj"></app-train-card>
         </div>
       </div>
       <ng-template #loader>

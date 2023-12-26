@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Helper } from 'src/app/common/helper';
 import { TrainUpdateInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-availability-card',
@@ -23,7 +24,8 @@ export class AvailabilityCardComponent implements OnInit {
     const currentTimeInMilliSeconds = new Date().getTime();
     if (
       this.avail.lastUpdatedOnRaw <
-      currentTimeInMilliSeconds - 3600000 * hours
+        currentTimeInMilliSeconds - 3600000 * hours &&
+      !environment.mock
     ) {
       this.update();
     }

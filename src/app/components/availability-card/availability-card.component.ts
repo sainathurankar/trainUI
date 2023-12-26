@@ -37,7 +37,8 @@ export class AvailabilityCardComponent implements OnInit {
       'border-danger':
         status === 'REGRET' ||
         status === 'NOT AVAILABLE' ||
-        status === 'CLASS NOT EXIST',
+        status === 'CLASS NOT EXIST' ||
+        status === 'TRAIN CANCELLED',
     };
   }
 
@@ -49,7 +50,8 @@ export class AvailabilityCardComponent implements OnInit {
       'text-danger':
         status === 'REGRET' ||
         status === 'NOT AVAILABLE' ||
-        status === 'CLASS NOT EXIST',
+        status === 'CLASS NOT EXIST' ||
+        status === 'TRAIN CANCELLED',
     };
   }
 

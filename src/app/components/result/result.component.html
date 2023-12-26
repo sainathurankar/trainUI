@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div *ngIf="!loading; else loader">
 
-        <div *ngIf="error !== null; else trainResults">
+        <div *ngIf="error; else trainResults">
           <div class="alert alert-danger" role="alert">
             <strong>Oops!</strong> Something went wrong while fetching train results. Please try again later.
           </div>

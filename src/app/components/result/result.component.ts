@@ -21,7 +21,6 @@ export class ResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Result Page');
     this.route.queryParams.subscribe((params) => {
       this.src = params.src;
       this.dst = params.dst;
@@ -36,17 +35,10 @@ export class ResultComponent implements OnInit {
       dst: this.dst,
       doj: this.doj,
     };
-    console.log(searchInput);
     this.searchService.getSearchResults(searchInput, "false").subscribe(data => {
       console.log(data);
       this.searchResponse = data;
       this.loading = false;
     })
-
-    // this.searchService.getSearchResults(searchInput, "true").subscribe(data => {
-    //   console.log(data);
-    //   this.searchResponse = data;
-    //   this.loading = false;
-    // })
   }
 }

@@ -15,8 +15,13 @@
           <div *ngFor="let train of searchResponse?.trains">
             <app-train-card [train]="train" [doj]="doj"></app-train-card>
           </div>
-          <div *ngIf="searchResponse?.trains?.length === 0" class="no-trains">
+          <div *ngIf="searchResponse?.trains?.length === 0 && searchResponse?.errorCode !== '100.31'" class="no-trains">
             No Trains available for searched Criteria.
+          </div>
+          <div *ngIf="searchResponse?.errorCode === '100.31'">
+            <div class="alert alert-danger" role="alert">
+              {{searchResponse?.detailedMsg}}
+            </div>
           </div>
         </ng-template>
       </div>

@@ -1,0 +1,878 @@
+{
+  "errorCode": null,
+  "detailedMsg": null,
+  "response": null,
+  "status": {
+    "StatusCode": 200,
+    "StatusMsg": "OK"
+  },
+  "trainList": [
+    "23:50 Golgumbaz Exp 07:50 ",
+    "08:00 Bme Ypr Ac Exp 15:45 ",
+    "14:20 Aii Mys Exp 23:30 ",
+    "20:25 Ubl Chennai Exp 05:23 ",
+    "13:40 Sbc Vande Bharat 19:45 ",
+    "18:25 Ubl Sbc Exp 03:55 ",
+    "14:05 Janshatabdi Exp 21:15 ",
+    "22:30 Rani Chennamma 06:15 ",
+    "12:45 Puducherry Exp 22:25 ",
+    "23:15 Ubl Sbc Spl 06:50 ",
+    "11:30 Ubl Ypr Exp 19:20 ",
+    "22:00 Ypr S Krnti Exp 05:25 ",
+    "10:30 Ubl Ktym Spl 19:23 ",
+    "05:00 Vsg Ypr Exp 12:35 ",
+    "06:00 Siddaganga Exp 14:05 ",
+    "18:30 Hampi Express 05:50 ",
+    "08:50 Vishwamanav Exp 17:40 ",
+    "06:30 Ubl Rmm Exp 15:08 ",
+    "23:40 Bgm Sbc Exp 07:30 "
+  ],
+  "trains": [
+    {
+      "trainName": "Sbc Vande Bharat",
+      "trainNumber": "20662",
+      "departureTime": "13:40",
+      "arrivalTime": "19:45",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "CC",
+          "status": "Available",
+          "seats": "209",
+          "fare": "1320",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703617909097
+        },
+        {
+          "quota": "GN",
+          "className": "EC",
+          "status": "Available",
+          "seats": "6",
+          "fare": "2395",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618524703
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Ubl Ypr Exp",
+      "trainNumber": "20656",
+      "departureTime": "11:30",
+      "arrivalTime": "19:20",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "Available",
+          "seats": "177",
+          "fare": "310",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619457390
+        },
+        {
+          "quota": "GN",
+          "className": "CC",
+          "status": "Available",
+          "seats": "142",
+          "fare": "660",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619448494
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "Available",
+          "seats": "167",
+          "fare": "800",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619448941
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "Available",
+          "seats": "71",
+          "fare": "1120",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619449607
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Yesvantpur Jn",
+      "fromStationCode": "UBL",
+      "toStationCode": "YPR"
+    },
+    {
+      "trainName": "Aii Mys Exp",
+      "trainNumber": "16209",
+      "departureTime": "14:20",
+      "arrivalTime": "23:30",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "Available",
+          "seats": "8",
+          "fare": "280",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619448366
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "Available",
+          "seats": "31",
+          "fare": "755",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619448432
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "Available",
+          "seats": "8",
+          "fare": "1070",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619451128
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "RLWL",
+          "seats": "1",
+          "fare": "1795",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619452621
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Siddaganga Exp",
+      "trainNumber": "12726",
+      "departureTime": "06:00",
+      "arrivalTime": "14:05",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "2S",
+          "status": "Available",
+          "seats": "133",
+          "fare": "185",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618364021
+        },
+        {
+          "quota": "GN",
+          "className": "CC",
+          "status": "Available",
+          "seats": "25",
+          "fare": "660",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618567692
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Bme Ypr Ac Exp",
+      "trainNumber": "14806",
+      "departureTime": "08:00",
+      "arrivalTime": "15:45",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "Available",
+          "seats": "179",
+          "fare": "755",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619451043
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "Available",
+          "seats": "11",
+          "fare": "1070",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619450741
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "Available",
+          "seats": "2",
+          "fare": "1795",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619452999
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Yesvantpur Jn",
+      "fromStationCode": "UBL",
+      "toStationCode": "YPR"
+    },
+    {
+      "trainName": "Vishwamanav Exp",
+      "trainNumber": "17325",
+      "departureTime": "08:50",
+      "arrivalTime": "17:40",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "2S",
+          "status": "Available",
+          "seats": "30",
+          "fare": "170",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618562835
+        },
+        {
+          "quota": "GN",
+          "className": "CC",
+          "status": "Available",
+          "seats": "6",
+          "fare": "610",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618564203
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Janshatabdi Exp",
+      "trainNumber": "12080",
+      "departureTime": "14:05",
+      "arrivalTime": "21:15",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "2S",
+          "status": "Available",
+          "seats": "263",
+          "fare": "210",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618422712
+        },
+        {
+          "quota": "GN",
+          "className": "CC",
+          "status": "Available",
+          "seats": "6",
+          "fare": "700",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618567252
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Ubl Sbc Spl",
+      "trainNumber": "07339",
+      "departureTime": "23:15",
+      "arrivalTime": "06:50",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "Available",
+          "seats": "173",
+          "fare": "400",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618546912
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RAC",
+          "seats": "2",
+          "fare": "1065",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619452644
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "Available",
+          "seats": "5",
+          "fare": "1435",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618548297
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Golgumbaz Exp",
+      "trainNumber": "16536",
+      "departureTime": "23:50",
+      "arrivalTime": "07:50",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "RLWL",
+          "seats": "24",
+          "fare": "280",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619520369
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "Available",
+          "seats": "10",
+          "fare": "755",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703618866023
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RLWL",
+          "seats": "1",
+          "fare": "1070",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619508342
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "RLWL",
+          "seats": "1",
+          "fare": "1795",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618538424
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Golgumbaz Exp",
+      "trainNumber": "16536",
+      "departureTime": "23:50",
+      "arrivalTime": "07:50",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "RAC",
+          "seats": "91",
+          "fare": "450",
+          "lastUpdatedOn": "Updated 3 days ago",
+          "lastUpdatedOnRaw": 1703310700691
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RAC",
+          "seats": "7",
+          "fare": "1575",
+          "lastUpdatedOn": "Updated 7 hrs ago",
+          "lastUpdatedOnRaw": 1703591302676
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Hampi Express",
+      "trainNumber": "16591",
+      "departureTime": "18:30",
+      "arrivalTime": "05:50",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "GNWL",
+          "seats": "49",
+          "fare": "325",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619507315
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RAC",
+          "seats": "24",
+          "fare": "880",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619508062
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "GNWL",
+          "seats": "2",
+          "fare": "1245",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619508263
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "GNWL",
+          "seats": "1",
+          "fare": "2075",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618534847
+        },
+        {
+          "quota": "GN",
+          "className": "CC",
+          "status": "REGRET",
+          "seats": "",
+          "fare": "705",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618534675
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Hampi Express",
+      "trainNumber": "16591",
+      "departureTime": "18:30",
+      "arrivalTime": "05:50",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RAC",
+          "seats": "9",
+          "fare": "885",
+          "lastUpdatedOn": "Updated 9 hrs ago",
+          "lastUpdatedOnRaw": 1703583968840
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RAC",
+          "seats": "5",
+          "fare": "1440",
+          "lastUpdatedOn": "Updated 3 hrs ago",
+          "lastUpdatedOnRaw": 1703605373390
+        },
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "RAC",
+          "seats": "48",
+          "fare": "340",
+          "lastUpdatedOn": "Updated 3 days ago",
+          "lastUpdatedOnRaw": 1703285871498
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Ypr S Krnti Exp",
+      "trainNumber": "12630",
+      "departureTime": "22:00",
+      "arrivalTime": "05:25",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "RLWL",
+          "seats": "18",
+          "fare": "310",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619455765
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RLWL",
+          "seats": "1",
+          "fare": "800",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619459041
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RLWL",
+          "seats": "1",
+          "fare": "1120",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619457300
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "Available",
+          "seats": "1",
+          "fare": "1875",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619458026
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Yesvantpur Jn",
+      "fromStationCode": "UBL",
+      "toStationCode": "YPR"
+    },
+    {
+      "trainName": "Ubl Sbc Exp",
+      "trainNumber": "17392",
+      "departureTime": "18:25",
+      "arrivalTime": "03:55",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "RAC",
+          "seats": "12",
+          "fare": "280",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618338021
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Ubl Rmm Exp",
+      "trainNumber": "07355",
+      "departureTime": "06:30",
+      "arrivalTime": "15:08",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "GNWL",
+          "seats": "10",
+          "fare": "385",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619461298
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RAC",
+          "seats": "2",
+          "fare": "1050",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619460063
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RAC",
+          "seats": "1",
+          "fare": "1440",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619462361
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Banaswadi",
+      "fromStationCode": "UBL",
+      "toStationCode": "BAND"
+    },
+    {
+      "trainName": "Bgm Sbc Exp",
+      "trainNumber": "20654",
+      "departureTime": "23:40",
+      "arrivalTime": "07:30",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "GNWL",
+          "seats": "43",
+          "fare": "310",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618549104
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "GNWL",
+          "seats": "9",
+          "fare": "800",
+          "lastUpdatedOn": "1 hr ago",
+          "lastUpdatedOnRaw": 1703612469523
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "GNWL",
+          "seats": "15",
+          "fare": "1120",
+          "lastUpdatedOn": "1 hr ago",
+          "lastUpdatedOnRaw": 1703613004560
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "GNWL",
+          "seats": "8",
+          "fare": "1875",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618551355
+        },
+        {
+          "quota": "GN",
+          "className": "3E",
+          "status": "NOT AVAILABLE",
+          "seats": "",
+          "fare": "740",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618553179
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Rani Chennamma",
+      "trainNumber": "16590",
+      "departureTime": "22:30",
+      "arrivalTime": "06:15",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "RLWL",
+          "seats": "35",
+          "fare": "280",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618468309
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RLWL",
+          "seats": "7",
+          "fare": "755",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618567561
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RLWL",
+          "seats": "4",
+          "fare": "1070",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618558183
+        },
+        {
+          "quota": "GN",
+          "className": "1A",
+          "status": "RLWL",
+          "seats": "10",
+          "fare": "1795",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618560518
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Ksr Bengaluru",
+      "fromStationCode": "UBL",
+      "toStationCode": "SBC"
+    },
+    {
+      "trainName": "Ubl Chennai Exp",
+      "trainNumber": "22697",
+      "departureTime": "20:25",
+      "arrivalTime": "05:23",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "GNWL",
+          "seats": "42",
+          "fare": "320",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619470481
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "GNWL",
+          "seats": "14",
+          "fare": "825",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619469903
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "GNWL",
+          "seats": "6",
+          "fare": "1155",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619476350
+        },
+        {
+          "quota": "GN",
+          "className": "2S",
+          "status": "NOT AVAILABLE",
+          "seats": "",
+          "fare": "190",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619461984
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Krishnarajapurm",
+      "fromStationCode": "UBL",
+      "toStationCode": "KJM"
+    },
+    {
+      "trainName": "Vsg Ypr Exp",
+      "trainNumber": "17310",
+      "departureTime": "05:00",
+      "arrivalTime": "12:35",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "GNWL",
+          "seats": "63",
+          "fare": "280",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618538990
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "GNWL",
+          "seats": "28",
+          "fare": "755",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618542055
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "GNWL",
+          "seats": "31",
+          "fare": "1070",
+          "lastUpdatedOn": "15 mins ago",
+          "lastUpdatedOnRaw": 1703618555717
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Yesvantpur Jn",
+      "fromStationCode": "UBL",
+      "toStationCode": "YPR"
+    },
+    {
+      "trainName": "Ubl Ktym Spl",
+      "trainNumber": "07305",
+      "departureTime": "10:30",
+      "arrivalTime": "19:23",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "GNWL",
+          "seats": "66",
+          "fare": "385",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619463925
+        },
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "GNWL",
+          "seats": "15",
+          "fare": "1050",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619465001
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "GNWL",
+          "seats": "3",
+          "fare": "1440",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619465623
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Whitefield",
+      "fromStationCode": "UBL",
+      "toStationCode": "WFD"
+    },
+    {
+      "trainName": "Puducherry Exp",
+      "trainNumber": "11005",
+      "departureTime": "12:45",
+      "arrivalTime": "22:25",
+      "availabilitiesList": [
+        {
+          "quota": "GN",
+          "className": "3A",
+          "status": "RLWL",
+          "seats": "10",
+          "fare": "775",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619466791
+        },
+        {
+          "quota": "GN",
+          "className": "2A",
+          "status": "RLWL",
+          "seats": "2",
+          "fare": "1105",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619467287
+        },
+        {
+          "quota": "GN",
+          "className": "SL",
+          "status": "REGRET",
+          "seats": "",
+          "fare": "290",
+          "lastUpdatedOn": "Few mins ago",
+          "lastUpdatedOnRaw": 1703619467522
+        }
+      ],
+      "fromStation": "Sss Hubballi Jn",
+      "toStation": "Krishnarajapurm",
+      "fromStationCode": "UBL",
+      "toStationCode": "KJM"
+    }
+  ]
+}

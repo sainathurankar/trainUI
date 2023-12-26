@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api',
-  bookingLink: 'https://www.redbus.in/railways/travellerInfo'
+  redBusBookingLink: 'https://www.redbus.in/railways/travellerInfo',
+  hdfcSmartBuyLink: 'https://offers.reward360.in/v1/train/checkout?searchTrainKey={key}'
 };
 
 /*

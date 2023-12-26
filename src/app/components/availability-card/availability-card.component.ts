@@ -73,7 +73,7 @@ export class AvailabilityCardComponent implements OnInit {
   }
 
   navigateToBooking() {
-    const link = Helper.buildHyperLink(
+    const link = Helper.buildRedBusHyperLink(
       this.train.fromStationCode,
       this.train.toStationCode,
       this.doj,

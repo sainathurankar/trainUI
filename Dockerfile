@@ -1,5 +1,5 @@
-# Use Node.js version 12.18.3
-FROM node:14-alpine
+# Use Node.js version 14
+FROM node:14-alpine as builder
 
 # Set the working directory to /app
 WORKDIR /app
@@ -25,8 +25,20 @@ RUN ng lint
 # Build the Angular app for production
 RUN ng build
 
+# Production stage
+FROM nginx:alpine
+
+# Remove default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy the built app from the previous stage
+COPY --from=builder /app/dist/trainUI /usr/share/nginx/html
+
+# Copy Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose the port the app runs on
 EXPOSE 80
 
-# Start the Angular app in production mode
-CMD ["./node_modules/.bin/ng", "serve", "--host", "0.0.0.0", "--disable-host-check", "--port", "80"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

@@ -14,6 +14,7 @@ export class ResultComponent implements OnInit {
   doj: string = '';
   searchResponse: any;
   loading = true;
+  error = false;
 
   constructor(
     private searchService: SearchService,
@@ -35,10 +36,14 @@ export class ResultComponent implements OnInit {
       dst: this.dst,
       doj: this.doj,
     };
-    this.searchService.getSearchResults(searchInput, "false").subscribe(data => {
+    this.searchService.getSearchResults(searchInput, "false").subscribe((data) => {
       console.log(data);
       this.searchResponse = data;
       this.loading = false;
+    },
+    (error) => {
+      this.loading = false;
+      this.error = true;
     })
   }
 }

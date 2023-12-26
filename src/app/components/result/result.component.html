@@ -4,9 +4,21 @@
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="!loading; else loader">
-        <div *ngFor="let train of searchResponse?.trains">
-          <app-train-card [train] = "train" [doj]="doj"></app-train-card>
+
+        <div *ngIf="error; else trainResults">
+          <div class="alert alert-danger" role="alert">
+            <strong>Oops!</strong> Something went wrong while fetching train results. Please try again later.
+          </div>
         </div>
+
+        <ng-template #trainResults>
+          <div *ngFor="let train of searchResponse?.trains">
+            <app-train-card [train]="train" [doj]="doj"></app-train-card>
+          </div>
+          <div *ngIf="searchResponse?.trains?.length === 0" class="no-trains">
+            No Trains available for searched Criteria.
+          </div>
+        </ng-template>
       </div>
       <ng-template #loader>
         <app-loader></app-loader>

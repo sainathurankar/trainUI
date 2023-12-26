@@ -28,7 +28,6 @@ export class HomeComponent {
       // this.suggestions = this.autocompleteService.getSuggestions()
       // .filter(suggestion => suggestion.toLowerCase().includes(this.inputValue.toLowerCase()));
       this.autocompleteService.getSuggestions(input.trim()).subscribe((data) => {
-        console.log(data);
         if (key === 'from') {
           this.fromsuggestions = data.results;
         } else {
@@ -55,12 +54,9 @@ export class HomeComponent {
 
   onDateChange(date: string) {
     this.dateOfTravel = date.split('-').join('');
-    console.log(date);
-    console.log(this.dateOfTravel);
   }
 
   onClickSearch() {
-    console.log('click')
     this.router.navigate(['results'], {queryParams: {
       src: this.frominputObject.stationCode,
       dst: this.toinputObject.stationCode,

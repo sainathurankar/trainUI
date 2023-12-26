@@ -4,6 +4,11 @@
 
 .quota-card {
   min-height: 128px;
+  background: rgb(246, 245, 246);
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(222, 218, 222);;
+  }
 }
 
 .refresh {

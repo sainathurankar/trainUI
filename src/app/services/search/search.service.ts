@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SearchInput, TrainUpdateInput } from './search-input';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class SearchService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.http.post('http://localhost:8080/api/search' + '?update='+ update, searchInput, {
+    return this.http.post(`${environment.apiUrl}/search?update=${update}`, searchInput, {
       headers,
     });
   }
@@ -22,7 +23,7 @@ export class SearchService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.http.post('http://localhost:8080/api/search/trainUpdate', trainUpdateInput, {
+    return this.http.post(`${environment.apiUrl}/search/trainUpdate`, trainUpdateInput, {
       headers,
     });
   }

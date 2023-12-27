@@ -9,7 +9,7 @@
         </p>
         <span class="text-muted">{{ avail.lastUpdatedOn }}</span>
       </div>
-      <div class="text-end">
+      <div class="text-end col-md-4">
         <p class="mb-1" *ngIf="avail.fare !== 'null'"><strong>₹ {{ avail.fare }}</strong></p>
 
         <span *ngIf="updating" class="spinner-border spinner-border-sm text-primary" role="status">

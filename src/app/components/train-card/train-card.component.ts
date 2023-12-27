@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Helper } from 'src/app/common/helper';
 
 @Component({
   selector: 'app-train-card',
@@ -7,6 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TrainCardComponent {
 
+  helper = Helper;
+  
   @Input() train: any;
 
   @Input() doj?: string;

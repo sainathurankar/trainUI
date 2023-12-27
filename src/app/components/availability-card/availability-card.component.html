@@ -1,5 +1,5 @@
 <div class="card rounded quota-card" [ngClass]="getQuotaCardClass(avail.status)">
-  <div class="card-body" (click)="navigateToBooking()">
+  <div class="card-body" (click)="navigateToBooking()" [title]="'Click to book'">
     <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
     <div class="card-text d-flex justify-content-between">
       <div class="text-start">
@@ -16,7 +16,7 @@
           <span class="visually-hidden">Loading...</span>
         </span>
 
-        <span *ngIf="!updating" class="icon refresh" (click)="$event.stopPropagation(); update()">
+        <span *ngIf="!updating" class="icon refresh" [title]="'Click to refresh'" (click)="$event.stopPropagation(); update()">
           <i class="fas fa-sync-alt"></i>
         </span>
       </div>

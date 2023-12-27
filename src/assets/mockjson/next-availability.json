@@ -1,0 +1,62 @@
+[
+  {
+    "quota": "GN",
+    "className": "1A",
+    "status": "Available",
+    "seats": "",
+    "fare": "1795",
+    "lastUpdatedOn": "Few mins ago",
+    "lastUpdatedOnRaw": null,
+    "availablityDate": "30-12-2023"
+  },
+  {
+    "quota": "GN",
+    "className": "1A",
+    "status": "Available",
+    "seats": "9",
+    "fare": "1795",
+    "lastUpdatedOn": "Few mins ago",
+    "lastUpdatedOnRaw": null,
+    "availablityDate": "31-12-2023"
+  },
+  {
+    "quota": "GN",
+    "className": "1A",
+    "status": "GNWL",
+    "seats": "2",
+    "fare": "1795",
+    "lastUpdatedOn": "Few mins ago",
+    "lastUpdatedOnRaw": null,
+    "availablityDate": "01-01-2024"
+  },
+  {
+    "quota": "GN",
+    "className": "1A",
+    "status": "GNWL",
+    "seats": "3",
+    "fare": "1795",
+    "lastUpdatedOn": "Few mins ago",
+    "lastUpdatedOnRaw": null,
+    "availablityDate": "02-01-2024"
+  },
+  {
+    "quota": "GN",
+    "className": "1A",
+    "status": "Available",
+    "seats": "9",
+    "fare": "1795",
+    "lastUpdatedOn": "Few mins ago",
+    "lastUpdatedOnRaw": null,
+    "availablityDate": "03-01-2024"
+  },
+  {
+    "quota": "GN",
+    "className": "1A",
+    "status": "GNWL",
+    "seats": "3",
+    "fare": "1795",
+    "lastUpdatedOn": "Few mins ago",
+    "lastUpdatedOnRaw": null,
+    "availablityDate": "04-01-2024"
+  }
+]

@@ -23,6 +23,7 @@ export class AvailabilityCardComponent implements OnInit {
     const hours = 2; // specify the hours that need to be updated
     const currentTimeInMilliSeconds = new Date().getTime();
     if (
+      this.avail.lastUpdatedOnRaw &&
       this.avail.lastUpdatedOnRaw <
         currentTimeInMilliSeconds - 3600000 * hours &&
       !environment.mock

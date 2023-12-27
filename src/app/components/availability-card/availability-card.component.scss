@@ -1,22 +1,37 @@
+// Define reusable color variables
+$primary-background-color: rgb(246, 245, 246);
+$hover-background-color: rgba(201, 201, 201, 0.914);
+$primary-text-color: #846cca;
+$hover-text-color: #351398;
+
 .card {
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add a subtle box shadow
+  transition: box-shadow 0.3s ease; // Smooth transition on hover
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Increase box shadow on hover
+  }
 }
 
 .quota-card {
   min-height: 128px;
-  background: rgb(246, 245, 246);
+  background: $primary-background-color;
   cursor: pointer;
+  transition: background-color 0.3s ease; // Smooth transition on hover
+
   &:hover {
-    background-color: rgb(222, 218, 222);;
+    background-color: $hover-background-color;
   }
 }
 
 .refresh {
   cursor: pointer;
-  color: #846cca;
+  color: $primary-text-color;
+  transition: color 0.3s ease, font-weight 0.3s ease; // Smooth transition on hover
 
   &:hover {
-    color: #351398;
-    font-weight: 700;
+    color: $hover-text-color;
+    font-weight: bold;
   }
 }

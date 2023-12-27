@@ -14,6 +14,12 @@ export class Helper {
     return link.replace('{key}', btoa(searchKey));
   }
 
+  static convertTo12HourFormat(time24: string): string {
+    const [hours, minutes] = time24.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+    return `${hours12}:${minutes} ${period}`;
+  }
 }
 
 function convertDateFormat(inputDate: string) {

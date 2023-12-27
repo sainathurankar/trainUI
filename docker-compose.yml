@@ -5,6 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: ["nginx", "-g", "daemon off;"]  # Override the default command to run nginx
     ports:
       - "80:80"
-

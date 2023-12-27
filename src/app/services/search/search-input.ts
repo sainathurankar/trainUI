@@ -11,4 +11,5 @@ export interface TrainUpdateInput {
   quota: string;
   trainNumber: string;
   class: string;
+  numberOfDays?: number
 }

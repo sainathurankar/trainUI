@@ -46,4 +46,22 @@ export class SearchService {
       }
     );
   }
+
+  getNextAvailability(trainUpdateInput: TrainUpdateInput): Observable<any> {
+    if (environment.mock) {
+      return this.http
+        .get('assets/mockjson/next-availability.json')
+        .pipe(delay(2000));
+    }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(
+      `${environment.apiUrl}/search/availabilityNearBy`,
+      trainUpdateInput,
+      {
+        headers,
+      }
+    );
+  }
 }

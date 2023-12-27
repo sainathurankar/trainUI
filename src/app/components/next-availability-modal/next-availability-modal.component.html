@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="modal-header">
+    <h2 class="modal-title">Next 6 Days Availability</h2>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="loading; else results" class="d-flex justify-content-center align-items-center loading-spinner">
+      <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <ng-template #results>
+      <div class="row">
+        <div *ngFor="let avail of nextAvailList" class="col-md-2 mb-3">
+          <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
+          <p class="p-2">{{avail.availablityDate}}</p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

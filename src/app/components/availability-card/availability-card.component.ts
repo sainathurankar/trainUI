@@ -16,14 +16,15 @@ export class AvailabilityCardComponent implements OnInit {
 
   @Input() doj: any;
 
+  @Input() updateStatus = true;
+
   updating = false;
 
   constructor(private searchService: SearchService) {}
   ngOnInit(): void {
     const hours = 2; // specify the hours that need to be updated
     const currentTimeInMilliSeconds = new Date().getTime();
-    if (
-      this.avail.lastUpdatedOnRaw &&
+    if (this.updateStatus &&
       this.avail.lastUpdatedOnRaw <
         currentTimeInMilliSeconds - 3600000 * hours &&
       !environment.mock

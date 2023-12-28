@@ -13,7 +13,7 @@
     <ng-template #results>
       <div class="row">
         <div *ngFor="let avail of nextAvailList" class="col-md-2 mb-3">
-          <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
+          <app-availability-card [avail]="avail" [train]="train" [doj]="helper.convertDateToString(avail.availablityDate)"></app-availability-card>
           <p class="p-2">{{avail.availablityDate}}</p>
         </div>
       </div>

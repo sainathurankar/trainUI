@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Helper } from 'src/app/common/helper';
 import { TrainUpdateInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
 
@@ -15,6 +16,8 @@ export class NextAvailabilityModalComponent implements OnInit{
 
   nextAvailList: any;
   loading = true;
+
+  helper = Helper;
 
   constructor(public activeModal: NgbActiveModal, private searchService: SearchService) { }
   ngOnInit(): void {

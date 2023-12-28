@@ -20,6 +20,16 @@ export class Helper {
     const hours12 = Number(hours) % 12 || 12;
     return `${hours12}:${minutes} ${period}`;
   }
+
+/**
+* Converts date from dd-mm-yyyy format to yyyymmdd
+* @param {string} date
+* @return {string} convertedDate
+*/
+  static convertDateToString(date: string): string {
+    const [day, month, year] = date.split('-');
+    return year + month + day;
+  }
 }
 
 function convertDateFormat(inputDate: string) {

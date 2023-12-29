@@ -10,11 +10,11 @@
           <span>{{ train.fromStation }} ({{ train.fromStationCode }})</span>
         </p>
         <p class="fs-5 fw-bold">{{ helper.convertTo12HourFormat(train.departureTime) }}</p>
-        <p class="fs-md-4 text-muted mb-1">{{ train.departureDate }}</p>
+        <p class="fs-md-4 text-muted mb-1">{{helper.formatDateString(train.departureDate) }}</p>
       </div>
 
       <div class="text-center">
-        <p class="fs-md-5  text-muted mb-2"> {{ train.duration }} hours</p>
+        <p class="fs-md-5  text-muted mb-2"> <i class="fa-regular fa-clock"></i> {{ train.duration }} hrs</p>
       </div>
 
       <div class="text-end">
@@ -22,7 +22,7 @@
           <span>{{ train.toStation }} ({{ train.toStationCode }})</span>
         </p>
         <p class="fs-5 fw-bold">{{ helper.convertTo12HourFormat(train.arrivalTime) }}</p>
-        <p class="fs-md-4 text-muted mb-1"> {{ train.arrivalDate }}</p>
+        <p class="fs-md-4 text-muted mb-1"> {{ helper.formatDateString(train.arrivalDate) }}</p>
       </div>
     </div>
 

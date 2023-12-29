@@ -1,4 +1,7 @@
 <div class="card rounded quota-card" [ngClass]="getQuotaCardClass(avail.status)">
+  <span *ngIf="avail.quota === 'TQ' && (avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC')" class="position-absolute top-0 start-50 translate-middle p-2">
+    <span class="badge text-bg-success">TATKAL</span>
+  </span>
   <div class="card-body" (click)="navigateToBooking()" [title]="'Click to book'" style="cursor: pointer;">
     <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
     <div class="card-text d-flex justify-content-between">

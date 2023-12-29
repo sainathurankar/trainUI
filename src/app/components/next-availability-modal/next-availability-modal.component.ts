@@ -17,6 +17,8 @@ export class NextAvailabilityModalComponent implements OnInit {
   loading = false;
   loadingNext = false;
 
+  tempDOJ: any;
+
   helper = Helper;
 
   selectedClass: string = '';
@@ -32,6 +34,7 @@ export class NextAvailabilityModalComponent implements OnInit {
   updateSelectedClass(cls: string) {
     this.selectedClass = cls;
     this.availList = [];
+    this.tempDOJ = this.doj;
     this.getAvailability();
   }
 
@@ -51,7 +54,7 @@ export class NextAvailabilityModalComponent implements OnInit {
   }
 
   loadNextAvail() {
-    this.doj = this.helper.nextDayDate(
+    this.tempDOJ = this.helper.nextDayDate(
       this.availList[this.availList.length - 1].availablityDate
     );
     this.loading = true;
@@ -67,7 +70,7 @@ export class NextAvailabilityModalComponent implements OnInit {
     return {
       source: this.train.fromStationCode,
       destination: this.train.toStationCode,
-      doj: this.doj,
+      doj: this.tempDOJ,
       quota: 'GN',
       trainNumber: this.train.trainNumber,
       class: this.selectedClass,

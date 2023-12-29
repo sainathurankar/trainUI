@@ -72,6 +72,22 @@ export class Helper {
 
     return this.convertDateToString(nextDateString);
   }
+
+  static formatDateString(dateString: string): string {
+    const parts = dateString.split('-');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Months are 0-indexed
+    const year = parseInt(parts[2], 10);
+
+    const date = new Date(year, month, day);
+
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long', // Full weekday name
+      month: 'short', // Abbreviated month name
+      day: 'numeric', // Day of the month
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
 }
 
 function convertDateFormat(inputDate: string) {

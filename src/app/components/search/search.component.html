@@ -1,31 +1,38 @@
 <section class="search-section">
-    <h2>Search for Trains</h2>
-    <form class="row align-items- justify-content-between">
-      <div class="col-md-4">
-        <div class="dropdown" [class.show]="fromsuggestions.length > 0">
-          <input type="text" id="from" name="from" class="form-control" placeholder="Origin" [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
-            <ul class="dropdown-menu dropdown-menu-start" [class.show]="fromsuggestions.length > 0">
-              <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
-            </ul>
-        </div>
+  <h2 class="mb-4">Search for Trains</h2>
+  <form class="row g-3 align-items-center justify-content-between">
+    <div class="col-md-3 position-relative">
+      <div class="input-group">
+        <span class="input-group-text bg-primary text-white"><i class="fas fa-map-marker-alt  mx-1"></i></span>
+        <input type="text" id="from" name="from" class="form-control" placeholder="Origin" [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
+        <ul class="dropdown-menu dropdown-menu-start position-absolute" [class.show]="fromsuggestions.length > 0">
+          <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
+        </ul>
       </div>
+    </div>
 
-      <div class="col-md-4">
-
-        <div class="dropdown" [class.show]="tosuggestions.length > 0">
-          <input type="text" id="to" name="to" class="form-control" placeholder="Destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
-            <ul class="dropdown-menu dropdown-menu-start" [class.show]="tosuggestions.length > 0">
-              <li class="dropdown-item" *ngFor="let suggestion of tosuggestions" (click)="onSelectSuggestion(suggestion, 'to')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
-            </ul>
-        </div>
+    <div class="col-md-3 position-relative">
+      <div class="input-group">
+        <span class="input-group-text bg-success text-white"><i class="fas fa-map-marker-alt  mx-1"></i></span>
+        <input type="text" id="to" name="to" class="form-control" placeholder="Destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
+        <ul class="dropdown-menu dropdown-menu-start position-absolute" [class.show]="tosuggestions.length > 0">
+          <li class="dropdown-item" *ngFor="let suggestion of tosuggestions" (click)="onSelectSuggestion(suggestion, 'to')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
+        </ul>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <input type="date" id="date" #date class="form-control" (input)="onDateChange(date.value)" [min]="minDate">
+    <div class="col-md-3 position-relative">
+      <div class="input-group">
+        <span class="input-group-text bg-warning text-dark"><i class="fas fa-calendar-alt  mx-1"></i></span>
+        <input class="date form-control" type="date" [(ngModel)]="dateOfTravel" name="date" id="date" #date [min]="minDate">
       </div>
+    </div>
 
-      <div class="col-md-1 d-flex align-items-center">
-        <button type="submit" (click)="onClickSearch()" [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''" class="btn btn-primary mb-2">Search</button>
-      </div>
-    </form>
-  </section>
+    <div class="col-md-2">
+      <button type="submit" (click)="onClickSearch()" [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''" class="btn btn-danger">
+        <i class="fas fa-search px-1"></i>
+        <span class="d-sm-inline px-1">Search</span>
+      </button>
+    </div>
+  </form>
+</section>

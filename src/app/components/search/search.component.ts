@@ -30,7 +30,7 @@ export class SearchComponent {
 
   onInput(key: string): void {
     const input = key === 'from' ? this.frominputValue : this.toinputValue;
-    if(input.length > 2) {
+    if(input.length > 0) {
       // this.suggestions = this.autocompleteService.getSuggestions()
       // .filter(suggestion => suggestion.toLowerCase().includes(this.inputValue.toLowerCase()));
       this.autocompleteService.getSuggestions(input.trim()).subscribe((data) => {

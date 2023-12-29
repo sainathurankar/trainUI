@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div *ngIf="showNextAvail" class="row">
       <div *ngFor="let avail of train.availabilitiesList" class="col-md-2 mb-3">
         <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
       </div>

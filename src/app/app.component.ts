@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { StatusService } from './services/status/status.service';
 
 @Component({
@@ -6,13 +6,12 @@ import { StatusService } from './services/status/status.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements AfterViewInit{
 
   title = 'trainUI';
 
   constructor(private statusService: StatusService) {}
-
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.checkAPIStatus();
   }
 

@@ -1,6 +1,13 @@
 <div class="container mt-4">
-  <h2 class="mb-4 text-info">Train Search Results</h2>
-
+  <div class="row mb-3 d-flex align-items-center justify-content-between">
+    <div class="col-7">
+      <h3 class=" m-0">Train Search Results</h3>
+    </div>
+    <div class="col-5 col-sm-4 d-flex justify-content-end">
+      <button (click)="modifySearch = !modifySearch" class="btn text-danger"><span class=""><i class="fas fa-solid fa-pen mx-2"></i></span>Modify</button>
+    </div>
+  </div>
+  <app-search *ngIf="modifySearch"></app-search>
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="!loading; else loader">

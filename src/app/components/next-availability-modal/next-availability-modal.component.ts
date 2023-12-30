@@ -10,7 +10,7 @@ import { SearchService } from 'src/app/services/search/search.service';
   styleUrls: ['./next-availability-modal.component.scss'],
 })
 export class NextAvailabilityModalComponent implements OnInit {
-  @Input() train: any; // Assuming you have a Train interface or class
+  @Input() train: any; 
   @Input() doj: any;
 
   availList: any[] = [];
@@ -74,7 +74,7 @@ export class NextAvailabilityModalComponent implements OnInit {
       quota: 'GN',
       trainNumber: this.train.trainNumber,
       class: this.selectedClass,
-      // numberOfDays: 2
+      numberOfDays: 6
     };
   }
 }

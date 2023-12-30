@@ -6,8 +6,19 @@
   letter-spacing: 2px;
 }
 
-@media (max-width: 576px) {
+.availability-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
   .avail {
     padding: 4px;
+  }
+  .availability-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
   }
 }

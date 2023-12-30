@@ -15,7 +15,7 @@ $hover-text-color: #351398;
 }
 
 .quota-card {
-  // min-height: 128px;
+  min-height: 128px;
   background: $primary-background-color;
   cursor: pointer;
   transition: background-color 0.3s ease; // Smooth transition on hover
@@ -36,6 +36,9 @@ $hover-text-color: #351398;
   }
 }
 
+.badge-wrapper {
+  top: 10px;
+}
 
 // /* Default styles for larger screens */
 // .card-subtitle,
@@ -52,5 +55,9 @@ $hover-text-color: #351398;
 
   .small-text {
     font-size: 6px;
+  }
+
+  .quota-card {
+    min-height: 95px;
   }
 }

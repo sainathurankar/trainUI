@@ -1,6 +1,6 @@
 <section class="search-section">
   <h2 class="mb-4">Search for Trains</h2>
-  <form class="row g-3 align-items-center justify-content-between">
+  <form class="row g-3 align-items-center justify-content-center">
     <div class="col-md-3 position-relative">
       <div class="input-group">
         <span class="input-group-text bg-primary text-white"><i class="fas fa-map-marker-alt mx-1"></i></span>
@@ -9,6 +9,12 @@
           <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
         </ul>
       </div>
+    </div>
+
+    <div class="col-md-1 d-flex justify-content-center d-none d-md-flex">
+      <button type="submit" (click)="switchStations()" [disabled]="frominputValue === '' || toinputValue === ''" class="btn btn-info ">
+        <i class="fas fa-repeat px-1"></i>
+      </button>
     </div>
 
     <div class="col-md-3 position-relative">
@@ -28,7 +34,10 @@
       </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 d-flex justify-content-between">
+      <button type="submit" (click)="switchStations()" [disabled]="frominputValue === '' || toinputValue === ''" class="btn btn-info d-md-none">
+        <i class="fas fa-repeat px-1"></i>
+      </button>
       <button type="submit" (click)="onClickSearch()" [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''" class="btn btn-danger">
         <i class="fas fa-search px-1"></i>
         <span class="d-sm-inline px-1">Search</span>

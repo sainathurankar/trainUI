@@ -7,7 +7,7 @@ import { AutocompleteService } from 'src/app/services/autocomplete.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
   frominputValue = '';
   toinputValue = '';
@@ -19,6 +19,9 @@ export class SearchComponent {
   tosuggestions: any[] = [];
   minDate?: string;
 
+  objectSaved?: {frominputObject: any; toinputObject: any, dateOfTravel: any};
+  key = 'USER_SEARCH';
+
   constructor(private autocompleteService: AutocompleteService, private router: Router) {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -26,6 +29,17 @@ export class SearchComponent {
     const day = ('0' + currentDate.getDate()).slice(-2);
     this.dateOfTravel = `${year}-${month}-${day}`;
     this.minDate = this.dateOfTravel
+  }
+
+  ngOnInit(): void {
+    this.objectSaved = this.getStoredObject();
+    if (this.objectSaved) {
+      this.frominputValue = this.objectSaved.frominputObject.stationName;
+      this.toinputValue = this.objectSaved.toinputObject.stationName;
+      this.frominputObject = this.objectSaved.frominputObject;
+      this.toinputObject = this.objectSaved.toinputObject;
+      this.dateOfTravel = this.objectSaved.dateOfTravel;
+    }
   }
 
 
@@ -60,6 +74,8 @@ export class SearchComponent {
   }
 
   onClickSearch() {
+    this.storeObjectInLocalStorage();
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.navigate(['results'], {queryParams: {
       src: this.frominputObject.stationCode,
       dst: this.toinputObject.stationCode,
@@ -69,6 +85,26 @@ export class SearchComponent {
 
   getFormattedDate(date: string) {
     return date.split('-').join('');
+  }
+
+  storeObjectInLocalStorage() {
+    this.objectSaved = {frominputObject: this.frominputObject, toinputObject: this.toinputObject, dateOfTravel: this.dateOfTravel};
+    if (localStorage) {
+      localStorage.setItem(this.key, JSON.stringify(this.objectSaved));
+    }
+  }
+
+  getStoredObject() {
+    if (localStorage && localStorage.getItem(this.key)) {
+      const objectString = localStorage.getItem(this.key);
+      return objectString ? JSON.parse(objectString) : null;
+    }
+    return null;
+  }
+
+  switchStations() {
+    [this.frominputValue, this.toinputValue] = [this.toinputValue, this.frominputValue];
+    [this.frominputObject, this.toinputObject] = [this.toinputObject, this.frominputObject];
   }
 
 }

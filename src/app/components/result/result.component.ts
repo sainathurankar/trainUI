@@ -15,6 +15,7 @@ export class ResultComponent implements OnInit {
   searchResponse: any;
   loading = true;
   error = false;
+  modifySearch = false;
 
   constructor(
     private searchService: SearchService,

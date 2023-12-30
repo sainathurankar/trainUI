@@ -5,3 +5,9 @@
 .card-title {
   letter-spacing: 2px;
 }
+
+@media (max-width: 576px) {
+  .avail {
+    padding: 4px;
+  }
+}

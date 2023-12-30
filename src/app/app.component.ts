@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { StatusService } from './services/status/status.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,11 @@ export class AppComponent implements AfterViewInit{
   title = 'trainUI';
 
   constructor(private statusService: StatusService) {}
+  
   ngAfterViewInit(): void {
-    this.checkAPIStatus();
+    if (environment.production) {
+      this.checkAPIStatus();
+    }
   }
 
   checkAPIStatus() {

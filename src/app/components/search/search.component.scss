@@ -50,7 +50,7 @@ form {
 .search-section .position-absolute {
   position: absolute;
   top: calc(100% + 5px); /* Adjust the distance from the input */
-  left: 40px;
+  left: 0;
   z-index: 1000;
 }
 
@@ -58,6 +58,30 @@ form {
   position: relative;
 }
 
-.search-section .form-control:focus + .dropdown-menu {
-  // display: block;
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 1000;
+  display: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+/* Style for dropdown items */
+.dropdown-menu li {
+  padding: 10px;
+}
+
+.dropdown-menu li:hover {
+  background: #e0e0e0;
+  cursor: pointer;
 }

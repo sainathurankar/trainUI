@@ -3,9 +3,9 @@
   <form class="row g-3 align-items-center justify-content-between">
     <div class="col-md-3 position-relative">
       <div class="input-group">
-        <span class="input-group-text bg-primary text-white"><i class="fas fa-map-marker-alt  mx-1"></i></span>
+        <span class="input-group-text bg-primary text-white"><i class="fas fa-map-marker-alt mx-1"></i></span>
         <input type="text" id="from" name="from" class="form-control" placeholder="Origin" [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
-        <ul class="dropdown-menu dropdown-menu-start position-absolute" [class.show]="fromsuggestions.length > 0">
+        <ul class="dropdown-menu position-absolute" [class.show]="fromsuggestions.length > 0">
           <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
         </ul>
       </div>
@@ -13,9 +13,9 @@
 
     <div class="col-md-3 position-relative">
       <div class="input-group">
-        <span class="input-group-text bg-success text-white"><i class="fas fa-map-marker-alt  mx-1"></i></span>
+        <span class="input-group-text bg-success text-white"><i class="fas fa-map-marker-alt mx-1"></i></span>
         <input type="text" id="to" name="to" class="form-control" placeholder="Destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
-        <ul class="dropdown-menu dropdown-menu-start position-absolute" [class.show]="tosuggestions.length > 0">
+        <ul class="dropdown-menu position-absolute" [class.show]="tosuggestions.length > 0">
           <li class="dropdown-item" *ngFor="let suggestion of tosuggestions" (click)="onSelectSuggestion(suggestion, 'to')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
         </ul>
       </div>
@@ -23,7 +23,7 @@
 
     <div class="col-md-3 position-relative">
       <div class="input-group">
-        <span class="input-group-text bg-warning text-dark"><i class="fas fa-calendar-alt  mx-1"></i></span>
+        <span class="input-group-text bg-warning text-dark"><i class="fas fa-calendar-alt mx-1"></i></span>
         <input class="date form-control" type="date" [(ngModel)]="dateOfTravel" name="date" id="date" #date [min]="minDate">
       </div>
     </div>

@@ -23,3 +23,12 @@
     color: #005cd3;
   }
 }
+
+@media (max-width: 576px) {
+  .small-text {
+    font-size: 10px;
+  }
+  .avail {
+    padding: 4px;
+  }
+}

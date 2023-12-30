@@ -15,7 +15,7 @@ $hover-text-color: #351398;
 }
 
 .quota-card {
-  min-height: 128px;
+  // min-height: 128px;
   background: $primary-background-color;
   cursor: pointer;
   transition: background-color 0.3s ease; // Smooth transition on hover
@@ -33,5 +33,24 @@ $hover-text-color: #351398;
   &:hover {
     color: $hover-text-color;
     font-weight: bold;
+  }
+}
+
+
+// /* Default styles for larger screens */
+// .card-subtitle,
+// .card-text {
+//   font-size: 16px; /* Adjust the default font size for larger screens */
+// }
+
+/* Media query for smaller screens */
+@media (max-width: 576px) {
+  .card-subtitle,
+  .card-text {
+    font-size: 8px; /* Set a smaller font size for screens with a width of 576px or less */
+  }
+
+  .small-text {
+    font-size: 6px;
   }
 }

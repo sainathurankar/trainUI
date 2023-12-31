@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { timer } from 'rxjs';
+import { delayWhen, retryWhen, take } from 'rxjs/operators';
 import { Helper } from 'src/app/common/helper';
 import { TrainUpdateInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
@@ -10,7 +12,7 @@ import { SearchService } from 'src/app/services/search/search.service';
   styleUrls: ['./next-availability-modal.component.scss'],
 })
 export class NextAvailabilityModalComponent implements OnInit {
-  @Input() train: any; 
+  @Input() train: any;
   @Input() doj: any;
 
   availList: any[] = [];
@@ -40,13 +42,29 @@ export class NextAvailabilityModalComponent implements OnInit {
 
   getAvailability() {
     const trainUpdateInput: TrainUpdateInput = this.buildInput();
+    const maxRetries = 5;
+
     this.loading = true;
     this.searchService
       .getNextAvailability(trainUpdateInput)
-      .subscribe((resonse) => {
-        this.availList = resonse;
-        this.loading = false;
-      });
+      .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            delayWhen(() => timer(1000)), // Delay for 1 second between retries
+            take(maxRetries) // Maximum number of retries
+          )
+        )
+      )
+      .subscribe(
+        (response) => {
+          this.availList = response;
+          this.loading = false;
+        },
+        (error) => {
+          console.error('Error after maximum retries', error);
+          this.loading = false;
+        }
+      );
   }
 
   closeModal() {
@@ -74,7 +92,7 @@ export class NextAvailabilityModalComponent implements OnInit {
       quota: 'GN',
       trainNumber: this.train.trainNumber,
       class: this.selectedClass,
-      numberOfDays: 6
+      numberOfDays: 6,
     };
   }
 }

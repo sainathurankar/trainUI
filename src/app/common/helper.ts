@@ -41,10 +41,13 @@ export class Helper {
   }
 
   static convertTo12HourFormat(time24: string): string {
-    const [hours, minutes] = time24.split(':');
-    const period = Number(hours) >= 12 ? 'PM' : 'AM';
-    const hours12 = Number(hours) % 12 || 12;
-    return `${hours12}:${minutes} ${period}`;
+    if (time24) {
+      const [hours, minutes] = time24.split(':');
+      const period = Number(hours) >= 12 ? 'PM' : 'AM';
+      const hours12 = Number(hours) % 12 || 12;
+      return `${hours12}:${minutes} ${period}`;
+    }
+    return '';
   }
 
   /**
@@ -53,8 +56,11 @@ export class Helper {
    * @return {string} convertedDate
    */
   static convertDateToString(date: string): string {
-    const [day, month, year] = date.split('-');
-    return year + month + day;
+    if (date) {
+      const [day, month, year] = date.split('-');
+      return year + month + day;
+    }
+    return '';
   }
 
   static nextDayDate(date: string): string {
@@ -74,28 +80,34 @@ export class Helper {
   }
 
   static formatDateString(dateString: string): string {
-    const parts = dateString.split('-');
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1; // Months are 0-indexed
-    const year = parseInt(parts[2], 10);
+    if (dateString) {
+      const parts = dateString.split('-');
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1; // Months are 0-indexed
+      const year = parseInt(parts[2], 10);
 
-    const date = new Date(year, month, day);
+      const date = new Date(year, month, day);
 
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long', // Full weekday name
-      month: 'short', // Abbreviated month name
-      day: 'numeric', // Day of the month
-    };
-    return date.toLocaleDateString('en-US', options);
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long', // Full weekday name
+        month: 'short', // Abbreviated month name
+        day: 'numeric', // Day of the month
+      };
+      return date.toLocaleDateString('en-US', options);
+    }
+    return '';
   }
 }
 
 function convertDateFormat(inputDate: string) {
-  inputDate = String(inputDate);
+  if (inputDate) {
+    inputDate = String(inputDate);
 
-  const year = inputDate.substring(0, 4);
-  const month = inputDate.substring(4, 6);
-  const day = inputDate.substring(6, 8);
-  const outputDate = `${day}-${month}-${year}`;
-  return outputDate;
+    const year = inputDate.substring(0, 4);
+    const month = inputDate.substring(4, 6);
+    const day = inputDate.substring(6, 8);
+    const outputDate = `${day}-${month}-${year}`;
+    return outputDate;
+  }
+  return '';
 }

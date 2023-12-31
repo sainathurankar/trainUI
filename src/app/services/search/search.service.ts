@@ -57,7 +57,7 @@ export class SearchService {
       'Content-Type': 'application/json',
     });
     return this.http.post(
-      `${environment.apiUrl}/search/availabilityNearBy`,
+      `${environment.apiUrl}/v5/search/availabilityNearBy`,
       trainUpdateInput,
       {
         headers,

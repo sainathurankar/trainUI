@@ -13,7 +13,7 @@
 
     <div class="col-md-1 d-flex justify-content-center d-none d-md-flex">
       <button type="submit" (click)="switchStations()" [disabled]="frominputValue === '' || toinputValue === ''" class="btn btn-info ">
-        <i class="fas fa-repeat px-1"></i>
+        <i class="fas fa-sharp fa-arrow-right-arrow-left text-white"></i>
       </button>
     </div>
 
@@ -36,7 +36,7 @@
 
     <div class="col-md-2 d-flex justify-content-between">
       <button type="submit" (click)="switchStations()" [disabled]="frominputValue === '' || toinputValue === ''" class="btn btn-info d-md-none">
-        <i class="fas fa-repeat px-1"></i>
+        <i class="fas fa-sharp fa-arrow-right-arrow-left text-white px-1"></i>
       </button>
       <button type="submit" (click)="onClickSearch()" [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''" class="btn btn-danger">
         <i class="fas fa-search px-1"></i>

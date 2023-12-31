@@ -1,19 +1,19 @@
-<div class="card rounded quota-card" [ngClass]="getQuotaCardClass(avail.status)">
-  <span *ngIf="avail.quota === 'TQ' && (avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC')" class="badge-wrapper position-absolute start-50 translate-middle p-2">
+<div class="card rounded quota-card" [ngClass]="getQuotaCardClass(avail?.status)">
+  <span *ngIf="avail?.quota === 'TQ' && (avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC')" class="badge-wrapper position-absolute start-50 translate-middle p-2">
     <span class="badge text-bg-success">TATKAL</span>
   </span>
   <div class="card-body p-1 p-md-2 p-lg-3" (click)="navigateToBooking()" [title]="'Click to book'" style="cursor: pointer;">
-    <h5 class="card-subtitle mb-1 text-dark">{{ avail.quota }}</h5>
+    <h5 class="card-subtitle mb-1 text-dark">{{ avail?.quota }}</h5>
     <div class="card-text d-flex justify-content-between">
       <div class="text-start">
-        <p class="mb-0 mb-md-1"><strong>{{ avail.className }}</strong></p>
-        <p class="mb-0 mb-md-1" [ngClass]="getAvailabilityClass(avail.status)">
-          <strong>{{ avail.seats }}</strong> {{ avail.status }}
+        <p class="mb-0 mb-md-1"><strong>{{ avail?.className }}</strong></p>
+        <p class="mb-0 mb-md-1" [ngClass]="getAvailabilityClass(avail?.status)">
+          <strong>{{ avail?.seats }}</strong> {{ avail?.status }}
         </p>
-        <span class="text-muted small-text">{{ avail.lastUpdatedOn }}</span>
+        <span class="text-muted small-text">{{ avail?.lastUpdatedOn }}</span>
       </div>
       <div class="text-end">
-        <p class="mb-0 mb-md-1" *ngIf="avail.fare !== 'null'"><strong>₹ {{ avail.fare }}</strong></p>
+        <p class="mb-0 mb-md-1" *ngIf="avail?.fare !== 'null'"><strong>₹ {{ avail?.fare }}</strong></p>
 
         <span *ngIf="updating" class="spinner-border spinner-border-sm text-primary" role="status">
           <span class="visually-hidden">Loading...</span>

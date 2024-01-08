@@ -42,7 +42,9 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.toinputValue = this.objectSaved.toinputObject.stationName;
       this.frominputObject = this.objectSaved.frominputObject;
       this.toinputObject = this.objectSaved.toinputObject;
-      this.dateOfTravel = this.objectSaved.dateOfTravel;
+      this.dateOfTravel = this.minDate && this.objectSaved.dateOfTravel < this.minDate
+      ? this.minDate
+      : this.objectSaved.dateOfTravel;
     }
   }
 

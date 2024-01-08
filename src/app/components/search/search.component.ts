@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AutocompleteService } from 'src/app/services/autocomplete.service';
 
 @Component({
@@ -7,7 +9,7 @@ import { AutocompleteService } from 'src/app/services/autocomplete.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   frominputValue = '';
   toinputValue = '';
@@ -18,6 +20,8 @@ export class SearchComponent implements OnInit {
   fromsuggestions: any[] = [];
   tosuggestions: any[] = [];
   minDate?: string;
+
+  private destroy$ = new Subject<void>();
 
   objectSaved?: {frominputObject: any; toinputObject: any, dateOfTravel: any};
   key = 'USER_SEARCH';
@@ -38,17 +42,22 @@ export class SearchComponent implements OnInit {
       this.toinputValue = this.objectSaved.toinputObject.stationName;
       this.frominputObject = this.objectSaved.frominputObject;
       this.toinputObject = this.objectSaved.toinputObject;
-      this.dateOfTravel = this.objectSaved.dateOfTravel;
+      this.dateOfTravel = this.minDate && this.objectSaved.dateOfTravel < this.minDate
+      ? this.minDate
+      : this.objectSaved.dateOfTravel;
     }
   }
 
 
   onInput(key: string): void {
+    this.cancelAllCalls();
     const input = key === 'from' ? this.frominputValue : this.toinputValue;
     if(input.length > 1) {
       // this.suggestions = this.autocompleteService.getSuggestions()
       // .filter(suggestion => suggestion.toLowerCase().includes(this.inputValue.toLowerCase()));
-      this.autocompleteService.getSuggestions(input.trim()).subscribe((data) => {
+      this.autocompleteService.getSuggestions(input.trim())
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
         if (key === 'from') {
           this.fromsuggestions = data.results;
         } else {
@@ -107,4 +116,13 @@ export class SearchComponent implements OnInit {
     [this.frominputObject, this.toinputObject] = [this.toinputObject, this.frominputObject];
   }
 
+  ngOnDestroy(): void {
+    this.cancelAllCalls();
+  }
+
+  cancelAllCalls() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.destroy$ = new Subject<void>();
+  }
 }

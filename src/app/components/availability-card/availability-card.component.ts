@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Helper } from 'src/app/common/helper';
 import { TrainUpdateInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
@@ -9,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './availability-card.component.html',
   styleUrls: ['./availability-card.component.scss'],
 })
-export class AvailabilityCardComponent implements OnInit {
+export class AvailabilityCardComponent implements OnInit, OnDestroy {
   @Input() avail: any;
 
   @Input() train: any;
@@ -19,6 +21,7 @@ export class AvailabilityCardComponent implements OnInit {
   @Input() updateStatus = true;
 
   updating = false;
+  private destroy$ = new Subject<void>();
 
   constructor(private searchService: SearchService) {}
   ngOnInit(): void {
@@ -72,6 +75,7 @@ export class AvailabilityCardComponent implements OnInit {
 
     this.searchService
       .getTrainUpdate(trainUpdateInput)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
         this.avail = response;
         this.updating = false;
@@ -88,5 +92,10 @@ export class AvailabilityCardComponent implements OnInit {
       this.avail.quota
     );
     window.open(link, '_blank');
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

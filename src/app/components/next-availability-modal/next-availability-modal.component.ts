@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { timer } from 'rxjs';
-import { delayWhen, retryWhen, take } from 'rxjs/operators';
+import { Subject, timer } from 'rxjs';
+import { delayWhen, retryWhen, take, takeUntil } from 'rxjs/operators';
 import { Helper } from 'src/app/common/helper';
 import { TrainUpdateInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
@@ -11,17 +11,16 @@ import { SearchService } from 'src/app/services/search/search.service';
   templateUrl: './next-availability-modal.component.html',
   styleUrls: ['./next-availability-modal.component.scss'],
 })
-export class NextAvailabilityModalComponent implements OnInit {
+export class NextAvailabilityModalComponent implements OnInit, OnDestroy {
   @Input() train: any;
   @Input() doj: any;
 
   availList: any[] = [];
   loading = false;
-  loadingNext = false;
+  private destroy$ = new Subject<void>();
+  helper = Helper;
 
   tempDOJ: any;
-
-  helper = Helper;
 
   selectedClass: string = '';
 
@@ -29,14 +28,17 @@ export class NextAvailabilityModalComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private searchService: SearchService
   ) {}
+
   ngOnInit(): void {
     this.updateSelectedClass(this.train.availableClasses[0]);
   }
 
   updateSelectedClass(cls: string) {
+
     this.selectedClass = cls;
     this.availList = [];
     this.tempDOJ = this.doj;
+    this.cancelAllCalls();
     this.getAvailability();
   }
 
@@ -48,6 +50,7 @@ export class NextAvailabilityModalComponent implements OnInit {
     this.searchService
       .getNextAvailability(trainUpdateInput)
       .pipe(
+        takeUntil(this.destroy$),
         retryWhen((errors) =>
           errors.pipe(
             delayWhen(() => timer(1000)), // Delay for 1 second between retries
@@ -61,7 +64,7 @@ export class NextAvailabilityModalComponent implements OnInit {
           this.loading = false;
         },
         (error) => {
-          console.error('Error after maximum retries', error);
+          console.error('Error in getAvailability:', error);
           this.loading = false;
         }
       );
@@ -72,16 +75,25 @@ export class NextAvailabilityModalComponent implements OnInit {
   }
 
   loadNextAvail() {
-    this.tempDOJ = this.helper.nextDayDate(
+    this.cancelAllCalls();
+    this.tempDOJ = Helper.nextDayDate(
       this.availList[this.availList.length - 1].availablityDate
     );
     this.loading = true;
     this.searchService
       .getNextAvailability(this.buildInput())
-      .subscribe((response) => {
-        this.availList.push(...response);
-        this.loading = false;
-      });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (response) => {
+          this.availList.push(...response);
+          this.loading = false;
+        },
+        (error) => {
+          console.error('Error in loadNextAvail:', error);
+          this.loading = false;
+          // Handle specific error scenarios if needed
+        }
+      );
   }
 
   buildInput(): TrainUpdateInput {
@@ -94,5 +106,15 @@ export class NextAvailabilityModalComponent implements OnInit {
       class: this.selectedClass,
       numberOfDays: 6,
     };
+  }
+
+  ngOnDestroy(): void {
+    this.cancelAllCalls();
+  }
+
+  cancelAllCalls() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.destroy$ = new Subject<void>();
   }
 }

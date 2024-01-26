@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { StatusService } from './services/status/status.service';
 import { environment } from 'src/environments/environment';
 
@@ -7,22 +7,35 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
 
   title = 'trainUI';
+  apiLoading: boolean = false;
+  showAppReadyMessage: boolean = false;
+  failed: boolean = false;
 
   constructor(private statusService: StatusService) {}
-  
+
   ngAfterViewInit(): void {
-    if (environment.production) {
-      this.checkAPIStatus();
-    }
+    this.checkAPIStatus();
   }
 
   checkAPIStatus() {
-    this.statusService.getAPIStatus().subscribe((response) => {
-      window.alert("API is UP");
-      console.log("API status: ", response);
-    })
+    this.apiLoading = true;
+    this.statusService.getAPIStatus().subscribe(
+      (response) => {
+        console.log("API status: ", response);
+        this.apiLoading = false;
+        this.showAppReadyMessage = true;
+        setTimeout(() => {
+          this.showAppReadyMessage = false;
+        }, 1000);
+      },
+      (error) => {
+        console.error("API error: ", error);
+        this.apiLoading = false;
+        this.failed = true;
+      }
+    );
   }
 }

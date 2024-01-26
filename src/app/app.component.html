@@ -1,4 +1,32 @@
-<app-header></app-header>
-<main><router-outlet></router-outlet></main>
 
-<app-footer></app-footer>
+  <app-header></app-header>
+  <main><router-outlet></router-outlet></main>
+  <app-footer></app-footer>
+
+<div class="position-fixed top-0 end-0 m-3">
+  <div *ngIf="showAppReadyMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> Application is ready.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+
+<div class="position-fixed top-0 end-0 m-3">
+  <div *ngIf="failed" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Failed!</strong> Something went wrong. Please Try Again Later.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+
+<div *ngIf="apiLoading" class="position-fixed top-0 end-0 m-3">
+  <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+    <div class="toast-header">
+      <strong class="me-auto">Application Booting Up...</strong>
+    </div>
+    <div class="toast-body d-flex align-items-center">
+      <div class="spinner-border" style="width: 40px; margin: 12px;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <span>Please wait while we're preparing the application for you.</span>
+    </div>
+  </div>
+</div>

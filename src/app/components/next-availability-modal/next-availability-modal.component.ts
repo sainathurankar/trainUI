@@ -104,7 +104,7 @@ export class NextAvailabilityModalComponent implements OnInit, OnDestroy {
       quota: 'GN',
       trainNumber: this.train.trainNumber,
       class: this.selectedClass,
-      numberOfDays: 6,
+      numberOfDays: 14,
     };
   }
 

@@ -90,7 +90,8 @@ export class AvailabilityCardComponent implements OnInit, OnDestroy {
       this.train.trainNumber,
       this.avail.className,
       this.avail.quota,
-      this.train.trainName
+      this.train.trainName,
+      this.avail.availablityType
     );
     window.open(link, '_blank');
   }

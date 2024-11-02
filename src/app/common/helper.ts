@@ -8,11 +8,12 @@ export class Helper {
     trainNo: string,
     cls: string,
     quota: string,
-    train: string
+    train: string,
+    availableType: string
   ): string {
     const link = environment.redBusBookingLink;
     // src=UBL&dst=HLN&doj=20231229&trainNo=17302&cls=1A&q=GN
-    const queryParams = `?src=${srcCode}&dst=${dstCode}&doj=${doj}&trainNo=${trainNo}&cls=${cls}&q=${quota}&train=${train}`;
+    const queryParams = `?src=${srcCode}&dst=${dstCode}&doj=${doj}&trainNo=${trainNo}&cls=${cls}&q=${quota}&train=${train}&avlT=${availableType}`;
     return link + queryParams;
   }
 

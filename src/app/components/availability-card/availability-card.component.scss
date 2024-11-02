@@ -50,11 +50,11 @@ $hover-text-color: #351398;
 @media (max-width: 576px) {
   .card-subtitle,
   .card-text {
-    font-size: 8px; /* Set a smaller font size for screens with a width of 576px or less */
+    font-size: 10px; /* Set a smaller font size for screens with a width of 576px or less */
   }
 
   .small-text {
-    font-size: 6px;
+    font-size: 8px;
   }
 
   .quota-card {

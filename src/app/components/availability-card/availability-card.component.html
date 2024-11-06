@@ -2,6 +2,9 @@
   <span *ngIf="avail?.quota === 'TQ' && (avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC')" class="badge-wrapper position-absolute start-50 translate-middle p-2">
     <span class="badge text-bg-success">TATKAL</span>
   </span>
+  <span *ngIf="avail?.tg" class="badge-wrapper position-absolute start-50 translate-middle p-2">
+    <span class="badge text-bg-primary">GURANTEE</span>
+  </span>
   <div class="card-body p-1 p-md-2 p-lg-3" (click)="navigateToBooking()" [title]="'Click to book'" style="cursor: pointer;">
     <h5 class="card-subtitle mb-1 text-dark">{{ avail?.quota }}</h5>
     <div class="card-text d-flex justify-content-between">

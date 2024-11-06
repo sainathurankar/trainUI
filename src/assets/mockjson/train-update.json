@@ -1,9 +1,12 @@
 {
   "quota": "GN",
   "className": "SL",
-  "status": "Available",
+  "status": "AVBL",
   "seats": "24",
   "fare": "280",
   "lastUpdatedOn": "Few mins ago",
-  "lastUpdatedOnRaw": null
+  "lastUpdatedOnRaw": null,
+  "availablityType": "1",
+  "reasonType": "S",
+  "tg": true
 }

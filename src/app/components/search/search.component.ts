@@ -1,15 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AutocompleteService } from 'src/app/services/autocomplete.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  private autocompleteService = inject(AutocompleteService);
+  private router = inject(Router);
+
 
   frominputValue = '';
   toinputValue = '';
@@ -30,7 +35,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   objectSaved?: {frominputObject: any; toinputObject: any, dateOfTravel: any};
   key = 'USER_SEARCH';
 
-  constructor(private autocompleteService: AutocompleteService, private router: Router) {
+  constructor() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);

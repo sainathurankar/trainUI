@@ -12,29 +12,38 @@
 
   <div class="tu-modal-body">
     <ul class="tu-class-tabs">
-      <li *ngFor="let cls of train.availableClasses">
-        <a class="tu-class-tab" [class.active]="cls === selectedClass"
-          (click)="updateSelectedClass(cls)" role="tab">{{cls}}</a>
-      </li>
+      @for (cls of train.availableClasses; track cls) {
+        <li>
+          <a class="tu-class-tab" [class.active]="cls === selectedClass"
+          (click)="updateSelectedClass(cls)" (keyup.enter)="updateSelectedClass(cls)" (keyup.space)="updateSelectedClass(cls)"
+          role="tab" tabindex="0" [attr.aria-selected]="cls === selectedClass">{{cls}}</a>
+        </li>
+      }
     </ul>
 
     <div class="tu-modal-avail">
       <div class="tu-modal-avail-grid">
-        <div *ngFor="let avail of availList" class="tu-modal-avail-item">
-          <p class="tu-avail-date">{{helper.formatDateString(avail.availablityDate)}}</p>
-          <app-availability-card [avail]="avail" [train]="train"
+        @for (avail of availList; track avail) {
+          <div class="tu-modal-avail-item">
+            <p class="tu-avail-date">{{helper.formatDateString(avail.availablityDate)}}</p>
+            <app-availability-card [avail]="avail" [train]="train"
             [doj]="helper.convertDateToString(avail.availablityDate)" [updateStatus]="true"></app-availability-card>
+          </div>
+        }
+      </div>
+
+      @if (loading) {
+        <div class="tu-modal-loading">
+          <span class="tu-modal-spinner"></span>
         </div>
-      </div>
+      }
 
-      <div *ngIf="loading" class="tu-modal-loading">
-        <span class="tu-modal-spinner"></span>
-      </div>
-
-      <button *ngIf="!loading" class="tu-load-more" [attr.aria-label]="'Load Next 6 Days Availability'"
-        (click)="loadNextAvail()">
-        <i class="fas fa-plus"></i> Load more days
-      </button>
+      @if (!loading) {
+        <button class="tu-load-more" [attr.aria-label]="'Load Next 6 Days Availability'"
+          (click)="loadNextAvail()">
+          <i class="fas fa-plus"></i> Load more days
+        </button>
+      }
     </div>
   </div>
 </div>

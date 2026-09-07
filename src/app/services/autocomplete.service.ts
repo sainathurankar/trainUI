@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AutocompleteService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
 
   getSuggestions(query: string): Observable<any> {
     if (environment.mock) {

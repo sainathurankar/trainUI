@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, timer } from 'rxjs';
 import { delayWhen, retryWhen, take, takeUntil } from 'rxjs/operators';
@@ -7,11 +7,16 @@ import { TrainUpdateInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
 
 @Component({
-  selector: 'app-next-availability-modal',
-  templateUrl: './next-availability-modal.component.html',
-  styleUrls: ['./next-availability-modal.component.scss'],
+    selector: 'app-next-availability-modal',
+    templateUrl: './next-availability-modal.component.html',
+    styleUrls: ['./next-availability-modal.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class NextAvailabilityModalComponent implements OnInit, OnDestroy {
+  activeModal = inject(NgbActiveModal);
+  private searchService = inject(SearchService);
+
   @Input() train: any;
   @Input() doj: any;
 
@@ -22,12 +27,7 @@ export class NextAvailabilityModalComponent implements OnInit, OnDestroy {
 
   tempDOJ: any;
 
-  selectedClass: string = '';
-
-  constructor(
-    public activeModal: NgbActiveModal,
-    private searchService: SearchService
-  ) {}
+  selectedClass = '';
 
   ngOnInit(): void {
     this.updateSelectedClass(this.train.availableClasses[0]);

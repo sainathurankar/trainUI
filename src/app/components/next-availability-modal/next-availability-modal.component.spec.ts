@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { NextAvailabilityModalComponent } from './next-availability-modal.component';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 describe('NextAvailabilityModalComponent', () => {
   let component: NextAvailabilityModalComponent;
@@ -11,11 +12,11 @@ describe('NextAvailabilityModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NextAvailabilityModalComponent],
-      imports: [HttpClientTestingModule],
-      providers: [NgbActiveModal],
-      schemas: [NO_ERRORS_SCHEMA]
-    })
+    declarations: [NextAvailabilityModalComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [],
+    providers: [NgbActiveModal, provideHttpClient(withXhr(), withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
   });
 

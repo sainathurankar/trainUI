@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AvailabilityCardComponent } from './availability-card.component';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 describe('AvailabilityCardComponent', () => {
   let component: AvailabilityCardComponent;
@@ -20,10 +21,11 @@ describe('AvailabilityCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AvailabilityCardComponent],
-      imports: [HttpClientTestingModule],
-      schemas: [NO_ERRORS_SCHEMA]
-    })
+    declarations: [AvailabilityCardComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [],
+    providers: [provideHttpClient(withXhr(), withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
   });
 

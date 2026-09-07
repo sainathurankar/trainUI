@@ -1,14 +1,18 @@
-<div class="tu-skeleton-card" *ngFor="let card of [1,2,3]">
-  <div class="tu-sk-head">
-    <span class="tu-sk tu-sk-num"></span>
-    <span class="tu-sk tu-sk-days"></span>
+@for (card of [1,2,3]; track card) {
+  <div class="tu-skeleton-card">
+    <div class="tu-sk-head">
+      <span class="tu-sk tu-sk-num"></span>
+      <span class="tu-sk tu-sk-days"></span>
+    </div>
+    <div class="tu-sk-journey">
+      <span class="tu-sk tu-sk-time"></span>
+      <span class="tu-sk tu-sk-line"></span>
+      <span class="tu-sk tu-sk-time"></span>
+    </div>
+    <div class="tu-sk-grid">
+      @for (q of [1,2,3,4,5,6]; track q) {
+        <span class="tu-sk tu-sk-quota"></span>
+      }
+    </div>
   </div>
-  <div class="tu-sk-journey">
-    <span class="tu-sk tu-sk-time"></span>
-    <span class="tu-sk tu-sk-line"></span>
-    <span class="tu-sk tu-sk-time"></span>
-  </div>
-  <div class="tu-sk-grid">
-    <span class="tu-sk tu-sk-quota" *ngFor="let q of [1,2,3,4,5,6]"></span>
-  </div>
-</div>
+}

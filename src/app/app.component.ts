@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { StatusService } from './services/status/status.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AppComponent implements OnInit {
+  private statusService = inject(StatusService);
+
 
   title = 'trainUI';
-  apiLoading: boolean = false;
-  showAppReadyMessage: boolean = false;
-  failed: boolean = false;
-
-  constructor(private statusService: StatusService) {}
+  apiLoading = false;
+  showAppReadyMessage = false;
+  failed = false;
 
   // Runs before the first change-detection pass so toggling apiLoading here
   // doesn't trigger NG0100 ExpressionChangedAfterItHasBeenCheckedError.

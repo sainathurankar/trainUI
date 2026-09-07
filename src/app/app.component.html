@@ -6,28 +6,34 @@
 
 <!-- Toast stack -->
 <div class="tu-toast-stack">
-  <div *ngIf="showAppReadyMessage" class="tu-toast tu-toast-success" role="alert">
-    <span class="tu-toast-icon"><i class="fas fa-circle-check"></i></span>
-    <div class="tu-toast-body">
-      <strong>All set!</strong>
-      <span>The application is ready.</span>
+  @if (showAppReadyMessage) {
+    <div class="tu-toast tu-toast-success" role="alert">
+      <span class="tu-toast-icon"><i class="fas fa-circle-check"></i></span>
+      <div class="tu-toast-body">
+        <strong>All set!</strong>
+        <span>The application is ready.</span>
+      </div>
     </div>
-  </div>
+  }
 
-  <div *ngIf="failed" class="tu-toast tu-toast-error" role="alert">
-    <span class="tu-toast-icon"><i class="fas fa-triangle-exclamation"></i></span>
-    <div class="tu-toast-body">
-      <strong>Something went wrong</strong>
-      <span>Please try again later.</span>
+  @if (failed) {
+    <div class="tu-toast tu-toast-error" role="alert">
+      <span class="tu-toast-icon"><i class="fas fa-triangle-exclamation"></i></span>
+      <div class="tu-toast-body">
+        <strong>Something went wrong</strong>
+        <span>Please try again later.</span>
+      </div>
+      <button type="button" class="tu-toast-close" (click)="failed = false" aria-label="Close"><i class="fas fa-xmark"></i></button>
     </div>
-    <button type="button" class="tu-toast-close" (click)="failed = false" aria-label="Close"><i class="fas fa-xmark"></i></button>
-  </div>
+  }
 
-  <div *ngIf="apiLoading" class="tu-toast tu-toast-loading" role="alert" aria-live="assertive">
-    <span class="tu-toast-spinner"></span>
-    <div class="tu-toast-body">
-      <strong>Booting up…</strong>
-      <span>Preparing the application for you.</span>
+  @if (apiLoading) {
+    <div class="tu-toast tu-toast-loading" role="alert" aria-live="assertive">
+      <span class="tu-toast-spinner"></span>
+      <div class="tu-toast-body">
+        <strong>Booting up…</strong>
+        <span>Preparing the application for you.</span>
+      </div>
     </div>
-  </div>
+  }
 </div>

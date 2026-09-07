@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
 
 import { ResultComponent } from './result.component';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
@@ -12,16 +13,18 @@ describe('ResultComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ResultComponent],
-      imports: [HttpClientTestingModule],
-      providers: [
+    declarations: [ResultComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [],
+    providers: [
         {
-          provide: ActivatedRoute,
-          useValue: { queryParams: of({ src: 'TSR', dst: 'TDS', doj: '20260911' }) }
-        }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    })
+            provide: ActivatedRoute,
+            useValue: { queryParams: of({ src: 'TSR', dst: 'TDS', doj: '20260911' }) }
+        },
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
     .compileComponents();
   });
 

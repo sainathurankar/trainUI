@@ -1,6 +1,6 @@
 # RailGo — TrainUI
 
-A modern train ticket booking front end built with **Angular 14**. Search trains
+A modern train ticket booking front end built with **Angular 16**. Search trains
 between stations, view live seat availability across classes and quotas, and
 preview a two-week availability outlook. Styled with Bootstrap 5, ng-bootstrap
 and a custom design-token theme.
@@ -11,16 +11,16 @@ and a custom design-token theme.
 
 ## Tech stack
 
-- Angular 14 (standalone `AppModule`)
+- Angular 16
 - Bootstrap 5 (SCSS) + ng-bootstrap (modals)
 - FontAwesome icons
 - Karma + Jasmine for unit tests
 
 ## Prerequisites
 
-- Node.js (a recent LTS). On very new Node versions the legacy OpenSSL provider
-  is required for the Angular 14 toolchain — prefix commands with
-  `NODE_OPTIONS=--openssl-legacy-provider` (see below).
+- Node.js 18 LTS is recommended. (Angular 16 uses the modern esbuild-based
+  toolchain, so the old `NODE_OPTIONS=--openssl-legacy-provider` workaround is
+  no longer required.)
 - Install dependencies:
 
   ```bash
@@ -30,8 +30,7 @@ and a custom design-token theme.
 ## Development server
 
 ```bash
-# on modern Node versions:
-NODE_OPTIONS=--openssl-legacy-provider npx ng serve
+npx ng serve
 ```
 
 Navigate to `http://localhost:4200/`. The app reloads automatically on source
@@ -40,7 +39,7 @@ changes.
 ## Build
 
 ```bash
-NODE_OPTIONS=--openssl-legacy-provider npx ng build
+npx ng build
 ```
 
 Build artifacts are emitted to `dist/`.
@@ -48,7 +47,6 @@ Build artifacts are emitted to `dist/`.
 ## Running unit tests
 
 ```bash
-NODE_OPTIONS=--openssl-legacy-provider \
 CHROME_BIN="$(which google-chrome || echo /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome)" \
 npx ng test --watch=false --browsers=ChromeHeadless
 ```

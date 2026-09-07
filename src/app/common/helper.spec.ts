@@ -67,4 +67,60 @@ describe('Helper (feature-ui-enhancements additions)', () => {
       expect(Helper.bestAvailabilityScore([])).toBe(-1);
     });
   });
+
+  describe('predictionBand (Feature 1)', () => {
+    it('buckets percentages into bands', () => {
+      expect(Helper.predictionBand(95)).toBe('high');
+      expect(Helper.predictionBand(80)).toBe('high');
+      expect(Helper.predictionBand(65)).toBe('medium');
+      expect(Helper.predictionBand(50)).toBe('medium');
+      expect(Helper.predictionBand(20)).toBe('low');
+    });
+    it('returns none for null/undefined/NaN', () => {
+      expect(Helper.predictionBand(null)).toBe('none');
+      expect(Helper.predictionBand(undefined)).toBe('none');
+      expect(Helper.predictionBand(NaN)).toBe('none');
+    });
+    it('maps to a css class (empty when none)', () => {
+      expect(Helper.predictionBandClass(90)).toBe('tu-pred-high');
+      expect(Helper.predictionBandClass(null)).toBe('');
+    });
+  });
+
+  describe('confirmChance (Feature 1)', () => {
+    it('prefers RAC->CNF chance for RAC rows', () => {
+      expect(Helper.confirmChance({ status: 'RAC', predictionPercentage: 40, racCnfPredictionPercentage: 82 })).toBe(82);
+    });
+    it('uses general prediction for waitlist', () => {
+      expect(Helper.confirmChance({ status: 'GNWL', predictionPercentage: 55, racCnfPredictionPercentage: null })).toBe(55);
+    });
+    it('returns null when nothing is available', () => {
+      expect(Helper.confirmChance({ status: 'AVBL' })).toBeNull();
+      expect(Helper.confirmChance(null as any)).toBeNull();
+    });
+  });
+
+  describe('fare transparency (Feature 2)', () => {
+    it('detects a genuine saving', () => {
+      expect(Helper.hasFareSaving({ fare: '1320', originalFare: 1690 })).toBe(true);
+      expect(Helper.hasFareSaving({ fare: '1320', originalFare: 1000 })).toBe(false);
+      expect(Helper.hasFareSaving({ fare: '1320' })).toBe(false);
+    });
+    it('computes the saving, preferring fareDifference', () => {
+      expect(Helper.fareSaving({ fare: '1320', originalFare: 1690, fareDifference: 370 })).toBe(370);
+      expect(Helper.fareSaving({ fare: '1320', originalFare: 1690 })).toBe(370);
+      expect(Helper.fareSaving({ fare: '1320', originalFare: 1000 })).toBe(0);
+    });
+  });
+
+  describe('departureWindow (Feature 3)', () => {
+    it('classifies times into windows', () => {
+      expect(Helper.departureWindow('05:00')).toBe('early');
+      expect(Helper.departureWindow('08:50')).toBe('morning');
+      expect(Helper.departureWindow('13:40')).toBe('afternoon');
+      expect(Helper.departureWindow('22:30')).toBe('night');
+      expect(Helper.departureWindow('00:15')).toBe('early');
+      expect(Helper.departureWindow('18:00')).toBe('night');
+    });
+  });
 });

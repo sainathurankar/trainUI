@@ -68,7 +68,60 @@
             </div>
           </div>
         }
+
+        <!-- Feature 3: departure time-of-day window -->
+        <div class="tu-filter-group">
+          <span class="tu-filter-label">Departure</span>
+          <div class="tu-chip-row">
+            <button class="tu-chip" [class.active]="depWindow === 'all'" (click)="setDepWindow('all')">Any time</button>
+            <button class="tu-chip" [class.active]="depWindow === 'early'" (click)="setDepWindow('early')"><i class="fas fa-moon"></i> Before 6 AM</button>
+            <button class="tu-chip" [class.active]="depWindow === 'morning'" (click)="setDepWindow('morning')"><i class="fas fa-mug-hot"></i> 6 AM – 12 PM</button>
+            <button class="tu-chip" [class.active]="depWindow === 'afternoon'" (click)="setDepWindow('afternoon')"><i class="fas fa-sun"></i> 12 – 6 PM</button>
+            <button class="tu-chip" [class.active]="depWindow === 'night'" (click)="setDepWindow('night')"><i class="fas fa-star"></i> After 6 PM</button>
+          </div>
+        </div>
+
+        <!-- Feature 4: quota selector -->
+        @if (availableQuotaOptions.length > 1) {
+          <div class="tu-filter-group">
+            <span class="tu-filter-label">Quota</span>
+            <div class="tu-chip-row">
+              <button class="tu-chip" [class.active]="quotaFilter === 'all'" (click)="quotaFilter = 'all'">All</button>
+              @for (q of availableQuotaOptions; track q) {
+                <button class="tu-chip" [class.active]="quotaFilter === q" (click)="quotaFilter = q">{{ q }}</button>
+              }
+            </div>
+          </div>
+        }
       </div>
+    </div>
+  }
+
+  <!-- Feature 8: promotional offers strip -->
+  @if (!loading && !error && offers.length > 0) {
+    <div class="tu-offers-strip">
+      @for (offer of offers; track offer) {
+        <div class="tu-offer" [title]="offer?.text">
+          <span class="tu-offer-icon"><i class="fas fa-tag"></i></span>
+          <span class="tu-offer-text">
+            <strong>{{ offer?.discountDisplayText || offer?.text }}</strong>
+            @if (offer?.code) { <span class="tu-offer-code">{{ offer?.code }}</span> }
+          </span>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Feature 5: recommended train -->
+  @if (!loading && !error && recommendation) {
+    <div class="tu-recommended">
+      <div class="tu-recommended-head">
+        <span class="tu-recommended-badge"><i class="fas fa-award"></i> Recommended</span>
+        @for (tag of recommendationTags; track tag) {
+          <span class="tu-recommended-tag">{{ tag }}</span>
+        }
+      </div>
+      <app-train-card [train]="recommendation" [doj]="doj"></app-train-card>
     </div>
   }
 

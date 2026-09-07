@@ -161,6 +161,72 @@ export class Helper {
       ...availabilitiesList.map((a) => this.availabilityScore(a.status || '', a.seats))
     );
   }
+
+  // ---------------------------------------------------------------------------
+  // Confirmation prediction (Feature 1)
+  // ---------------------------------------------------------------------------
+
+  /** Bucket a redBus confirmation percentage into a colour band. */
+  static predictionBand(pct?: number | null): 'high' | 'medium' | 'low' | 'none' {
+    if (pct === null || pct === undefined || isNaN(Number(pct))) return 'none';
+    const n = Number(pct);
+    if (n >= 80) return 'high';
+    if (n >= 50) return 'medium';
+    return 'low';
+  }
+
+  /** CSS modifier class for a prediction band (drives pill colour). */
+  static predictionBandClass(pct?: number | null): string {
+    const band = this.predictionBand(pct);
+    return band === 'none' ? '' : `tu-pred-${band}`;
+  }
+
+  /**
+   * Chooses the most relevant confirmation percentage for a class:
+   * RAC->CNF chance takes priority for RAC rows, else the general prediction.
+   */
+  static confirmChance(avail: { status?: string; predictionPercentage?: number | null; racCnfPredictionPercentage?: number | null }): number | null {
+    if (!avail) return null;
+    const rank = this.availabilityRank(avail.status || '');
+    if (rank === 'rac' && avail.racCnfPredictionPercentage != null) {
+      return Number(avail.racCnfPredictionPercentage);
+    }
+    if (avail.predictionPercentage != null) return Number(avail.predictionPercentage);
+    if (avail.racCnfPredictionPercentage != null) return Number(avail.racCnfPredictionPercentage);
+    return null;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Fare transparency (Feature 2)
+  // ---------------------------------------------------------------------------
+
+  /** True when a class has a genuine discount worth showing (original > current). */
+  static hasFareSaving(avail: { fare?: string | number; originalFare?: number | null; fareDifference?: number | null }): boolean {
+    if (!avail) return false;
+    const orig = Number(avail.originalFare);
+    const cur = Number(avail.fare);
+    return !!orig && !!cur && orig > cur;
+  }
+
+  /** Rupee savings vs. the original fare (falls back to computing the delta). */
+  static fareSaving(avail: { fare?: string | number; originalFare?: number | null; fareDifference?: number | null }): number {
+    if (!this.hasFareSaving(avail)) return 0;
+    if (avail.fareDifference != null && Number(avail.fareDifference) > 0) return Number(avail.fareDifference);
+    return Number(avail.originalFare) - Number(avail.fare);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Departure time-of-day windows (Feature 3)
+  // ---------------------------------------------------------------------------
+
+  /** Classify a "HH:mm" departure time into a coarse time-of-day bucket. */
+  static departureWindow(time: string): 'early' | 'morning' | 'afternoon' | 'night' {
+    const mins = this.timeToMinutes(time);
+    if (mins < 6 * 60) return 'early';       // 00:00 - 05:59
+    if (mins < 12 * 60) return 'morning';    // 06:00 - 11:59
+    if (mins < 18 * 60) return 'afternoon';  // 12:00 - 17:59
+    return 'night';                           // 18:00 - 23:59
+  }
 }
 
 function convertDateFormat(inputDate: string) {

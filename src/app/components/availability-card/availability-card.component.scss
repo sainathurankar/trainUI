@@ -7,6 +7,7 @@
   border-left: 4px solid #cbd5e1;
   border-radius: var(--tu-radius-sm);
   min-height: 118px;
+  height: 100%;
   overflow: hidden;
   transition: transform 0.25s var(--tu-ease), box-shadow 0.25s var(--tu-ease);
   box-shadow: var(--tu-shadow-sm);
@@ -67,6 +68,63 @@
   margin-top: auto;
 }
 .tu-fare { font-weight: 700; font-size: 0.9rem; color: var(--tu-indigo-900); }
+
+/* Feature 2: fare transparency */
+.tu-fare-wrap { display: inline-flex; align-items: baseline; gap: 0.35rem; flex-wrap: wrap; }
+.tu-fare-orig {
+  font-size: 0.72rem;
+  color: var(--tu-text-muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+.tu-fare-save {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--tu-emerald);
+  background: rgba(16, 185, 129, 0.12);
+  border-radius: 999px;
+  padding: 0.05rem 0.4rem;
+  white-space: nowrap;
+}
+
+/* Feature 1: confirmation-chance prediction pill */
+.tu-pred {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  width: fit-content;
+  border: 1px solid transparent;
+}
+.tu-pred .tu-pred-val { font-weight: 800; }
+.tu-pred .tu-pred-lbl { opacity: 0.85; }
+.tu-pred-high   { color: var(--tu-emerald); background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3); }
+.tu-pred-medium { color: var(--tu-amber);   background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3); }
+.tu-pred-low    { color: var(--tu-rose);    background: rgba(244, 63, 94, 0.12);  border-color: rgba(244, 63, 94, 0.3); }
+.tu-pred-lb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6rem;
+  color: var(--tu-text-muted);
+}
+
+/* Feature 7: boarding / dropping override note */
+.tu-board-override {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--tu-primary);
+  background: var(--tu-surface-2);
+  border-radius: 6px;
+  padding: 0.12rem 0.4rem;
+}
 
 .tu-refresh {
   display: inline-grid;

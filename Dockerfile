@@ -1,5 +1,5 @@
-# Use Node.js version 14
-FROM node:14-alpine as builder
+# Use Node.js version 18 (required by Angular 16)
+FROM node:18-alpine AS builder
 
 # Set the working directory to /app
 WORKDIR /app
@@ -8,10 +8,10 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install Angular CLI globally
-RUN npm install -g @angular/cli@14
+RUN npm install -g @angular/cli@16
 
 # Install project dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .

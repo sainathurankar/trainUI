@@ -9,6 +9,22 @@ and a custom design-token theme.
 > fully on bundled mock JSON (see `src/environments/environment.ts`,
 > `mock: true`), so no backend is required to explore the UI.
 
+## Features
+
+- **Search & live availability** — station autocomplete, 12+ trains per route
+  with seat status across every class and quota.
+- **Filter & sort results** — sort by departure, arrival, duration, price or
+  best availability; filter by availability bucket (Available / RAC / Waitlist)
+  and travel class.
+- **2-week availability outlook** — per-class 14-day view with an inline SVG
+  trend sparkline (Improving / Declining / Steady).
+- **Dark mode** — one-click theme toggle that respects `prefers-color-scheme`
+  and persists your choice across visits.
+- **Installable PWA** — add to home screen and browse cached results offline
+  (service worker via `@angular/service-worker`).
+- **Polished UX** — skeleton loaders while fetching and toast notifications for
+  search results and errors.
+
 ## Tech stack
 
 - Angular 22 (standalone-ready, new `@if`/`@for` control flow, `inject()` DI)

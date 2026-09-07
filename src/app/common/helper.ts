@@ -99,6 +99,68 @@ export class Helper {
     }
     return '';
   }
+
+  /**
+   * Normalizes a raw availability status into a coarse bucket used for
+   * colouring, sorting and trend rendering.
+   */
+  static availabilityRank(status: string): 'available' | 'rac' | 'waitlist' | 'unavailable' {
+    const s = (status || '').toUpperCase();
+    if (s === 'AVBL' || s === 'CURR_AVBL') return 'available';
+    if (s === 'RAC') return 'rac';
+    if (s.indexOf('WL') > -1) return 'waitlist';
+    return 'unavailable';
+  }
+
+  /**
+   * Maps a status + seat count to a numeric score (higher = more available),
+   * used to plot the 2-week availability trend sparkline and to sort results.
+   */
+  static availabilityScore(status: string, seats?: string | number): number {
+    const rank = this.availabilityRank(status);
+    const n = Math.max(0, Number(seats) || 0);
+    switch (rank) {
+      case 'available':
+        return 300 + Math.min(n, 400);   // best: green, scaled by seats
+      case 'rac':
+        return 150 + Math.min(n, 100);   // decent
+      case 'waitlist':
+        return Math.max(0, 100 - Math.min(n, 100)); // lower WL number = better
+      default:
+        return -1;                        // regret / cancelled
+    }
+  }
+
+  /** Parses a "HH:mm" duration string into total minutes (for sorting). */
+  static durationToMinutes(duration: string): number {
+    if (!duration) return Number.MAX_SAFE_INTEGER;
+    const [h, m] = duration.split(':').map((x) => parseInt(x, 10) || 0);
+    return h * 60 + m;
+  }
+
+  /** Parses a "HH:mm" 24h time into minutes since midnight (for sorting). */
+  static timeToMinutes(time: string): number {
+    if (!time) return Number.MAX_SAFE_INTEGER;
+    const [h, m] = time.split(':').map((x) => parseInt(x, 10) || 0);
+    return h * 60 + m;
+  }
+
+  /** Cheapest fare across a train's availability list (for price sorting). */
+  static minFare(availabilitiesList: { fare?: string | number }[]): number {
+    if (!availabilitiesList || !availabilitiesList.length) return Number.MAX_SAFE_INTEGER;
+    const fares = availabilitiesList
+      .map((a) => Number(a.fare) || 0)
+      .filter((f) => f > 0);
+    return fares.length ? Math.min(...fares) : Number.MAX_SAFE_INTEGER;
+  }
+
+  /** Best availability score across a train's classes (for availability sorting). */
+  static bestAvailabilityScore(availabilitiesList: { status?: string; seats?: string }[]): number {
+    if (!availabilitiesList || !availabilitiesList.length) return -1;
+    return Math.max(
+      ...availabilitiesList.map((a) => this.availabilityScore(a.status || '', a.seats))
+    );
+  }
 }
 
 function convertDateFormat(inputDate: string) {

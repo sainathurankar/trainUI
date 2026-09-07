@@ -68,3 +68,37 @@
 .tu-nav-muted { color: var(--tu-text-muted); }
 
 .tu-cta { border-radius: 999px; }
+
+/* ---- Theme toggle ----------------------------------------- */
+.tu-theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--tu-border, #e6e9f2);
+  background: var(--tu-surface, #fff);
+  color: var(--tu-text, #1e293b);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color .2s var(--tu-ease), border-color .2s, background .2s, transform .2s;
+}
+.tu-theme-toggle:hover {
+  color: var(--tu-primary, #4f46e5);
+  border-color: var(--tu-primary, #4f46e5);
+  transform: rotate(-15deg);
+}
+
+/* ---- Dark-theme navbar surfaces --------------------------- */
+:host-context([data-theme='dark']) .tu-navbar {
+  background: rgba(19, 28, 49, 0.72);
+  border-bottom-color: rgba(38, 49, 73, 0.9);
+}
+:host-context([data-theme='dark']) .tu-navbar.scrolled {
+  background: rgba(19, 28, 49, 0.92);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+:host-context([data-theme='dark']) .tu-brand-name { color: var(--tu-text, #e2e8f0); }
+:host-context([data-theme='dark']) .tu-theme-toggle {
+  background: var(--tu-surface-2, #1b2540);
+}

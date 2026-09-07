@@ -49,6 +49,51 @@
   --bs-body-font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
+/* ---- Dark theme overrides --------------------------------- */
+[data-theme='dark'] {
+  --tu-bg:         #0b1120;
+  --tu-surface:    #131c31;
+  --tu-surface-2:  #1b2540;
+  --tu-border:     #263149;
+  --tu-text:       #e2e8f0;
+  --tu-text-muted: #94a3b8;
+
+  /* Headings / train names / times / fares use these fixed-dark tokens in
+     light mode; remap them to light values so they stay legible in dark mode. */
+  --tu-indigo-900: #f1f5f9;
+  --tu-indigo-800: #e2e8f0;
+  --tu-primary-700: #a5b4fc;
+  --tu-hero-top: #101a30;
+
+  --tu-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.4);
+  --tu-shadow:     0 6px 20px rgba(0, 0, 0, 0.45);
+  --tu-shadow-lg:  0 18px 45px rgba(0, 0, 0, 0.55);
+
+  /* Bootstrap surface/text mapping so BS components follow the theme */
+  --bs-body-bg: #0b1120;
+  --bs-body-color: #e2e8f0;
+  --bs-border-color: #263149;
+  color-scheme: dark;
+}
+
+[data-theme='dark'] body { background: var(--tu-bg); color: var(--tu-text); }
+
+[data-theme='dark'] .form-control,
+[data-theme='dark'] .form-select {
+  background-color: var(--tu-surface-2);
+  border-color: var(--tu-border);
+  color: var(--tu-text);
+}
+[data-theme='dark'] .form-control::placeholder { color: var(--tu-text-muted); }
+[data-theme='dark'] .form-control:focus,
+[data-theme='dark'] .form-select:focus {
+  background-color: var(--tu-surface-2);
+  color: var(--tu-text);
+}
+[data-theme='dark'] ::selection { background: rgba(129, 140, 248, 0.35); }
+[data-theme='dark'] * { scrollbar-color: #33415c transparent; }
+[data-theme='dark'] *::-webkit-scrollbar-thumb { background: #33415c; }
+
 /* ---- Bootstrap SCSS override (must precede import) -------- */
 $primary: #4f46e5;
 $info:    #06b6d4;

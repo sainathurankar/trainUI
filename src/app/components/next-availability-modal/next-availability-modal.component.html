@@ -22,6 +22,9 @@
     </ul>
 
     <div class="tu-modal-avail">
+      @if (!loading && availList.length > 1) {
+        <app-availability-sparkline [series]="availList"></app-availability-sparkline>
+      }
       <div class="tu-modal-avail-grid">
         @for (avail of availList; track avail) {
           <div class="tu-modal-avail-item">

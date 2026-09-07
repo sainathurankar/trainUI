@@ -14,7 +14,7 @@
   z-index: -1;
   background:
     radial-gradient(1200px 500px at 50% -10%, rgba(124, 58, 237, 0.10), transparent 60%),
-    linear-gradient(180deg, #f6f7fe 0%, var(--tu-bg) 100%);
+    linear-gradient(180deg, var(--tu-hero-top, #f6f7fe) 0%, var(--tu-bg) 100%);
 }
 
 .tu-blob {

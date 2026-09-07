@@ -1,0 +1,11 @@
+<div class="tu-toast-stack" aria-live="polite" aria-atomic="true">
+  @for (toast of toasts(); track toast.id) {
+    <div class="tu-toast" [class]="'tu-toast-' + toast.type" role="alert">
+      <span class="tu-toast-icon"><i class="fas" [ngClass]="icon(toast.type)"></i></span>
+      <span class="tu-toast-text">{{ toast.text }}</span>
+      <button type="button" class="tu-toast-close" aria-label="Dismiss" (click)="dismiss(toast.id)">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+  }
+</div>

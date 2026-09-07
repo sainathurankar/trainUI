@@ -4,8 +4,11 @@
   <app-footer></app-footer>
 </div>
 
-<!-- Toast stack -->
-<div class="tu-toast-stack">
+<!-- Global toast notifications (search results, actions) -->
+<app-toast-container></app-toast-container>
+
+<!-- App boot status toasts -->
+<div class="tu-toast-stack tu-boot-stack">
   @if (showAppReadyMessage) {
     <div class="tu-toast tu-toast-success" role="alert">
       <span class="tu-toast-icon"><i class="fas fa-circle-check"></i></span>

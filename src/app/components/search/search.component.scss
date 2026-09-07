@@ -43,7 +43,7 @@
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--tu-border);
-  background: #fff;
+  background: var(--tu-surface, #fff);
   color: var(--tu-primary);
   font-size: 0.95rem;
   cursor: pointer;
@@ -79,7 +79,7 @@
   left: 0;
   right: 0;
   z-index: 1200;
-  background: #fff;
+  background: var(--tu-surface, #fff);
   border: 1px solid var(--tu-border);
   border-radius: 14px;
   box-shadow: var(--tu-shadow-lg);

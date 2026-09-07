@@ -1,53 +1,52 @@
-<div class="card mb-3">
-  <div class="card-body">
-    <div class="row d-flex justify-content-between">
-      <div class="col-8 col-md-10">
-        <h4 class="card-title">
-          {{ train.trainNumber }} | <span class="fw-bold text-uppercase">{{ train.trainName }}</span>
-        </h4>
-      </div>
-      <div class="col-4 col-md-2 d-flex justify-content-end">
-        <div class="fw-light" style="letter-spacing: 4px;">
-          <span [class.fw-bold]="train?.runningMon === 'Y'">M</span>
-          <span [class.fw-bold]="train?.runningTue === 'Y'">T</span>
-          <span [class.fw-bold]="train?.runningWed === 'Y'">W</span>
-          <span [class.fw-bold]="train?.runningThu === 'Y'">T</span>
-          <span [class.fw-bold]="train?.runningFri === 'Y'">F</span>
-          <span [class.fw-bold]="train?.runningSat === 'Y'">S</span>
-          <span [class.fw-bold]="train?.runningSun === 'Y'">S</span>
-        </div>
-      </div>
+<div class="tu-train-card">
+  <!-- Header: train name + running days -->
+  <div class="tu-train-head">
+    <div class="tu-train-name">
+      <span class="tu-train-num">{{ train.trainNumber }}</span>
+      <span class="tu-train-title">{{ train.trainName }}</span>
     </div>
-
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <div class="text-start">
-        <p class="card-text text-muted mb-2">
-          <span>{{ train.fromStation }} ({{ train.fromStationCode }})</span>
-        </p>
-        <p class="fs-6 fw-bold">{{ helper.convertTo12HourFormat(train.departureTime) }}</p>
-        <p class="text-muted mb-1">{{helper.formatDateString(train.departureDate) }}</p>
-      </div>
-
-      <div class="text-center">
-        <p class="text-muted mb-2"> <i class="fa-regular fa-clock"></i> {{ train.duration }} hrs</p>
-      </div>
-
-      <div class="text-end">
-        <p class="card-text text-muted mb-2">
-          <span>{{ train.toStation }} ({{ train.toStationCode }})</span>
-        </p>
-        <p class="fs-6 fw-bold">{{ helper.convertTo12HourFormat(train.arrivalTime) }}</p>
-        <p class="text-muted mb-1"> {{ helper.formatDateString(train.arrivalDate) }}</p>
-      </div>
+    <div class="tu-run-days" title="Running days">
+      <span [class.on]="train?.runningMon === 'Y'">M</span>
+      <span [class.on]="train?.runningTue === 'Y'">T</span>
+      <span [class.on]="train?.runningWed === 'Y'">W</span>
+      <span [class.on]="train?.runningThu === 'Y'">T</span>
+      <span [class.on]="train?.runningFri === 'Y'">F</span>
+      <span [class.on]="train?.runningSat === 'Y'">S</span>
+      <span [class.on]="train?.runningSun === 'Y'">S</span>
     </div>
-
-    <div *ngIf="showNextAvail" class="row d-flex mb-3">
-      <div class="availability-container">
-        <div *ngFor="let avail of train.availabilitiesList" class="avail col-4 col-md-4 px-md-2 col-lg-2 mb-3">
-          <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
-        </div>
-      </div>
-    </div>
-    <app-next-availabilty *ngIf="showNextAvail" [train]="train" [doj]="doj"></app-next-availabilty>
   </div>
+
+  <!-- Journey visualization -->
+  <div class="tu-journey">
+    <div class="tu-stop tu-stop-start">
+      <p class="tu-time">{{ helper.convertTo12HourFormat(train.departureTime) }}</p>
+      <p class="tu-station">{{ train.fromStation }} <span class="tu-code">({{ train.fromStationCode }})</span></p>
+      <p class="tu-date">{{ helper.formatDateString(train.departureDate) }}</p>
+    </div>
+
+    <div class="tu-journey-line">
+      <span class="tu-dot"></span>
+      <span class="tu-line"></span>
+      <span class="tu-duration"><i class="fa-regular fa-clock"></i> {{ train.duration }} hrs</span>
+      <span class="tu-line"></span>
+      <span class="tu-dot tu-dot-end"></span>
+    </div>
+
+    <div class="tu-stop tu-stop-end">
+      <p class="tu-time">{{ helper.convertTo12HourFormat(train.arrivalTime) }}</p>
+      <p class="tu-station">{{ train.toStation }} <span class="tu-code">({{ train.toStationCode }})</span></p>
+      <p class="tu-date">{{ helper.formatDateString(train.arrivalDate) }}</p>
+    </div>
+  </div>
+
+  <!-- Availability quota cards -->
+  <div *ngIf="showNextAvail" class="tu-avail-wrap">
+    <div class="tu-avail-grid">
+      <div *ngFor="let avail of train.availabilitiesList" class="tu-avail-item">
+        <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
+      </div>
+    </div>
+  </div>
+
+  <app-next-availabilty *ngIf="showNextAvail" [train]="train" [doj]="doj"></app-next-availabilty>
 </div>

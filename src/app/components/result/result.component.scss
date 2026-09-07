@@ -1,4 +1,79 @@
-.container {
-  margin-top: 10px;
+:host { display: block; }
 
+.tu-results {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  max-width: 960px;
 }
+
+.tu-results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+.tu-results-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--tu-indigo-900);
+  margin: 0;
+}
+.tu-results-sub {
+  color: var(--tu-text-muted);
+  font-size: 0.9rem;
+  margin: 0.15rem 0 0;
+}
+
+.tu-modify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--tu-border);
+  background: #fff;
+  color: var(--tu-primary-700);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+.tu-modify-btn:hover { border-color: var(--tu-primary); color: var(--tu-primary); }
+.tu-modify-btn.active { background: rgba(79, 70, 229, 0.08); border-color: var(--tu-primary); }
+
+/* Collapsible modify panel */
+.tu-modify-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--tu-ease);
+}
+.tu-modify-panel.open {
+  grid-template-rows: 1fr;
+  margin-bottom: 1.5rem;
+}
+.tu-modify-panel > * { overflow: hidden; min-height: 0; }
+
+/* Empty / error states */
+.tu-empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--tu-surface);
+  border: 1px dashed var(--tu-border);
+  border-radius: var(--tu-radius);
+  animation: tu-fade-in 0.4s var(--tu-ease) both;
+}
+.tu-empty-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  font-size: 1.6rem;
+  color: #fff;
+  background: var(--tu-grad-brand);
+  margin-bottom: 1rem;
+}
+.tu-empty-icon-muted { background: #cbd5e1; }
+.tu-empty-error .tu-empty-icon { background: linear-gradient(135deg, #fb7185, #e11d48); }
+.tu-empty h4 { font-weight: 700; color: var(--tu-indigo-900); margin-bottom: 0.4rem; }
+.tu-empty p { color: var(--tu-text-muted); margin: 0; max-width: 420px; margin-inline: auto; }

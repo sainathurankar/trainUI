@@ -1,63 +1,120 @@
-// Define reusable color variables
-$primary-background-color: rgb(246, 245, 246);
-$hover-background-color: rgba(201, 201, 201, 0.914);
-$primary-text-color: #846cca;
-$hover-text-color: #351398;
+:host { display: block; }
 
-.card {
-  // margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add a subtle box shadow
-  transition: box-shadow 0.3s ease; // Smooth transition on hover
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Increase box shadow on hover
-  }
+.tu-quota {
+  position: relative;
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+  border-left: 4px solid #cbd5e1;
+  border-radius: var(--tu-radius-sm);
+  min-height: 118px;
+  overflow: hidden;
+  transition: transform 0.25s var(--tu-ease), box-shadow 0.25s var(--tu-ease);
+  box-shadow: var(--tu-shadow-sm);
+}
+.tu-quota:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--tu-shadow);
 }
 
-.quota-card {
-  min-height: 128px;
-  background: $primary-background-color;
+/* Status accent via Bootstrap border-* classes from the component */
+.tu-quota.border-success { border-left-color: var(--tu-emerald) !important; }
+.tu-quota.border-warning { border-left-color: var(--tu-amber) !important; }
+.tu-quota.border-danger  { border-left-color: var(--tu-rose) !important; }
+
+.tu-quota-body {
+  padding: 0.7rem 0.8rem;
   cursor: pointer;
-  transition: background-color 0.3s ease; // Smooth transition on hover
-
-  &:hover {
-    background-color: $hover-background-color;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.refresh {
+.tu-quota-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.tu-quota-type {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--tu-text-muted);
+  text-transform: uppercase;
+}
+.tu-quota-class {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--tu-indigo-900);
+  background: var(--tu-surface-2);
+  border-radius: 6px;
+  padding: 0.05rem 0.4rem;
+}
+
+.tu-quota-status { display: flex; align-items: baseline; gap: 0.3rem; flex-wrap: wrap; }
+.tu-seats { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; }
+.tu-status-label { font-size: 0.75rem; font-weight: 600; }
+/* Bootstrap text-* colors applied by component are respected automatically */
+.tu-quota-status.text-success { color: var(--tu-emerald) !important; }
+.tu-quota-status.text-warning { color: var(--tu-amber) !important; }
+.tu-quota-status.text-danger  { color: var(--tu-rose) !important; }
+
+.tu-quota-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.tu-fare { font-weight: 700; font-size: 0.9rem; color: var(--tu-indigo-900); }
+
+.tu-refresh {
+  display: inline-grid;
+  place-items: center;
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  color: var(--tu-primary);
   cursor: pointer;
-  color: $primary-text-color;
-  transition: color 0.3s ease, font-weight 0.3s ease; // Smooth transition on hover
+  transition: background 0.2s ease, transform 0.4s var(--tu-ease);
+}
+.tu-refresh:hover { background: rgba(79, 70, 229, 0.1); transform: rotate(180deg); }
 
-  &:hover {
-    color: $hover-text-color;
-    font-weight: bold;
-  }
+.tu-refresh-spinner {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(79, 70, 229, 0.25);
+  border-top-color: var(--tu-primary);
+  animation: tu-spin 0.7s linear infinite;
+}
+@keyframes tu-spin { to { transform: rotate(360deg); } }
+
+.tu-updated {
+  font-size: 0.65rem;
+  color: var(--tu-text-muted);
 }
 
-.badge-wrapper {
-  top: 10px;
+/* Ribbons */
+.tu-ribbon {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  z-index: 2;
+  box-shadow: var(--tu-shadow-sm);
+  white-space: nowrap;
 }
+.tu-ribbon-tatkal { background: var(--tu-emerald); }
+.tu-ribbon-guarantee { background: var(--tu-primary); }
 
-// /* Default styles for larger screens */
-// .card-subtitle,
-// .card-text {
-//   font-size: 16px; /* Adjust the default font size for larger screens */
-// }
-
-/* Media query for smaller screens */
 @media (max-width: 576px) {
-  .card-subtitle,
-  .card-text {
-    font-size: 10px; /* Set a smaller font size for screens with a width of 576px or less */
-  }
-
-  .small-text {
-    font-size: 8px;
-  }
-
-  .quota-card {
-    min-height: 95px;
-  }
+  .tu-quota { min-height: 100px; }
+  .tu-quota-body { padding: 0.55rem 0.6rem; }
+  .tu-seats { font-size: 0.9rem; }
+  .tu-status-label { font-size: 0.68rem; }
+  .tu-updated { font-size: 0.58rem; }
 }

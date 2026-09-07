@@ -1,47 +1,61 @@
-<section class="search-section">
-  <h2 class="mb-4">Search for Trains</h2>
-  <form class="row g-3 align-items-center justify-content-center">
-    <div class="col-md-3 position-relative">
-      <div class="input-group">
-        <span class="input-group-text bg-primary text-white"><i class="fas fa-map-marker-alt mx-1"></i></span>
-        <input type="text" id="from" name="from" class="form-control" placeholder="Enter Source" [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
-        <ul class="dropdown-menu position-absolute" [class.show]="fromsuggestions.length > 0">
-          <li class="dropdown-item" *ngFor="let suggestion of fromsuggestions" (click)="onSelectSuggestion(suggestion, 'from')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
+<section class="tu-search">
+  <form class="tu-search-form">
+    <div class="tu-fields">
+      <!-- FROM -->
+      <div class="tu-field position-relative">
+        <label class="tu-field-label"><i class="fas fa-circle-dot text-primary"></i> From</label>
+        <input type="text" id="from" name="from" class="form-control tu-input"
+          placeholder="Enter source station"
+          [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
+        <ul class="tu-suggestions" [class.show]="fromsuggestions.length > 0">
+          <li class="tu-suggestion" *ngFor="let suggestion of fromsuggestions"
+            (click)="onSelectSuggestion(suggestion, 'from')">
+            <i class="fas fa-train-subway text-muted"></i>
+            <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+          </li>
         </ul>
       </div>
-    </div>
 
-    <div class="col-md-1 d-flex justify-content-center d-none d-md-flex">
-      <button type="submit" (click)="switchStations()" [disabled]="frominputValue === '' || toinputValue === ''" class="btn btn-info ">
-        <i class="fas fa-sharp fa-arrow-right-arrow-left text-white"></i>
-      </button>
-    </div>
+      <!-- SWAP -->
+      <div class="tu-swap-col">
+        <button type="button" (click)="switchStations()"
+          [disabled]="frominputValue === '' || toinputValue === ''"
+          class="tu-swap-btn" title="Swap stations" aria-label="Swap source and destination">
+          <i class="fas fa-arrow-right-arrow-left"></i>
+        </button>
+      </div>
 
-    <div class="col-md-3 position-relative">
-      <div class="input-group">
-        <span class="input-group-text bg-success text-white"><i class="fas fa-map-marker-alt mx-1"></i></span>
-        <input type="text" id="to" name="to" class="form-control" placeholder="Enter Destination" [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
-        <ul class="dropdown-menu position-absolute" [class.show]="tosuggestions.length > 0">
-          <li class="dropdown-item" *ngFor="let suggestion of tosuggestions" (click)="onSelectSuggestion(suggestion, 'to')">{{ suggestion.stationName }} ({{suggestion.stationCode}})</li>
+      <!-- TO -->
+      <div class="tu-field position-relative">
+        <label class="tu-field-label"><i class="fas fa-location-dot text-danger"></i> To</label>
+        <input type="text" id="to" name="to" class="form-control tu-input"
+          placeholder="Enter destination station"
+          [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
+        <ul class="tu-suggestions" [class.show]="tosuggestions.length > 0">
+          <li class="tu-suggestion" *ngFor="let suggestion of tosuggestions"
+            (click)="onSelectSuggestion(suggestion, 'to')">
+            <i class="fas fa-train-subway text-muted"></i>
+            <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+          </li>
         </ul>
       </div>
-    </div>
 
-    <div class="col-md-3 position-relative">
-      <div class="input-group">
-        <span class="input-group-text bg-warning text-dark"><i class="fas fa-calendar-alt mx-1"></i></span>
-        <input class="date form-control" type="date" [(ngModel)]="dateOfTravel" name="date" id="date" #date [min]="minDate">
+      <!-- DATE -->
+      <div class="tu-field">
+        <label class="tu-field-label"><i class="fas fa-calendar-day text-warning"></i> Date of journey</label>
+        <input class="form-control tu-input" type="date" [(ngModel)]="dateOfTravel"
+          name="date" id="date" #date [min]="minDate">
       </div>
-    </div>
 
-    <div class="col-md-2 d-flex justify-content-between">
-      <button type="submit" (click)="switchStations()" [disabled]="frominputValue === '' || toinputValue === ''" class="btn btn-info d-md-none">
-        <i class="fas fa-sharp fa-arrow-right-arrow-left text-white px-1"></i>
-      </button>
-      <button type="submit" (click)="onClickSearch()" [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''" class="btn btn-danger">
-        <i class="fas fa-search px-1"></i>
-        <span class="d-sm-inline px-1">Search</span>
-      </button>
+      <!-- SEARCH -->
+      <div class="tu-search-col">
+        <button type="submit" (click)="onClickSearch()"
+          [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''"
+          class="btn btn-gradient tu-search-btn">
+          <i class="fas fa-magnifying-glass"></i>
+          <span>Search trains</span>
+        </button>
+      </div>
     </div>
   </form>
 </section>

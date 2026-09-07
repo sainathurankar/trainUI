@@ -1,12 +1,18 @@
 <div class="tu-quota" [ngClass]="getQuotaCardClass(avail?.status)">
-  <span *ngIf="avail?.quota === 'TQ' && (avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC')"
+  @if (avail?.quota === 'TQ' && (avail.status === 'Available' || avail.status === 'CURR_AVBL' || avail.status === 'RAC')) {
+    <span
     class="tu-ribbon tu-ribbon-tatkal">TATKAL</span>
-  <span *ngIf="avail?.tg" class="tu-ribbon tu-ribbon-guarantee">GUARANTEE</span>
+  }
+  @if (avail?.tg) {
+    <span class="tu-ribbon tu-ribbon-guarantee">GUARANTEE</span>
+  }
 
-  <div class="tu-quota-body" (click)="navigateToBooking()" [title]="'Click to book'">
+  <div class="tu-quota-body" (click)="navigateToBooking()" (keyup.enter)="navigateToBooking()" (keyup.space)="navigateToBooking()" role="button" tabindex="0" [title]="'Click to book'">
     <div class="tu-quota-top">
       <span class="tu-quota-type">{{ avail?.quota }}</span>
-      <span *ngIf="avail?.className" class="tu-quota-class">{{ avail?.className }}</span>
+      @if (avail?.className) {
+        <span class="tu-quota-class">{{ avail?.className }}</span>
+      }
     </div>
 
     <div class="tu-quota-status" [ngClass]="getAvailabilityClass(avail?.status)">
@@ -15,14 +21,23 @@
     </div>
 
     <div class="tu-quota-foot">
-      <span *ngIf="avail?.fare !== 'null'" class="tu-fare">₹ {{ avail?.fare }}</span>
-      <span *ngIf="!updating" class="tu-refresh" [title]="'Click to refresh'"
-        (click)="$event.stopPropagation(); update()">
-        <i class="fas fa-arrows-rotate"></i>
-      </span>
-      <span *ngIf="updating" class="tu-refresh-spinner"></span>
+      @if (avail?.fare !== 'null') {
+        <span class="tu-fare">₹ {{ avail?.fare }}</span>
+      }
+      @if (!updating) {
+        <span class="tu-refresh" [title]="'Click to refresh'" role="button" tabindex="0"
+          (click)="$event.stopPropagation(); update()"
+          (keyup.enter)="update()" (keyup.space)="update()">
+          <i class="fas fa-arrows-rotate"></i>
+        </span>
+      }
+      @if (updating) {
+        <span class="tu-refresh-spinner"></span>
+      }
     </div>
 
-    <span class="tu-updated" *ngIf="avail?.lastUpdatedOn">{{ avail?.lastUpdatedOn }}</span>
+    @if (avail?.lastUpdatedOn) {
+      <span class="tu-updated">{{ avail?.lastUpdatedOn }}</span>
+    }
   </div>
 </div>

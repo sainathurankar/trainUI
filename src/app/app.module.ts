@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from  '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from  '@angular/common/http';
 import { SearchComponent } from './components/search/search.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { TrainCardComponent } from './components/train-card/train-card.component';
@@ -18,30 +18,23 @@ import { NextAvailabiltyComponent } from './components/next-availabilty/next-ava
 import { NextAvailabilityModalComponent } from './components/next-availability-modal/next-availability-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ResultComponent,
-    HeaderComponent,
-    FooterComponent,
-    SearchComponent,
-    LoaderComponent,
-    TrainCardComponent,
-    AvailabilityCardComponent,
-    NextAvailabiltyComponent,
-    NextAvailabilityModalComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        ResultComponent,
+        HeaderComponent,
+        FooterComponent,
+        SearchComponent,
+        LoaderComponent,
+        TrainCardComponent,
+        AvailabilityCardComponent,
+        NextAvailabiltyComponent,
+        NextAvailabilityModalComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule], providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Helper } from 'src/app/common/helper';
@@ -7,11 +7,15 @@ import { SearchService } from 'src/app/services/search/search.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-availability-card',
-  templateUrl: './availability-card.component.html',
-  styleUrls: ['./availability-card.component.scss'],
+    selector: 'app-availability-card',
+    templateUrl: './availability-card.component.html',
+    styleUrls: ['./availability-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AvailabilityCardComponent implements OnInit, OnDestroy {
+  private searchService = inject(SearchService);
+
   @Input() avail: any;
 
   @Input() train: any;
@@ -22,8 +26,6 @@ export class AvailabilityCardComponent implements OnInit, OnDestroy {
 
   updating = false;
   private destroy$ = new Subject<void>();
-
-  constructor(private searchService: SearchService) {}
   ngOnInit(): void {
     const hours = 2; // specify the hours that need to be updated
     const currentTimeInMilliSeconds = new Date().getTime();
@@ -36,7 +38,7 @@ export class AvailabilityCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  getQuotaCardClass(status: string): { [key: string]: boolean } {
+  getQuotaCardClass(status: string): Record<string, boolean> {
     return {
       'border-success':
         status === 'AVBL' || status === 'CURR_AVBL' || status === 'RAC',
@@ -49,7 +51,7 @@ export class AvailabilityCardComponent implements OnInit, OnDestroy {
     };
   }
 
-  getAvailabilityClass(status: string): { [key: string]: boolean } {
+  getAvailabilityClass(status: string): Record<string, boolean> {
     return {
       'text-success':
         status === 'AVBL' || status === 'CURR_AVBL' || status === 'RAC',

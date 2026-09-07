@@ -12,18 +12,22 @@
           [attr.aria-expanded]="fromsuggestions.length > 0">
         <ul class="tu-suggestions" id="from-suggestions" role="listbox"
           [class.show]="fromsuggestions.length > 0">
-          <li class="tu-suggestion" *ngFor="let suggestion of fromsuggestions"
-            role="option" tabindex="0"
-            (click)="onSelectSuggestion(suggestion, 'from')"
-            (keydown.enter)="onSelectSuggestion(suggestion, 'from')"
-            (keydown.space)="onSelectSuggestion(suggestion, 'from'); $event.preventDefault()">
-            <i class="fas fa-train-subway text-muted"></i>
-            <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
-          </li>
+          @for (suggestion of fromsuggestions; track suggestion) {
+            <li class="tu-suggestion"
+              role="option" tabindex="0" [attr.aria-selected]="false"
+              (click)="onSelectSuggestion(suggestion, 'from')"
+              (keydown.enter)="onSelectSuggestion(suggestion, 'from')"
+              (keydown.space)="onSelectSuggestion(suggestion, 'from'); $event.preventDefault()">
+              <i class="fas fa-train-subway text-muted"></i>
+              <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+            </li>
+          }
         </ul>
-        <small class="tu-field-error" *ngIf="submitted && !fromValid">
-          Please pick a source station from the list.
-        </small>
+        @if (submitted && !fromValid) {
+          <small class="tu-field-error">
+            Please pick a source station from the list.
+          </small>
+        }
       </div>
 
       <!-- SWAP -->
@@ -46,21 +50,27 @@
           [attr.aria-expanded]="tosuggestions.length > 0">
         <ul class="tu-suggestions" id="to-suggestions" role="listbox"
           [class.show]="tosuggestions.length > 0">
-          <li class="tu-suggestion" *ngFor="let suggestion of tosuggestions"
-            role="option" tabindex="0"
-            (click)="onSelectSuggestion(suggestion, 'to')"
-            (keydown.enter)="onSelectSuggestion(suggestion, 'to')"
-            (keydown.space)="onSelectSuggestion(suggestion, 'to'); $event.preventDefault()">
-            <i class="fas fa-train-subway text-muted"></i>
-            <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
-          </li>
+          @for (suggestion of tosuggestions; track suggestion) {
+            <li class="tu-suggestion"
+              role="option" tabindex="0" [attr.aria-selected]="false"
+              (click)="onSelectSuggestion(suggestion, 'to')"
+              (keydown.enter)="onSelectSuggestion(suggestion, 'to')"
+              (keydown.space)="onSelectSuggestion(suggestion, 'to'); $event.preventDefault()">
+              <i class="fas fa-train-subway text-muted"></i>
+              <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+            </li>
+          }
         </ul>
-        <small class="tu-field-error" *ngIf="submitted && !toValid">
-          Please pick a destination station from the list.
-        </small>
-        <small class="tu-field-error" *ngIf="submitted && toValid && sameStation">
-          Source and destination can't be the same.
-        </small>
+        @if (submitted && !toValid) {
+          <small class="tu-field-error">
+            Please pick a destination station from the list.
+          </small>
+        }
+        @if (submitted && toValid && sameStation) {
+          <small class="tu-field-error">
+            Source and destination can't be the same.
+          </small>
+        }
       </div>
 
       <!-- DATE -->

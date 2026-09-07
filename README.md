@@ -1,6 +1,6 @@
 # RailGo — TrainUI
 
-A modern train ticket booking front end built with **Angular 16**. Search trains
+A modern train ticket booking front end built with **Angular 22**. Search trains
 between stations, view live seat availability across classes and quotas, and
 preview a two-week availability outlook. Styled with Bootstrap 5, ng-bootstrap
 and a custom design-token theme.
@@ -11,16 +11,17 @@ and a custom design-token theme.
 
 ## Tech stack
 
-- Angular 16
+- Angular 22 (standalone-ready, new `@if`/`@for` control flow, `inject()` DI)
 - Bootstrap 5 (SCSS) + ng-bootstrap (modals)
 - FontAwesome icons
 - Karma + Jasmine for unit tests
+- ESLint (flat config) via angular-eslint
 
 ## Prerequisites
 
-- Node.js 18 LTS is recommended. (Angular 16 uses the modern esbuild-based
-  toolchain, so the old `NODE_OPTIONS=--openssl-legacy-provider` workaround is
-  no longer required.)
+- Node.js 22 LTS or newer is required (Angular 22 needs Node ^20.19 || ^22.12
+  || >=24). The app uses the modern esbuild-based toolchain, so the old
+  `NODE_OPTIONS=--openssl-legacy-provider` workaround is not required.
 - Install dependencies:
 
   ```bash

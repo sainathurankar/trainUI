@@ -40,13 +40,19 @@
   </div>
 
   <!-- Availability quota cards -->
-  <div *ngIf="showNextAvail" class="tu-avail-wrap">
-    <div class="tu-avail-grid">
-      <div *ngFor="let avail of train.availabilitiesList" class="tu-avail-item">
-        <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
+  @if (showNextAvail) {
+    <div class="tu-avail-wrap">
+      <div class="tu-avail-grid">
+        @for (avail of train.availabilitiesList; track avail) {
+          <div class="tu-avail-item">
+            <app-availability-card [avail]="avail" [train]="train" [doj]="doj"></app-availability-card>
+          </div>
+        }
       </div>
     </div>
-  </div>
+  }
 
-  <app-next-availabilty *ngIf="showNextAvail" [train]="train" [doj]="doj"></app-next-availabilty>
+  @if (showNextAvail) {
+    <app-next-availabilty [train]="train" [doj]="doj"></app-next-availabilty>
+  }
 </div>

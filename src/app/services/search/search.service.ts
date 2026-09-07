@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SearchInput, TrainUpdateInput } from './search-input';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,8 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SearchService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
 
   getSearchResults(searchInput: SearchInput, update: string): Observable<any> {
     if (environment.mock) {

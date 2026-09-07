@@ -1,13 +1,77 @@
-<div class="container">
-  <header>
-    <h1>A New Way to book your Train Tickets</h1>
-  </header>
+<section class="tu-hero">
+  <!-- Decorative animated background -->
+  <div class="tu-hero-bg" aria-hidden="true">
+    <span class="tu-blob tu-blob-1"></span>
+    <span class="tu-blob tu-blob-2"></span>
+    <span class="tu-blob tu-blob-3"></span>
+    <span class="tu-grid"></span>
+  </div>
 
-  <main>
-    <app-search></app-search>
-    <section class="booking-section">
-      <h2>Effortlessly Plan Your Journey and Book with Us</h2>
-      <p>Experience seamless travel planning and booking with our user-friendly platform. Your journey begins with us!</p>
-    </section>
-  </main>
-</div>
+  <div class="container tu-hero-inner">
+    <div class="tu-hero-badge tu-animate-up">
+      <i class="fas fa-bolt"></i> Live seat availability &amp; instant search
+    </div>
+
+    <h1 class="tu-hero-title tu-animate-up tu-delay-1">
+      Book train tickets the
+      <span class="tu-gradient-text">smarter</span> way
+    </h1>
+
+    <p class="tu-hero-sub tu-animate-up tu-delay-2">
+      Search across thousands of trains, compare live availability and fares,
+      and plan your journey — all in one beautifully simple place.
+    </p>
+
+    <!-- Search card floats over the hero -->
+    <div class="tu-search-wrap tu-animate-up tu-delay-3">
+      <app-search></app-search>
+    </div>
+
+    <!-- Trust stats -->
+    <div class="tu-stats tu-animate-up tu-delay-4">
+      <div class="tu-stat">
+        <span class="tu-stat-num">12k+</span>
+        <span class="tu-stat-label">Trains</span>
+      </div>
+      <div class="tu-stat">
+        <span class="tu-stat-num">8k+</span>
+        <span class="tu-stat-label">Stations</span>
+      </div>
+      <div class="tu-stat">
+        <span class="tu-stat-num">Live</span>
+        <span class="tu-stat-label">Availability</span>
+      </div>
+      <div class="tu-stat">
+        <span class="tu-stat-num">₹0</span>
+        <span class="tu-stat-label">Booking Fee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature highlights -->
+<section class="container tu-features">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="tu-feature tu-card h-100">
+        <span class="tu-feature-icon tu-icon-indigo"><i class="fas fa-magnifying-glass-chart"></i></span>
+        <h3>Real-time search</h3>
+        <p>Find the right train in seconds with instant station autocomplete and smart results.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tu-feature tu-card h-100">
+        <span class="tu-feature-icon tu-icon-cyan"><i class="fas fa-chair"></i></span>
+        <h3>Live availability</h3>
+        <p>See up-to-the-minute seat status across every class and quota before you book.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tu-feature tu-card h-100">
+        <span class="tu-feature-icon tu-icon-amber"><i class="fas fa-calendar-week"></i></span>
+        <h3>2-week outlook</h3>
+        <p>Flexible on dates? Preview two weeks of availability and grab the best day to travel.</p>
+      </div>
+    </div>
+  </div>
+</section>

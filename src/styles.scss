@@ -1,7 +1,176 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   TrainUI — Global Design System
+   A modern, cohesive theme layered on top of Bootstrap 5.
+   ============================================================ */
+
 @import '~@fortawesome/fontawesome-free/css/all.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ---- Design Tokens ---------------------------------------- */
+:root {
+  /* Brand palette */
+  --tu-indigo-900: #0f172a;
+  --tu-indigo-800: #1e293b;
+  --tu-primary:    #4f46e5;   /* indigo-600 */
+  --tu-primary-600:#4338ca;
+  --tu-primary-700:#3730a3;
+  --tu-accent:     #06b6d4;   /* cyan-500  */
+  --tu-accent-600: #0891b2;
+  --tu-amber:      #f59e0b;
+  --tu-rose:       #f43f5e;
+  --tu-emerald:    #10b981;
+
+  /* Neutrals */
+  --tu-bg:         #f4f6fb;
+  --tu-surface:    #ffffff;
+  --tu-surface-2:  #f8fafc;
+  --tu-border:     #e6e9f2;
+  --tu-text:       #1e293b;
+  --tu-text-muted: #64748b;
+
+  /* Gradients */
+  --tu-grad-hero:  linear-gradient(135deg, #4f46e5 0%, #7c3aed 45%, #06b6d4 100%);
+  --tu-grad-brand: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+
+  /* Elevation */
+  --tu-shadow-sm:  0 1px 3px rgba(15, 23, 42, 0.08);
+  --tu-shadow:     0 6px 20px rgba(15, 23, 42, 0.08);
+  --tu-shadow-lg:  0 18px 45px rgba(15, 23, 42, 0.14);
+
+  /* Shape */
+  --tu-radius:     16px;
+  --tu-radius-sm:  12px;
+  --tu-radius-lg:  24px;
+
+  /* Motion */
+  --tu-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Bootstrap overrides */
+  --bs-primary: #4f46e5;
+  --bs-body-font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+/* ---- Bootstrap SCSS override (must precede import) -------- */
+$primary: #4f46e5;
+$info:    #06b6d4;
+$danger:  #f43f5e;
+$success: #10b981;
+$warning: #f59e0b;
+$border-radius: 0.75rem;
+$border-radius-lg: 1rem;
+$card-border-radius: 16px;
+$enable-shadows: false;
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+/* ---- Base ------------------------------------------------- */
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  background: var(--tu-bg);
+  color: var(--tu-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, .brand-name {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+::selection { background: rgba(79, 70, 229, 0.18); }
+
+/* Nice scrollbars */
+* { scrollbar-width: thin; scrollbar-color: #c7cbe0 transparent; }
+*::-webkit-scrollbar { height: 8px; width: 8px; }
+*::-webkit-scrollbar-thumb { background: #c7cbe0; border-radius: 8px; }
+
+/* ---- Shared utility classes ------------------------------- */
+.tu-gradient-text {
+  background: var(--tu-grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tu-card {
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+  border-radius: var(--tu-radius);
+  box-shadow: var(--tu-shadow-sm);
+  transition: transform 0.35s var(--tu-ease), box-shadow 0.35s var(--tu-ease);
+}
+.tu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tu-shadow-lg);
+}
+
+/* Modern buttons */
+.btn {
+  font-weight: 600;
+  border-radius: 12px;
+  transition: transform 0.2s var(--tu-ease), box-shadow 0.2s var(--tu-ease), filter 0.2s var(--tu-ease);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-gradient {
+  background: var(--tu-grad-brand);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+}
+.btn-gradient:hover { color: #fff; filter: brightness(1.05); box-shadow: 0 10px 26px rgba(79, 70, 229, 0.45); }
+.btn-gradient:disabled { filter: grayscale(0.4) opacity(0.7); box-shadow: none; }
+
+/* Form controls */
+.form-control, .form-select {
+  border-radius: 12px;
+  border-color: var(--tu-border);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  transition: border-color 0.2s var(--tu-ease), box-shadow 0.2s var(--tu-ease);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--tu-primary);
+  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+/* ---- Global animations ------------------------------------ */
+@keyframes tu-fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes tu-fade-in {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes tu-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes tu-train-move {
+  0%   { transform: translateX(-6px); }
+  50%  { transform: translateX(6px); }
+  100% { transform: translateX(-6px); }
+}
+@keyframes tu-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.tu-animate-up   { animation: tu-fade-up 0.6s var(--tu-ease) both; }
+.tu-animate-in   { animation: tu-fade-in 0.6s var(--tu-ease) both; }
+.tu-delay-1 { animation-delay: 0.08s; }
+.tu-delay-2 { animation-delay: 0.16s; }
+.tu-delay-3 { animation-delay: 0.24s; }
+.tu-delay-4 { animation-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

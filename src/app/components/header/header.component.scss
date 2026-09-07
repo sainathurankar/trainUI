@@ -1,0 +1,70 @@
+:host { display: block; }
+
+.tu-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  padding: 0.85rem 0;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(230, 233, 242, 0.8);
+  transition: padding 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.tu-navbar.scrolled {
+  padding: 0.55rem 0;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.tu-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+}
+.tu-brand-badge {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--tu-grad-brand);
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
+  animation: tu-train-move 3.5s ease-in-out infinite;
+}
+.tu-brand-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--tu-indigo-900);
+  letter-spacing: -0.02em;
+}
+
+.tu-nav-link {
+  color: var(--tu-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.tu-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 0; height: 2px;
+  border-radius: 2px;
+  background: var(--tu-grad-brand);
+  transition: width 0.25s var(--tu-ease);
+}
+.tu-nav-link:hover { color: var(--tu-primary); }
+.tu-nav-link:hover::after { width: 100%; }
+.tu-nav-muted { color: var(--tu-text-muted); }
+
+.tu-cta { border-radius: 999px; }

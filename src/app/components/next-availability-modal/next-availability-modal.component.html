@@ -1,34 +1,40 @@
-<div class="container">
-  <div class="modal-header">
-    <button type="button"
-      style="filter: invert(13%) sepia(94%) saturate(7452%) hue-rotate(2deg) brightness(93%) contrast(120%)"
-      class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+<div class="tu-modal">
+  <div class="tu-modal-header">
+    <h2 class="tu-modal-title"><i class="fas fa-calendar-week me-2"></i>2 weeks availability</h2>
+    <button type="button" class="tu-modal-close" aria-label="Close" (click)="closeModal()">
+      <i class="fas fa-xmark"></i>
+    </button>
   </div>
-  <app-train-card [showNextAvail]="false" [train]="train" [doj]="doj"></app-train-card>
-  <h2 class="modal-title"> 2 Weeks Availability</h2>
-  <div class="modal-body">
-    <ul class="nav nav-tabs" id="classTabs">
-      <li class="nav-item" style="cursor: pointer;" *ngFor="let cls of train.availableClasses">
-        <a class="nav-link" [class.active]="cls === selectedClass" data-bs-toggle="tab"
+
+  <div class="tu-modal-train">
+    <app-train-card [showNextAvail]="false" [train]="train" [doj]="doj"></app-train-card>
+  </div>
+
+  <div class="tu-modal-body">
+    <ul class="tu-class-tabs">
+      <li *ngFor="let cls of train.availableClasses">
+        <a class="tu-class-tab" [class.active]="cls === selectedClass"
           (click)="updateSelectedClass(cls)" role="tab">{{cls}}</a>
       </li>
     </ul>
 
-    <div class="tab-content mt-3" id="classTabsContent">
-      <div class="row d-flex mb-3">
-        <div *ngFor="let avail of availList" class="avail col-4 col-md-4 col-lg-2 mb-3">
-          <p class="mt-3 mb-1 small-text">{{helper.formatDateString(avail.availablityDate)}}</p>
+    <div class="tu-modal-avail">
+      <div class="tu-modal-avail-grid">
+        <div *ngFor="let avail of availList" class="tu-modal-avail-item">
+          <p class="tu-avail-date">{{helper.formatDateString(avail.availablityDate)}}</p>
           <app-availability-card [avail]="avail" [train]="train"
             [doj]="helper.convertDateToString(avail.availablityDate)" [updateStatus]="true"></app-availability-card>
         </div>
       </div>
-      <div *ngIf="loading" class="d-flex justify-content-center align-items-center loading-spinner">
-        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+
+      <div *ngIf="loading" class="tu-modal-loading">
+        <span class="tu-modal-spinner"></span>
       </div>
-      <button *ngIf="!loading" class="btn p-0" [attr.aria-label]="'Load Next 6 Days Availability'"
-        (click)="loadNextAvail()">Click for more..</button>
+
+      <button *ngIf="!loading" class="tu-load-more" [attr.aria-label]="'Load Next 6 Days Availability'"
+        (click)="loadNextAvail()">
+        <i class="fas fa-plus"></i> Load more days
+      </button>
     </div>
   </div>
 </div>

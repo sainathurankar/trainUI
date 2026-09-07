@@ -1,40 +1,53 @@
-<div class="container mt-4">
-  <div class="row mb-3 d-flex align-items-center justify-content-between">
-    <div class="col-7">
-      <h3 class=" m-0">Train Search Results</h3>
+<div class="tu-results container">
+  <div class="tu-results-head">
+    <div>
+      <h2 class="tu-results-title">Available trains</h2>
+      <p class="tu-results-sub">Live seat availability for your route</p>
     </div>
-    <div class="col-5 col-sm-4 d-flex justify-content-end">
-      <button (click)="modifySearch = !modifySearch" class="btn text-danger"><span class=""><i class="fas fa-solid fa-pen mx-2"></i></span>Modify</button>
-    </div>
+    <button (click)="modifySearch = !modifySearch" class="btn tu-modify-btn" [class.active]="modifySearch">
+      <i class="fas" [ngClass]="modifySearch ? 'fa-xmark' : 'fa-sliders'"></i>
+      <span>{{ modifySearch ? 'Close' : 'Modify search' }}</span>
+    </button>
   </div>
-  <app-search *ngIf="modifySearch"></app-search>
-  <div class="row">
-    <div class="col-md-12">
-      <div *ngIf="!loading; else loader">
 
-        <div *ngIf="error; else trainResults">
-          <div class="alert alert-danger" role="alert">
-            <strong>Oops!</strong> Something went wrong while fetching train results. Please try again later.
-          </div>
+  <div class="tu-modify-panel" [class.open]="modifySearch">
+    <app-search *ngIf="modifySearch"></app-search>
+  </div>
+
+  <div class="tu-results-body">
+    <div *ngIf="!loading; else loader">
+
+      <div *ngIf="error; else trainResults">
+        <div class="tu-empty tu-empty-error">
+          <span class="tu-empty-icon"><i class="fas fa-triangle-exclamation"></i></span>
+          <h4>Oops! Couldn't fetch results</h4>
+          <p>Something went wrong while fetching train results. Please try again later.</p>
+        </div>
+      </div>
+
+      <ng-template #trainResults>
+        <div *ngFor="let train of searchResponse?.trains; let i = index"
+          class="tu-animate-up" [style.animation-delay]="(i * 0.05) + 's'">
+          <app-train-card *ngIf="!train.isAlternate" [train]="train" [doj]="doj"></app-train-card>
         </div>
 
-        <ng-template #trainResults>
-          <div *ngFor="let train of searchResponse?.trains">
-            <app-train-card *ngIf="!train.isAlternate" [train]="train" [doj]="doj"></app-train-card>
+        <div *ngIf="searchResponse?.trains?.length === 0 && searchResponse?.errorCode !== '100.31'" class="tu-empty">
+          <span class="tu-empty-icon tu-empty-icon-muted"><i class="fas fa-train"></i></span>
+          <h4>No trains found</h4>
+          <p>There are no trains available for the searched criteria. Try a different date or route.</p>
+        </div>
+
+        <div *ngIf="searchResponse?.errorCode === '100.31'">
+          <div class="tu-empty tu-empty-error">
+            <span class="tu-empty-icon"><i class="fas fa-circle-info"></i></span>
+            <h4>Heads up</h4>
+            <p>{{searchResponse?.detailedMsg}}</p>
           </div>
-          <div *ngIf="searchResponse?.trains?.length === 0 && searchResponse?.errorCode !== '100.31'" class="no-trains">
-            No Trains available for searched Criteria.
-          </div>
-          <div *ngIf="searchResponse?.errorCode === '100.31'">
-            <div class="alert alert-danger" role="alert">
-              {{searchResponse?.detailedMsg}}
-            </div>
-          </div>
-        </ng-template>
-      </div>
-      <ng-template #loader>
-        <app-loader></app-loader>
+        </div>
       </ng-template>
     </div>
+    <ng-template #loader>
+      <app-loader></app-loader>
+    </ng-template>
   </div>
 </div>

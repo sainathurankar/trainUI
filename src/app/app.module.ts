@@ -9,7 +9,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { HttpClientModule } from  '@angular/common/http';
 import { SearchComponent } from './components/search/search.component';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -38,7 +37,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatAutocompleteModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule

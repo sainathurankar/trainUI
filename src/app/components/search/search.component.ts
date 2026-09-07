@@ -21,6 +21,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   tosuggestions: any[] = [];
   minDate?: string;
 
+  // Set to true after the user presses Search with an invalid form,
+  // so we can surface inline "please pick a station from the list" hints.
+  submitted = false;
+
   private destroy$ = new Subject<void>();
 
   objectSaved?: {frominputObject: any; toinputObject: any, dateOfTravel: any};
@@ -51,10 +55,15 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   onInput(key: string): void {
     this.cancelAllCalls();
+    // Typing invalidates any previously picked station for that field:
+    // the code is only trustworthy when it came from a chosen suggestion.
+    if (key === 'from') {
+      this.frominputObject = undefined;
+    } else {
+      this.toinputObject = undefined;
+    }
     const input = key === 'from' ? this.frominputValue : this.toinputValue;
     if(input.length > 1) {
-      // this.suggestions = this.autocompleteService.getSuggestions()
-      // .filter(suggestion => suggestion.toLowerCase().includes(this.inputValue.toLowerCase()));
       this.autocompleteService.getSuggestions(input.trim())
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
@@ -82,7 +91,30 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.tosuggestions = [];
   }
 
+  /** A station field is valid only when a suggestion object with a code was picked. */
+  get fromValid(): boolean {
+    return !!this.frominputObject?.stationCode;
+  }
+
+  get toValid(): boolean {
+    return !!this.toinputObject?.stationCode;
+  }
+
+  /** Source and destination must be different stations. */
+  get sameStation(): boolean {
+    return this.fromValid && this.toValid &&
+      this.frominputObject.stationCode === this.toinputObject.stationCode;
+  }
+
+  get isValid(): boolean {
+    return this.fromValid && this.toValid && !this.sameStation && this.dateOfTravel !== '';
+  }
+
   onClickSearch() {
+    this.submitted = true;
+    if (!this.isValid) {
+      return;
+    }
     this.storeObjectInLocalStorage();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.navigate(['results'], {queryParams: {

@@ -3,7 +3,7 @@
    A modern, cohesive theme layered on top of Bootstrap 5.
    ============================================================ */
 
-@import '~@fortawesome/fontawesome-free/css/all.css';
+@import '@fortawesome/fontawesome-free/css/all.css';
 
 /* ---- Design Tokens ---------------------------------------- */
 :root {
@@ -61,7 +61,7 @@ $card-border-radius: 16px;
 $enable-shadows: false;
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
 
 /* ---- Base ------------------------------------------------- */
 html, body { height: 100%; }

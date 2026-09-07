@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StatusService } from './services/status/status.service';
 import { environment } from 'src/environments/environment';
 
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
 
   title = 'trainUI';
   apiLoading: boolean = false;
@@ -16,7 +16,9 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private statusService: StatusService) {}
 
-  ngAfterViewInit(): void {
+  // Runs before the first change-detection pass so toggling apiLoading here
+  // doesn't trigger NG0100 ExpressionChangedAfterItHasBeenCheckedError.
+  ngOnInit(): void {
     this.checkAPIStatus();
   }
 

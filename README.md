@@ -1,28 +1,68 @@
-# TrainUI
+# RailGo — TrainUI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+A modern train ticket booking front end built with **Angular 14**. Search trains
+between stations, view live seat availability across classes and quotas, and
+preview a two-week availability outlook. Styled with Bootstrap 5, ng-bootstrap
+and a custom design-token theme.
+
+> The app talks to a separate backend search API. In development it can run
+> fully on bundled mock JSON (see `src/environments/environment.ts`,
+> `mock: true`), so no backend is required to explore the UI.
+
+## Tech stack
+
+- Angular 14 (standalone `AppModule`)
+- Bootstrap 5 (SCSS) + ng-bootstrap (modals)
+- FontAwesome icons
+- Karma + Jasmine for unit tests
+
+## Prerequisites
+
+- Node.js (a recent LTS). On very new Node versions the legacy OpenSSL provider
+  is required for the Angular 14 toolchain — prefix commands with
+  `NODE_OPTIONS=--openssl-legacy-provider` (see below).
+- Install dependencies:
+
+  ```bash
+  npm install --legacy-peer-deps
+  ```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Build Docker Image
-
-To build the Docker image, use the following command:
-
 ```bash
-docker build -t train-booking-app:latest .
+# on modern Node versions:
+NODE_OPTIONS=--openssl-legacy-provider npx ng serve
 ```
 
-## Run Docker Container
+Navigate to `http://localhost:4200/`. The app reloads automatically on source
+changes.
 
-To run the Docker container and expose the Spring Boot application on port 8080, use the following command:
+## Build
 
 ```bash
-docker run -p 80:80 train-booking-app:latest
+NODE_OPTIONS=--openssl-legacy-provider npx ng build
 ```
 
+Build artifacts are emitted to `dist/`.
+
+## Running unit tests
+
+```bash
+NODE_OPTIONS=--openssl-legacy-provider \
+CHROME_BIN="$(which google-chrome || echo /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome)" \
+npx ng test --watch=false --browsers=ChromeHeadless
+```
+
+## Configuration
+
+Environment settings live in `src/environments/`:
+
+- `environment.ts` — development (defaults to `mock: true`)
+- `environment.prod.ts` — production build (via `fileReplacements`)
+
+Set `mock: false` and point `apiUrl` at your backend to use live data.
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For more on the Angular CLI use `ng help` or see the
+[Angular CLI Overview and Command Reference](https://angular.io/cli).

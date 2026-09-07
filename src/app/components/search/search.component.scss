@@ -127,3 +127,16 @@
   .tu-swap-btn { transform: rotate(90deg); }
   .tu-swap-btn:hover:not(:disabled) { transform: rotate(270deg); }
 }
+
+/* ---------- Validation ---------- */
+.tu-input.is-invalid {
+  border-color: var(--tu-rose, #e11d48);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12);
+}
+.tu-field-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--tu-rose, #e11d48);
+}

@@ -21,7 +21,15 @@
         <div class="tu-empty tu-empty-error">
           <span class="tu-empty-icon"><i class="fas fa-triangle-exclamation"></i></span>
           <h4>Oops! Couldn't fetch results</h4>
-          <p>Something went wrong while fetching train results. Please try again later.</p>
+          <p>Something went wrong while fetching train results. Please try again.</p>
+          <div class="tu-empty-actions">
+            <button class="btn btn-gradient tu-retry-btn" (click)="retry()">
+              <i class="fas fa-rotate-right"></i> Try again
+            </button>
+            <a class="btn tu-back-btn" routerLink="/">
+              <i class="fas fa-arrow-left"></i> Back to search
+            </a>
+          </div>
         </div>
       </div>
 

@@ -1,19 +1,29 @@
 <section class="tu-search">
-  <form class="tu-search-form">
+  <form class="tu-search-form" (ngSubmit)="onClickSearch()">
     <div class="tu-fields">
       <!-- FROM -->
       <div class="tu-field position-relative">
-        <label class="tu-field-label"><i class="fas fa-circle-dot text-primary"></i> From</label>
+        <label class="tu-field-label" for="from"><i class="fas fa-circle-dot text-primary"></i> From</label>
         <input type="text" id="from" name="from" class="form-control tu-input"
+          [class.is-invalid]="submitted && !fromValid"
           placeholder="Enter source station"
-          [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off">
-        <ul class="tu-suggestions" [class.show]="fromsuggestions.length > 0">
+          [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off"
+          role="combobox" aria-autocomplete="list" aria-controls="from-suggestions"
+          [attr.aria-expanded]="fromsuggestions.length > 0">
+        <ul class="tu-suggestions" id="from-suggestions" role="listbox"
+          [class.show]="fromsuggestions.length > 0">
           <li class="tu-suggestion" *ngFor="let suggestion of fromsuggestions"
-            (click)="onSelectSuggestion(suggestion, 'from')">
+            role="option" tabindex="0"
+            (click)="onSelectSuggestion(suggestion, 'from')"
+            (keydown.enter)="onSelectSuggestion(suggestion, 'from')"
+            (keydown.space)="onSelectSuggestion(suggestion, 'from'); $event.preventDefault()">
             <i class="fas fa-train-subway text-muted"></i>
             <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
           </li>
         </ul>
+        <small class="tu-field-error" *ngIf="submitted && !fromValid">
+          Please pick a source station from the list.
+        </small>
       </div>
 
       <!-- SWAP -->
@@ -27,30 +37,42 @@
 
       <!-- TO -->
       <div class="tu-field position-relative">
-        <label class="tu-field-label"><i class="fas fa-location-dot text-danger"></i> To</label>
+        <label class="tu-field-label" for="to"><i class="fas fa-location-dot text-danger"></i> To</label>
         <input type="text" id="to" name="to" class="form-control tu-input"
+          [class.is-invalid]="submitted && (!toValid || sameStation)"
           placeholder="Enter destination station"
-          [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off">
-        <ul class="tu-suggestions" [class.show]="tosuggestions.length > 0">
+          [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off"
+          role="combobox" aria-autocomplete="list" aria-controls="to-suggestions"
+          [attr.aria-expanded]="tosuggestions.length > 0">
+        <ul class="tu-suggestions" id="to-suggestions" role="listbox"
+          [class.show]="tosuggestions.length > 0">
           <li class="tu-suggestion" *ngFor="let suggestion of tosuggestions"
-            (click)="onSelectSuggestion(suggestion, 'to')">
+            role="option" tabindex="0"
+            (click)="onSelectSuggestion(suggestion, 'to')"
+            (keydown.enter)="onSelectSuggestion(suggestion, 'to')"
+            (keydown.space)="onSelectSuggestion(suggestion, 'to'); $event.preventDefault()">
             <i class="fas fa-train-subway text-muted"></i>
             <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
           </li>
         </ul>
+        <small class="tu-field-error" *ngIf="submitted && !toValid">
+          Please pick a destination station from the list.
+        </small>
+        <small class="tu-field-error" *ngIf="submitted && toValid && sameStation">
+          Source and destination can't be the same.
+        </small>
       </div>
 
       <!-- DATE -->
       <div class="tu-field">
-        <label class="tu-field-label"><i class="fas fa-calendar-day text-warning"></i> Date of journey</label>
+        <label class="tu-field-label" for="date"><i class="fas fa-calendar-day text-warning"></i> Date of journey</label>
         <input class="form-control tu-input" type="date" [(ngModel)]="dateOfTravel"
           name="date" id="date" #date [min]="minDate">
       </div>
 
       <!-- SEARCH -->
       <div class="tu-search-col">
-        <button type="submit" (click)="onClickSearch()"
-          [disabled]="frominputValue === '' || toinputValue === '' || dateOfTravel === ''"
+        <button type="submit"
           class="btn btn-gradient tu-search-btn">
           <i class="fas fa-magnifying-glass"></i>
           <span>Search trains</span>

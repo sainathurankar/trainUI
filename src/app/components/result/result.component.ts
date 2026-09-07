@@ -32,13 +32,14 @@ export class ResultComponent implements OnInit {
   }
 
   getSearchResults() {
+    this.loading = true;
+    this.error = false;
     const searchInput: SearchInput = {
       src: this.src,
       dst: this.dst,
       doj: this.doj,
     };
     this.searchService.getSearchResults(searchInput, "false").subscribe((data) => {
-      console.log(data);
       this.searchResponse = data;
       this.loading = false;
     },
@@ -46,5 +47,9 @@ export class ResultComponent implements OnInit {
       this.loading = false;
       this.error = true;
     })
+  }
+
+  retry() {
+    this.getSearchResults();
   }
 }

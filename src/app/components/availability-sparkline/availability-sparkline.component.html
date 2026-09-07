@@ -1,0 +1,22 @@
+@if (points.length > 1) {
+  <div class="tu-sparkline">
+    <div class="tu-sparkline-head">
+      <span class="tu-sparkline-title"><i class="fas fa-chart-line"></i> 2-week trend</span>
+      @if (trendLabel) {
+        <span class="tu-sparkline-trend" [class]="trendClass">{{ trendLabel }}</span>
+      }
+    </div>
+    <svg class="tu-sparkline-svg" [attr.viewBox]="'0 0 ' + width + ' ' + height"
+      preserveAspectRatio="none" role="img"
+      [attr.aria-label]="'Availability trend over ' + points.length + ' days: ' + trendLabel">
+      <path class="tu-spark-area" [attr.d]="areaPath"></path>
+      <path class="tu-spark-line" [attr.d]="linePath"></path>
+      @for (p of points; track $index) {
+        <circle class="tu-spark-dot" [class]="dotClass(p.rank)"
+          [attr.cx]="p.x" [attr.cy]="p.y" r="2.4">
+          <title>{{ p.date }} — {{ p.status }}{{ p.seats ? ' (' + p.seats + ')' : '' }}</title>
+        </circle>
+      }
+    </svg>
+  </div>
+}

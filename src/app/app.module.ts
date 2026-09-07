@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +16,10 @@ import { TrainCardComponent } from './components/train-card/train-card.component
 import { AvailabilityCardComponent } from './components/availability-card/availability-card.component';
 import { NextAvailabiltyComponent } from './components/next-availabilty/next-availabilty.component';
 import { NextAvailabilityModalComponent } from './components/next-availability-modal/next-availability-modal.component';
+import { ToastContainerComponent } from './components/toast-container/toast-container.component';
+import { AvailabilitySparklineComponent } from './components/availability-sparkline/availability-sparkline.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -30,11 +33,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         AvailabilityCardComponent,
         NextAvailabiltyComponent,
         NextAvailabilityModalComponent,
+        ToastContainerComponent,
+        AvailabilitySparklineComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule], providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())] })
+        NgbModule,
+        
+      ServiceWorkerModule.register('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        // Register the ServiceWorker as soon as the application is stable
+        // or after 30 seconds (whichever comes first).
+        registrationStrategy: 'registerWhenStable:30000'
+      })
+    ], providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule {}

@@ -16,6 +16,62 @@
     }
   </div>
 
+  <!-- Filter & sort toolbar -->
+  @if (!loading && !error && totalCount > 0) {
+    <div class="tu-toolbar">
+      <div class="tu-toolbar-summary">
+        <button class="tu-filter-toggle" (click)="toggleFilters()" [class.active]="showFilters"
+          [attr.aria-expanded]="showFilters" aria-controls="tu-filter-panel">
+          <i class="fas fa-sliders"></i> Filters &amp; sort
+          @if (hasActiveFilters) { <span class="tu-filter-dot"></span> }
+        </button>
+        <span class="tu-count">
+          Showing <strong>{{ filteredCount }}</strong> of {{ totalCount }} trains
+        </span>
+        @if (hasActiveFilters) {
+          <button class="tu-clear-filters" (click)="clearFilters()">
+            <i class="fas fa-rotate-left"></i> Reset
+          </button>
+        }
+      </div>
+
+      <div id="tu-filter-panel" class="tu-filter-panel" [class.open]="showFilters">
+        <div class="tu-filter-group">
+          <span class="tu-filter-label">Sort by</span>
+          <div class="tu-chip-row">
+            <button class="tu-chip" [class.active]="sortKey === 'departure'" (click)="setSort('departure')">Departure</button>
+            <button class="tu-chip" [class.active]="sortKey === 'arrival'" (click)="setSort('arrival')">Arrival</button>
+            <button class="tu-chip" [class.active]="sortKey === 'duration'" (click)="setSort('duration')">Duration</button>
+            <button class="tu-chip" [class.active]="sortKey === 'price'" (click)="setSort('price')">Price</button>
+            <button class="tu-chip" [class.active]="sortKey === 'availability'" (click)="setSort('availability')">Availability</button>
+          </div>
+        </div>
+
+        <div class="tu-filter-group">
+          <span class="tu-filter-label">Availability</span>
+          <div class="tu-chip-row">
+            <button class="tu-chip" [class.active]="availFilter === 'all'" (click)="setAvailFilter('all')">All</button>
+            <button class="tu-chip tu-chip-success" [class.active]="availFilter === 'available'" (click)="setAvailFilter('available')">Available</button>
+            <button class="tu-chip tu-chip-info" [class.active]="availFilter === 'rac'" (click)="setAvailFilter('rac')">RAC</button>
+            <button class="tu-chip tu-chip-warning" [class.active]="availFilter === 'waitlist'" (click)="setAvailFilter('waitlist')">Waitlist</button>
+          </div>
+        </div>
+
+        @if (availableClassOptions.length > 1) {
+          <div class="tu-filter-group">
+            <span class="tu-filter-label">Class</span>
+            <div class="tu-chip-row">
+              <button class="tu-chip" [class.active]="classFilter === 'all'" (click)="classFilter = 'all'">All</button>
+              @for (cls of availableClassOptions; track cls) {
+                <button class="tu-chip" [class.active]="classFilter === cls" (click)="classFilter = cls">{{ cls }}</button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
   <div class="tu-results-body">
     @if (!loading) {
       <div>
@@ -36,12 +92,22 @@
             </div>
           </div>
         } @else {
-          @for (train of searchResponse?.trains; track train; let i = $index) {
+          @for (train of displayTrains; track train; let i = $index) {
             <div
               class="tu-animate-up" [style.animation-delay]="(i * 0.05) + 's'">
-              @if (!train.isAlternate) {
-                <app-train-card [train]="train" [doj]="doj"></app-train-card>
-              }
+              <app-train-card [train]="train" [doj]="doj"></app-train-card>
+            </div>
+          }
+          @if (totalCount > 0 && filteredCount === 0) {
+            <div class="tu-empty">
+              <span class="tu-empty-icon tu-empty-icon-muted"><i class="fas fa-filter-circle-xmark"></i></span>
+              <h4>No trains match your filters</h4>
+              <p>Try relaxing your availability or class filters.</p>
+              <div class="tu-empty-actions">
+                <button class="btn btn-gradient tu-retry-btn" (click)="clearFilters()">
+                  <i class="fas fa-rotate-left"></i> Reset filters
+                </button>
+              </div>
             </div>
           }
           @if (searchResponse?.trains?.length === 0 && searchResponse?.errorCode !== '100.31') {
@@ -63,7 +129,29 @@
         }
       </div>
     } @else {
-      <app-loader></app-loader>
+      <!-- Skeleton loaders while fetching -->
+      <div class="tu-skeleton-list">
+        @for (s of [1,2,3,4]; track s) {
+          <div class="tu-skel-card">
+            <div class="tu-skel-head">
+              <span class="tu-skel tu-skel-badge"></span>
+              <span class="tu-skel tu-skel-title"></span>
+              <span class="tu-skel tu-skel-days"></span>
+            </div>
+            <div class="tu-skel-journey">
+              <span class="tu-skel tu-skel-time"></span>
+              <span class="tu-skel tu-skel-line"></span>
+              <span class="tu-skel tu-skel-time"></span>
+            </div>
+            <div class="tu-skel-grid">
+              <span class="tu-skel tu-skel-quota"></span>
+              <span class="tu-skel tu-skel-quota"></span>
+              <span class="tu-skel tu-skel-quota"></span>
+              <span class="tu-skel tu-skel-quota"></span>
+            </div>
+          </div>
+        }
+      </div>
     }
   </div>
 </div>

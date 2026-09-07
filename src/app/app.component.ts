@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { StatusService } from './services/status/status.service';
+import { ThemeService } from './services/theme/theme.service';
 
 @Component({
     selector: 'app-root',
@@ -10,6 +11,7 @@ import { StatusService } from './services/status/status.service';
 })
 export class AppComponent implements OnInit {
   private statusService = inject(StatusService);
+  private themeService = inject(ThemeService);
 
 
   title = 'trainUI';
@@ -20,6 +22,7 @@ export class AppComponent implements OnInit {
   // Runs before the first change-detection pass so toggling apiLoading here
   // doesn't trigger NG0100 ExpressionChangedAfterItHasBeenCheckedError.
   ngOnInit(): void {
+    this.themeService.init();
     this.checkAPIStatus();
   }
 

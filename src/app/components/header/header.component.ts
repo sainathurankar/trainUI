@@ -1,5 +1,6 @@
 import { Component, HostListener, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
     selector: 'app-header',
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   private router = inject(Router);
+  private themeService = inject(ThemeService);
 
+  theme = this.themeService.theme;
 
   scrolled = false;
 
@@ -23,4 +26,7 @@ export class HeaderComponent {
     this.router.navigateByUrl('');
   }
 
+  toggleTheme() {
+    this.themeService.toggle();
+  }
 }

@@ -13,8 +13,15 @@
       </a>
     </div>
 
-    <button class="btn btn-gradient btn-sm px-3 tu-cta" (click)="navigateToHome()">
-      <i class="fas fa-bolt me-1"></i> Book Now
-    </button>
+    <div class="d-flex align-items-center gap-2">
+      <button class="tu-theme-toggle" type="button" (click)="toggleTheme()"
+        [attr.aria-label]="theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        [attr.aria-pressed]="theme() === 'dark'" title="Toggle theme">
+        <i class="fas" [ngClass]="theme() === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
+      </button>
+      <button class="btn btn-gradient btn-sm px-3 tu-cta" (click)="navigateToHome()">
+        <i class="fas fa-bolt me-1"></i> Book Now
+      </button>
+    </div>
   </div>
 </nav>

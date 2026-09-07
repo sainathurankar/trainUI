@@ -20,9 +20,32 @@
       <span class="tu-status-label">{{ avail?.status }}</span>
     </div>
 
+    <!-- Feature 1: confirmation-chance prediction -->
+    @if (helper.confirmChance(avail) !== null) {
+      <div class="tu-pred" [ngClass]="helper.predictionBandClass(helper.confirmChance(avail))"
+        [title]="'redBus estimated chance of confirmation — indicative only'">
+        <i class="fas fa-chart-line"></i>
+        <span class="tu-pred-val">{{ helper.confirmChance(avail) }}%</span>
+        <span class="tu-pred-lbl">confirm chance</span>
+      </div>
+      @if (avail?.lbPredictionData) {
+        <span class="tu-pred-lb" [title]="'Lower-berth chance'">
+          <i class="fas fa-bed"></i> {{ avail?.lbPredictionData }}
+        </span>
+      }
+    }
+
     <div class="tu-quota-foot">
       @if (avail?.fare !== 'null') {
-        <span class="tu-fare">₹ {{ avail?.fare }}</span>
+        <span class="tu-fare-wrap">
+          @if (helper.hasFareSaving(avail)) {
+            <span class="tu-fare-orig">₹ {{ avail?.originalFare }}</span>
+          }
+          <span class="tu-fare">₹ {{ avail?.fare }}</span>
+          @if (helper.hasFareSaving(avail)) {
+            <span class="tu-fare-save" [title]="'You save ₹' + helper.fareSaving(avail)">Save ₹{{ helper.fareSaving(avail) }}</span>
+          }
+        </span>
       }
       @if (!updating) {
         <span class="tu-refresh" [title]="'Click to refresh'" role="button" tabindex="0"
@@ -35,6 +58,19 @@
         <span class="tu-refresh-spinner"></span>
       }
     </div>
+
+    <!-- Feature 7: boarding / dropping override (only when it differs from the train's O-D) -->
+    @if ((avail?.frmStnCode && avail?.frmStnCode !== train?.fromStationCode) || (avail?.toStnCode && avail?.toStnCode !== train?.toStationCode)) {
+      <span class="tu-board-override" [title]="'Boarding / dropping differs for this class'">
+        <i class="fas fa-location-dot"></i>
+        @if (avail?.frmStnCode && avail?.frmStnCode !== train?.fromStationCode) {
+          <span>Board {{ avail?.frmStnCode }} {{ avail?.frmStnDepartureTime }}</span>
+        }
+        @if (avail?.toStnCode && avail?.toStnCode !== train?.toStationCode) {
+          <span>· Drop {{ avail?.toStnCode }} {{ avail?.toStnArrivalTime }}</span>
+        }
+      </span>
+    }
 
     @if (avail?.lastUpdatedOn) {
       <span class="tu-updated">{{ avail?.lastUpdatedOn }}</span>

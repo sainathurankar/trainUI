@@ -4,6 +4,16 @@
     <div class="tu-train-name">
       <span class="tu-train-num">{{ train.trainNumber }}</span>
       <span class="tu-train-title">{{ train.trainName }}</span>
+      <!-- Feature 6: journey badges -->
+      @if (train?.isFastest) {
+        <span class="tu-badge tu-badge-fastest" title="Fastest train on this route"><i class="fas fa-bolt"></i> Fastest</span>
+      }
+      @if (train?.isPopular) {
+        <span class="tu-badge tu-badge-popular" title="Popular choice on this route"><i class="fas fa-fire"></i> Popular</span>
+      }
+      @if (train?.distance) {
+        <span class="tu-badge tu-badge-distance" title="Distance"><i class="fas fa-route"></i> {{ train.distance }} km</span>
+      }
     </div>
     <div class="tu-run-days" title="Running days">
       <span [class.on]="train?.runningMon === 'Y'">M</span>
@@ -22,6 +32,9 @@
       <p class="tu-time">{{ helper.convertTo12HourFormat(train.departureTime) }}</p>
       <p class="tu-station">{{ train.fromStation }} <span class="tu-code">({{ train.fromStationCode }})</span></p>
       <p class="tu-date">{{ helper.formatDateString(train.departureDate) }}</p>
+      @if (train?.boardingHaltTime) {
+        <p class="tu-halt" title="Halt at boarding station"><i class="fas fa-hourglass-half"></i> {{ train.boardingHaltTime }}</p>
+      }
     </div>
 
     <div class="tu-journey-line">
@@ -36,6 +49,9 @@
       <p class="tu-time">{{ helper.convertTo12HourFormat(train.arrivalTime) }}</p>
       <p class="tu-station">{{ train.toStation }} <span class="tu-code">({{ train.toStationCode }})</span></p>
       <p class="tu-date">{{ helper.formatDateString(train.arrivalDate) }}</p>
+      @if (train?.droppingHaltTime) {
+        <p class="tu-halt" title="Halt at destination station"><i class="fas fa-hourglass-half"></i> {{ train.droppingHaltTime }}</p>
+      }
     </div>
   </div>
 

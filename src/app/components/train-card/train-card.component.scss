@@ -24,6 +24,32 @@
   margin-bottom: 1.2rem;
 }
 .tu-train-name { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+
+/* Feature 6: journey badges */
+.tu-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  padding: 0.12rem 0.5rem;
+  white-space: nowrap;
+}
+.tu-badge-fastest  { color: var(--tu-amber);   background: rgba(245, 158, 11, 0.14); }
+.tu-badge-popular  { color: var(--tu-rose);    background: rgba(244, 63, 94, 0.14); }
+.tu-badge-distance { color: var(--tu-text-muted); background: var(--tu-surface-2); }
+
+/* Feature 6: halt time under a stop */
+.tu-halt {
+  margin: 0.15rem 0 0;
+  font-size: 0.62rem;
+  color: var(--tu-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
 .tu-train-num {
   background: rgba(79, 70, 229, 0.1);
   color: var(--tu-primary-700);

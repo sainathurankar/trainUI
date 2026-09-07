@@ -7,6 +7,7 @@ import { Helper } from 'src/app/common/helper';
 
 type SortKey = 'departure' | 'arrival' | 'duration' | 'price' | 'availability';
 type AvailFilter = 'all' | 'available' | 'rac' | 'waitlist';
+type DepWindow = 'all' | 'early' | 'morning' | 'afternoon' | 'night';
 
 @Component({
     selector: 'app-result',
@@ -33,7 +34,10 @@ export class ResultComponent implements OnInit {
   sortKey: SortKey = 'departure';
   availFilter: AvailFilter = 'all';
   classFilter = 'all';
+  depWindow: DepWindow = 'all';
+  quotaFilter = 'all';
   availableClassOptions: string[] = [];
+  availableQuotaOptions: string[] = [];
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -81,12 +85,17 @@ export class ResultComponent implements OnInit {
 
   private computeClassOptions(): void {
     const set = new Set<string>();
+    const quotaSet = new Set<string>();
     for (const t of this.baseTrains()) {
       for (const c of (t.availableClasses || [])) {
         set.add(c);
       }
+      for (const a of (t.availabilitiesList || [])) {
+        if (a.quota) quotaSet.add(a.quota);
+      }
     }
     this.availableClassOptions = Array.from(set).sort();
+    this.availableQuotaOptions = Array.from(quotaSet).sort();
   }
 
   /** Trains after filtering + sorting — bound by the template. */
@@ -104,6 +113,18 @@ export class ResultComponent implements OnInit {
         (t.availabilitiesList || []).some(
           (a: any) => Helper.availabilityRank(a.status) === this.availFilter
         )
+      );
+    }
+
+    // Feature 3: departure time-of-day window filter
+    if (this.depWindow !== 'all') {
+      trains = trains.filter((t) => Helper.departureWindow(t.departureTime) === this.depWindow);
+    }
+
+    // Feature 4: quota filter — keep trains offering the chosen quota
+    if (this.quotaFilter !== 'all') {
+      trains = trains.filter((t) =>
+        (t.availabilitiesList || []).some((a: any) => a.quota === this.quotaFilter)
       );
     }
 
@@ -133,12 +154,27 @@ export class ResultComponent implements OnInit {
     return this.baseTrains().length;
   }
 
+  /** Feature 5: the redBus-recommended train (if any). */
+  get recommendation(): any | null {
+    return this.searchResponse?.recommendation || null;
+  }
+
+  get recommendationTags(): string[] {
+    return this.searchResponse?.recommendationTags || [];
+  }
+
+  /** Feature 8: promotional offers strip. */
+  get offers(): any[] {
+    return this.searchResponse?.offers || [];
+  }
+
   get filteredCount(): number {
     return this.displayTrains.length;
   }
 
   get hasActiveFilters(): boolean {
-    return this.availFilter !== 'all' || this.classFilter !== 'all' || this.sortKey !== 'departure';
+    return this.availFilter !== 'all' || this.classFilter !== 'all' || this.sortKey !== 'departure'
+      || this.depWindow !== 'all' || this.quotaFilter !== 'all';
   }
 
   setSort(key: SortKey): void {
@@ -149,10 +185,16 @@ export class ResultComponent implements OnInit {
     this.availFilter = f;
   }
 
+  setDepWindow(w: DepWindow): void {
+    this.depWindow = w;
+  }
+
   clearFilters(): void {
     this.sortKey = 'departure';
     this.availFilter = 'all';
     this.classFilter = 'all';
+    this.depWindow = 'all';
+    this.quotaFilter = 'all';
   }
 
   toggleFilters(): void {

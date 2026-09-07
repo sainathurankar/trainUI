@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 export class AvailabilityCardComponent implements OnInit, OnDestroy {
   private searchService = inject(SearchService);
 
+  readonly helper = Helper;
+
   @Input() avail: any;
 
   @Input() train: any;

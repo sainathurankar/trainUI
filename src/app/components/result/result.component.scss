@@ -53,6 +53,10 @@
   margin-bottom: 1.5rem;
 }
 .tu-modify-panel > * { overflow: hidden; min-height: 0; }
+/* Once open, let children overflow so the station autocomplete dropdown
+   isn't clipped. Delay the switch until the 0.35s open animation finishes
+   so the grid-row collapse still clips cleanly. */
+.tu-modify-panel.open > * { overflow: visible; transition: overflow 0s 0.35s; }
 
 /* Empty / error states */
 .tu-empty {

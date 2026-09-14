@@ -34,12 +34,12 @@ describe('SearchComponent', () => {
   it('should swap source and destination values', () => {
     component.frominputValue = 'A';
     component.toinputValue = 'B';
-    component.frominputObject = { stationCode: 'A' };
-    component.toinputObject = { stationCode: 'B' };
+    component.frominputObject = { stationName: 'A', stationCode: 'A' };
+    component.toinputObject = { stationName: 'B', stationCode: 'B' };
     component.switchStations();
     expect(component.frominputValue).toBe('B');
     expect(component.toinputValue).toBe('A');
-    expect(component.frominputObject.stationCode).toBe('B');
-    expect(component.toinputObject.stationCode).toBe('A');
+    expect(component.frominputObject?.stationCode).toBe('B');
+    expect(component.toinputObject?.stationCode).toBe('A');
   });
 });

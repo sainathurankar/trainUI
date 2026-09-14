@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SearchInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { Helper } from 'src/app/common/helper';
+import { Offer, SearchResponse, Train } from 'src/app/models/train.models';
 
 type SortKey = 'departure' | 'arrival' | 'duration' | 'price' | 'availability';
 type AvailFilter = 'all' | 'available' | 'rac' | 'waitlist';
@@ -13,18 +14,19 @@ type DepWindow = 'all' | 'early' | 'morning' | 'afternoon' | 'night';
     selector: 'app-result',
     templateUrl: './result.component.html',
     styleUrls: ['./result.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class ResultComponent implements OnInit {
   private searchService = inject(SearchService);
   private route = inject(ActivatedRoute);
   private toast = inject(ToastService);
+  private cdr = inject(ChangeDetectorRef);
 
   src = '';
   dst = '';
   doj = '';
-  searchResponse: any;
+  searchResponse?: SearchResponse;
   loading = true;
   error = false;
   modifySearch = false;
@@ -65,11 +67,13 @@ export class ResultComponent implements OnInit {
         if (n > 0) {
           this.toast.success(`Found ${n} train${n === 1 ? '' : 's'} for your route`);
         }
+        this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
         this.error = true;
         this.toast.error('Could not fetch train results. Please try again.');
+        this.cdr.markForCheck();
       }
     });
   }
@@ -79,8 +83,8 @@ export class ResultComponent implements OnInit {
   }
 
   /** Real (non-alternate) trains from the raw response. */
-  private baseTrains(): any[] {
-    return (this.searchResponse?.trains || []).filter((t: any) => !t?.isAlternate);
+  private baseTrains(): Train[] {
+    return (this.searchResponse?.trains || []).filter((t) => !t?.isAlternate);
   }
 
   private computeClassOptions(): void {
@@ -99,7 +103,7 @@ export class ResultComponent implements OnInit {
   }
 
   /** Trains after filtering + sorting — bound by the template. */
-  get displayTrains(): any[] {
+  get displayTrains(): Train[] {
     let trains = this.baseTrains();
 
     // Class filter: keep trains that offer the chosen class
@@ -111,20 +115,20 @@ export class ResultComponent implements OnInit {
     if (this.availFilter !== 'all') {
       trains = trains.filter((t) =>
         (t.availabilitiesList || []).some(
-          (a: any) => Helper.availabilityRank(a.status) === this.availFilter
+          (a) => Helper.availabilityRank(a.status || '') === this.availFilter
         )
       );
     }
 
     // Feature 3: departure time-of-day window filter
     if (this.depWindow !== 'all') {
-      trains = trains.filter((t) => Helper.departureWindow(t.departureTime) === this.depWindow);
+      trains = trains.filter((t) => Helper.departureWindow(t.departureTime || '') === this.depWindow);
     }
 
     // Feature 4: quota filter — keep trains offering the chosen quota
     if (this.quotaFilter !== 'all') {
       trains = trains.filter((t) =>
-        (t.availabilitiesList || []).some((a: any) => a.quota === this.quotaFilter)
+        (t.availabilitiesList || []).some((a) => a.quota === this.quotaFilter)
       );
     }
 
@@ -132,19 +136,19 @@ export class ResultComponent implements OnInit {
     const sorted = [...trains];
     switch (this.sortKey) {
       case 'departure':
-        sorted.sort((a, b) => Helper.timeToMinutes(a.departureTime) - Helper.timeToMinutes(b.departureTime));
+        sorted.sort((a, b) => Helper.timeToMinutes(a.departureTime || '') - Helper.timeToMinutes(b.departureTime || ''));
         break;
       case 'arrival':
-        sorted.sort((a, b) => Helper.timeToMinutes(a.arrivalTime) - Helper.timeToMinutes(b.arrivalTime));
+        sorted.sort((a, b) => Helper.timeToMinutes(a.arrivalTime || '') - Helper.timeToMinutes(b.arrivalTime || ''));
         break;
       case 'duration':
-        sorted.sort((a, b) => Helper.durationToMinutes(a.duration) - Helper.durationToMinutes(b.duration));
+        sorted.sort((a, b) => Helper.durationToMinutes(a.duration || '') - Helper.durationToMinutes(b.duration || ''));
         break;
       case 'price':
-        sorted.sort((a, b) => Helper.minFare(a.availabilitiesList) - Helper.minFare(b.availabilitiesList));
+        sorted.sort((a, b) => Helper.minFare(a.availabilitiesList || []) - Helper.minFare(b.availabilitiesList || []));
         break;
       case 'availability':
-        sorted.sort((a, b) => Helper.bestAvailabilityScore(b.availabilitiesList) - Helper.bestAvailabilityScore(a.availabilitiesList));
+        sorted.sort((a, b) => Helper.bestAvailabilityScore(b.availabilitiesList || []) - Helper.bestAvailabilityScore(a.availabilitiesList || []));
         break;
     }
     return sorted;
@@ -155,7 +159,7 @@ export class ResultComponent implements OnInit {
   }
 
   /** Feature 5: the redBus-recommended train (if any). */
-  get recommendation(): any | null {
+  get recommendation(): Train | null {
     return this.searchResponse?.recommendation || null;
   }
 
@@ -164,7 +168,7 @@ export class ResultComponent implements OnInit {
   }
 
   /** Feature 8: promotional offers strip. */
-  get offers(): any[] {
+  get offers(): Offer[] {
     return this.searchResponse?.offers || [];
   }
 

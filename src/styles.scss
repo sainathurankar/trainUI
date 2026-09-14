@@ -3,7 +3,20 @@
    A modern, cohesive theme layered on top of Bootstrap 5.
    ============================================================ */
 
-@import '@fortawesome/fontawesome-free/css/all.css';
+/* Bootstrap must be @use'd at the top of the file, before any other rules.
+   Brand overrides are passed as configuration (replaces the old pattern of
+   declaring $vars above an @import). */
+@use 'bootstrap/scss/bootstrap' with (
+  $primary: #4f46e5,
+  $info:    #06b6d4,
+  $danger:  #f43f5e,
+  $success: #10b981,
+  $warning: #f59e0b,
+  $border-radius: 0.75rem,
+  $border-radius-lg: 1rem,
+  $card-border-radius: 16px,
+  $enable-shadows: false
+);
 
 /* ---- Design Tokens ---------------------------------------- */
 :root {
@@ -93,20 +106,6 @@
 [data-theme='dark'] ::selection { background: rgba(129, 140, 248, 0.35); }
 [data-theme='dark'] * { scrollbar-color: #33415c transparent; }
 [data-theme='dark'] *::-webkit-scrollbar-thumb { background: #33415c; }
-
-/* ---- Bootstrap SCSS override (must precede import) -------- */
-$primary: #4f46e5;
-$info:    #06b6d4;
-$danger:  #f43f5e;
-$success: #10b981;
-$warning: #f59e0b;
-$border-radius: 0.75rem;
-$border-radius-lg: 1rem;
-$card-border-radius: 16px;
-$enable-shadows: false;
-
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
 
 /* ---- Base ------------------------------------------------- */
 html, body { height: 100%; }

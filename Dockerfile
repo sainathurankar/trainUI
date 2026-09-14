@@ -4,26 +4,20 @@ FROM node:22-alpine AS builder
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy manifests first for better layer caching
 COPY package*.json ./
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli@22
-
-# Install project dependencies
-RUN npm install --legacy-peer-deps
+# Install project dependencies from the lockfile (reproducible)
+RUN npm ci --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .
 
-# Run linting
-RUN ng lint
-
-# Run tests
-# RUN ng test
+# Run linting (unit tests run in CI, where a headless browser is available)
+RUN npx ng lint
 
 # Build the Angular app for production
-RUN ng build
+RUN npx ng build --configuration production
 
 # Production stage
 FROM nginx:alpine
@@ -31,7 +25,7 @@ FROM nginx:alpine
 # Remove default Nginx configuration
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy the built app from the previous stage
+# Copy the built app from the previous stage (flat output at dist/trainUI)
 COPY --from=builder /app/dist/trainUI /usr/share/nginx/html
 
 # Copy Nginx configuration

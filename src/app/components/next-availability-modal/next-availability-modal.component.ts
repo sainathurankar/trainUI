@@ -1,73 +1,77 @@
-import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject, timer } from 'rxjs';
-import { delayWhen, retryWhen, take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { retry, takeUntil } from 'rxjs/operators';
 import { Helper } from 'src/app/common/helper';
 import { TrainUpdateInput } from 'src/app/services/search/search-input';
+import { Availability, Train } from 'src/app/models/train.models';
 import { SearchService } from 'src/app/services/search/search.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
 
 @Component({
     selector: 'app-next-availability-modal',
     templateUrl: './next-availability-modal.component.html',
     styleUrls: ['./next-availability-modal.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class NextAvailabilityModalComponent implements OnInit, OnDestroy {
   activeModal = inject(NgbActiveModal);
   private searchService = inject(SearchService);
+  private logger = inject(LoggerService);
+  private cdr = inject(ChangeDetectorRef);
 
-  @Input() train: any;
-  @Input() doj: any;
+  @Input() train!: Train;
+  @Input() doj!: string;
 
-  availList: any[] = [];
+  availList: Availability[] = [];
   loading = false;
   private destroy$ = new Subject<void>();
   helper = Helper;
 
-  tempDOJ: any;
+  private static readonly MAX_RETRIES = 5;
+  private static readonly RETRY_DELAY_MS = 1000;
+
+  tempDOJ = '';
 
   selectedClass = '';
 
   ngOnInit(): void {
-    this.updateSelectedClass(this.train.availableClasses[0]);
+    this.updateSelectedClass(this.train.availableClasses?.[0] ?? '');
   }
 
   updateSelectedClass(cls: string) {
-
     this.selectedClass = cls;
     this.availList = [];
     this.tempDOJ = this.doj;
-    this.cancelAllCalls();
     this.getAvailability();
   }
 
   getAvailability() {
     const trainUpdateInput: TrainUpdateInput = this.buildInput();
-    const maxRetries = 5;
 
     this.loading = true;
     this.searchService
       .getNextAvailability(trainUpdateInput)
       .pipe(
-        takeUntil(this.destroy$),
-        retryWhen((errors) =>
-          errors.pipe(
-            delayWhen(() => timer(1000)), // Delay for 1 second between retries
-            take(maxRetries) // Maximum number of retries
-          )
-        )
+        retry({
+          count: NextAvailabilityModalComponent.MAX_RETRIES,
+          delay: NextAvailabilityModalComponent.RETRY_DELAY_MS,
+        }),
+        takeUntil(this.destroy$)
       )
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response: Availability[]) => {
           this.availList = response;
           this.loading = false;
+          this.cdr.markForCheck();
         },
-        (error) => {
-          console.error('Error in getAvailability:', error);
+        error: (error) => {
+          this.logger.error('Error in getAvailability:', error);
           this.loading = false;
+          this.cdr.markForCheck();
         }
-      );
+      });
   }
 
   closeModal() {
@@ -75,46 +79,47 @@ export class NextAvailabilityModalComponent implements OnInit, OnDestroy {
   }
 
   loadNextAvail() {
-    this.cancelAllCalls();
     this.tempDOJ = Helper.nextDayDate(
-      this.availList[this.availList.length - 1].availablityDate
+      this.availList[this.availList.length - 1].availablityDate ?? ''
     );
     this.loading = true;
     this.searchService
       .getNextAvailability(this.buildInput())
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (response) => {
+      .pipe(
+        retry({
+          count: NextAvailabilityModalComponent.MAX_RETRIES,
+          delay: NextAvailabilityModalComponent.RETRY_DELAY_MS,
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe({
+        next: (response: Availability[]) => {
           this.availList.push(...response);
           this.loading = false;
+          this.cdr.markForCheck();
         },
-        (error) => {
-          console.error('Error in loadNextAvail:', error);
+        error: (error) => {
+          this.logger.error('Error in loadNextAvail:', error);
           this.loading = false;
-          // Handle specific error scenarios if needed
+          this.cdr.markForCheck();
         }
-      );
+      });
   }
 
   buildInput(): TrainUpdateInput {
     return {
-      source: this.train.fromStationCode,
-      destination: this.train.toStationCode,
+      source: this.train.fromStationCode ?? '',
+      destination: this.train.toStationCode ?? '',
       doj: this.tempDOJ,
       quota: 'GN',
-      trainNumber: this.train.trainNumber,
+      trainNumber: this.train.trainNumber ?? '',
       class: this.selectedClass,
       numberOfDays: 14,
     };
   }
 
   ngOnDestroy(): void {
-    this.cancelAllCalls();
-  }
-
-  cancelAllCalls() {
     this.destroy$.next();
     this.destroy$.complete();
-    this.destroy$ = new Subject<void>();
   }
 }

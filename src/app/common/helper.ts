@@ -17,32 +17,7 @@ export class Helper {
     return link + queryParams;
   }
 
-  static buildHdfcSmartBuyHyperLink(
-    srcCode: string,
-    dstCode: string,
-    doj: string,
-    trainNo: string,
-    cls: string,
-    quota: string,
-    departureTime: string,
-    arrivalTime: string,
-    trainName: string
-  ): string {
-    const link = environment.hdfcSmartBuyLink;
-    const searchKey =
-      srcCode +
-      dstCode +
-      convertDateFormat(doj) +
-      quota +
-      cls +
-      trainNo +
-      departureTime +
-      arrivalTime +
-      trainName.toUpperCase();
-    return link.replace('{key}', btoa(searchKey));
-  }
-
-  static convertTo12HourFormat(time24: string): string {
+  static convertTo12HourFormat(time24: string | undefined): string {
     if (time24) {
       const [hours, minutes] = time24.split(':');
       const period = Number(hours) >= 12 ? 'PM' : 'AM';
@@ -57,7 +32,7 @@ export class Helper {
    * @param {string} date
    * @return {string} convertedDate
    */
-  static convertDateToString(date: string): string {
+  static convertDateToString(date: string | undefined): string {
     if (date) {
       const [day, month, year] = date.split('-');
       return year + month + day;
@@ -81,7 +56,7 @@ export class Helper {
     return this.convertDateToString(nextDateString);
   }
 
-  static formatDateString(dateString: string): string {
+  static formatDateString(dateString: string | undefined): string {
     if (dateString) {
       const parts = dateString.split('-');
       const day = parseInt(parts[0], 10);
@@ -229,15 +204,3 @@ export class Helper {
   }
 }
 
-function convertDateFormat(inputDate: string) {
-  if (inputDate) {
-    inputDate = String(inputDate);
-
-    const year = inputDate.substring(0, 4);
-    const month = inputDate.substring(4, 6);
-    const day = inputDate.substring(6, 8);
-    const outputDate = `${day}-${month}-${year}`;
-    return outputDate;
-  }
-  return '';
-}

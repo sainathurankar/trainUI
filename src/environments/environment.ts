@@ -5,10 +5,11 @@
 export const environment = {
   production: false,
   mock: true,
+  // Dev talks to the deployed API by default. Uncomment the localhost line
+  // (and set mock:false) to run against a locally-running backend.
   apiUrl: 'https://rail-way-api.onrender.com/api',
   // apiUrl: 'http://localhost:8080/api',
   redBusBookingLink: 'https://www.redbus.in/railways/travellerInfo',
-  hdfcSmartBuyLink: 'https://offers.reward360.in/v1/train/checkout?searchTrainKey={key}'
 };
 
 /*

@@ -1,38 +1,53 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { AutocompleteService } from 'src/app/services/autocomplete.service';
+import { AutocompleteResponse, Station } from 'src/app/models/train.models';
+
+type FieldKey = 'from' | 'to';
+
+interface StoredSearch {
+  frominputObject: Station;
+  toinputObject: Station;
+  dateOfTravel: string;
+}
 
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class SearchComponent implements OnInit, OnDestroy {
   private autocompleteService = inject(AutocompleteService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
 
   frominputValue = '';
   toinputValue = '';
   dateOfTravel = '';
-  frominputObject: any;
-  toinputObject: any;
+  frominputObject?: Station;
+  toinputObject?: Station;
 
-  fromsuggestions: any[] = [];
-  tosuggestions: any[] = [];
+  fromsuggestions: Station[] = [];
+  tosuggestions: Station[] = [];
   minDate?: string;
 
   // Set to true after the user presses Search with an invalid form,
   // so we can surface inline "please pick a station from the list" hints.
   submitted = false;
 
+  // Debounced query streams per field: typing pushes the raw query here, and a
+  // single switchMap'd HTTP call resolves (so keystrokes don't each fire a
+  // request and stale responses can't overwrite fresher ones).
+  private fromQuery$ = new Subject<string>();
+  private toQuery$ = new Subject<string>();
   private destroy$ = new Subject<void>();
 
-  objectSaved?: {frominputObject: any; toinputObject: any, dateOfTravel: any};
+  objectSaved?: StoredSearch;
   key = 'USER_SEARCH';
 
   constructor() {
@@ -41,25 +56,47 @@ export class SearchComponent implements OnInit, OnDestroy {
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
     const day = ('0' + currentDate.getDate()).slice(-2);
     this.dateOfTravel = `${year}-${month}-${day}`;
-    this.minDate = this.dateOfTravel
+    this.minDate = this.dateOfTravel;
   }
 
   ngOnInit(): void {
+    this.wireQueryStream(this.fromQuery$, 'from');
+    this.wireQueryStream(this.toQuery$, 'to');
+
     this.objectSaved = this.getStoredObject();
-    if (this.objectSaved) {
+    if (this.objectSaved?.frominputObject && this.objectSaved?.toinputObject) {
       this.frominputValue = this.objectSaved.frominputObject.stationName;
       this.toinputValue = this.objectSaved.toinputObject.stationName;
       this.frominputObject = this.objectSaved.frominputObject;
       this.toinputObject = this.objectSaved.toinputObject;
       this.dateOfTravel = this.minDate && this.objectSaved.dateOfTravel < this.minDate
-      ? this.minDate
-      : this.objectSaved.dateOfTravel;
+        ? this.minDate
+        : this.objectSaved.dateOfTravel;
     }
   }
 
+  /** Subscribe a debounced query stream and push results into the right field. */
+  private wireQueryStream(source$: Subject<string>, key: FieldKey): void {
+    source$
+      .pipe(
+        debounceTime(250),
+        distinctUntilChanged(),
+        filter((q) => q.length > 1),
+        switchMap((q) => this.autocompleteService.getSuggestions(q)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((data: AutocompleteResponse) => {
+        const results = data?.results ?? [];
+        if (key === 'from') {
+          this.fromsuggestions = results;
+        } else {
+          this.tosuggestions = results;
+        }
+        this.cdr.markForCheck();
+      });
+  }
 
-  onInput(key: string): void {
-    this.cancelAllCalls();
+  onInput(key: FieldKey): void {
     // Typing invalidates any previously picked station for that field:
     // the code is only trustworthy when it came from a chosen suggestion.
     if (key === 'from') {
@@ -67,24 +104,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     } else {
       this.toinputObject = undefined;
     }
-    const input = key === 'from' ? this.frominputValue : this.toinputValue;
-    if(input.length > 1) {
-      this.autocompleteService.getSuggestions(input.trim())
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        if (key === 'from') {
-          this.fromsuggestions = data.results;
-        } else {
-          this.tosuggestions = data.results;
-        }
-      })
+    const input = (key === 'from' ? this.frominputValue : this.toinputValue).trim();
+    if (input.length > 1) {
+      (key === 'from' ? this.fromQuery$ : this.toQuery$).next(input);
     } else {
       this.fromsuggestions = [];
-      this.tosuggestions = []
+      this.tosuggestions = [];
     }
   }
 
-  onSelectSuggestion(suggestion: any, key: string): void {
+  onSelectSuggestion(suggestion: Station, key: FieldKey): void {
     if (key === 'from') {
       this.frominputValue = suggestion.stationName;
       this.frominputObject = suggestion;
@@ -108,7 +137,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   /** Source and destination must be different stations. */
   get sameStation(): boolean {
     return this.fromValid && this.toValid &&
-      this.frominputObject.stationCode === this.toinputObject.stationCode;
+      this.frominputObject!.stationCode === this.toinputObject!.stationCode;
   }
 
   get isValid(): boolean {
@@ -123,8 +152,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.storeObjectInLocalStorage();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.navigate(['results'], {queryParams: {
-      src: this.frominputObject.stationCode,
-      dst: this.toinputObject.stationCode,
+      src: this.frominputObject!.stationCode,
+      dst: this.toinputObject!.stationCode,
       doj: this.getFormattedDate(this.dateOfTravel)
     }});
   }
@@ -134,18 +163,36 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   storeObjectInLocalStorage() {
-    this.objectSaved = {frominputObject: this.frominputObject, toinputObject: this.toinputObject, dateOfTravel: this.dateOfTravel};
-    if (localStorage) {
+    if (!this.frominputObject || !this.toinputObject) {
+      return;
+    }
+    this.objectSaved = {
+      frominputObject: this.frominputObject,
+      toinputObject: this.toinputObject,
+      dateOfTravel: this.dateOfTravel,
+    };
+    try {
       localStorage.setItem(this.key, JSON.stringify(this.objectSaved));
+    } catch {
+      /* storage unavailable (private mode / quota) — non-fatal */
     }
   }
 
-  getStoredObject() {
-    if (localStorage && localStorage.getItem(this.key)) {
+  getStoredObject(): StoredSearch | undefined {
+    try {
       const objectString = localStorage.getItem(this.key);
-      return objectString ? JSON.parse(objectString) : null;
+      if (!objectString) {
+        return undefined;
+      }
+      const parsed = JSON.parse(objectString) as StoredSearch;
+      // Only trust a well-formed entry — an old/corrupt shape must not crash init.
+      if (parsed?.frominputObject?.stationCode && parsed?.toinputObject?.stationCode) {
+        return parsed;
+      }
+      return undefined;
+    } catch {
+      return undefined;
     }
-    return null;
   }
 
   switchStations() {
@@ -154,12 +201,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cancelAllCalls();
-  }
-
-  cancelAllCalls() {
     this.destroy$.next();
     this.destroy$.complete();
-    this.destroy$ = new Subject<void>();
   }
 }

@@ -1,0 +1,124 @@
+.tu-sch-hero {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.tu-sch-hero .tu-tno {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--tu-primary-700);
+}
+.tu-sch-hero .tu-tname {
+  font-family: var(--tu-font-display), sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--tu-text);
+}
+.tu-type-chip {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tu-info);
+  background: oklch(95% 0.03 250);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.tu-route-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--tu-text-muted);
+  flex-wrap: wrap;
+}
+.tu-route-line b { color: var(--tu-text); }
+.tu-route-line .fa-arrow-right-long { color: var(--tu-primary); }
+
+.tu-days {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.tu-day-chip {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tu-primary-700);
+  background: var(--tu-signal-wash);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+[data-theme='dark'] .tu-day-chip { color: #fff; }
+
+/* timeline (shared visual language with live status) */
+.tu-timeline {
+  margin-top: 20px;
+  padding-left: 6px;
+}
+.tu-tl-row {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: 0 0 20px 20px;
+}
+.tu-tl-row::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: -6px;
+  width: 2px;
+  background: var(--tu-border);
+}
+.tu-tl-row:last-child::before { display: none; }
+.tu-tl-dot {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tu-ontime);
+  border: 2px solid var(--tu-ontime);
+  z-index: 1;
+}
+.tu-tl-body { flex: 1; }
+.tu-tl-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tu-tl-top .name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--tu-text);
+}
+.tu-tl-top .code {
+  font-size: 12px;
+  color: var(--tu-ink-3);
+  margin-left: 4px;
+}
+.tu-tl-top .km {
+  font-size: 12px;
+  color: var(--tu-ink-3);
+}
+.tu-tl-times {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--tu-text-muted);
+}
+.tu-tl-times .halt { color: var(--tu-delay); font-weight: 600; }
+.tu-tl-times .day { color: var(--tu-primary-700); font-weight: 600; }
+.tu-disclaimer {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--tu-ink-3);
+}

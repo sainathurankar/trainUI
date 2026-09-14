@@ -1,0 +1,108 @@
+.tu-coach-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+@media (max-width: 575px) {
+  .tu-coach-form { grid-template-columns: 1fr; }
+}
+.tu-coach-form .tu-input { width: 100%; }
+.tu-upper { text-transform: uppercase; }
+.tu-coach-btn { height: 46px; }
+@media (max-width: 575px) { .tu-coach-btn { width: 100%; } }
+
+.tu-sch-hero {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.tu-sch-hero .tu-tno {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--tu-primary-700);
+}
+.tu-sch-hero .tu-tname {
+  font-family: var(--tu-font-display), sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--tu-text);
+}
+.tu-route-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--tu-text-muted);
+  flex-wrap: wrap;
+}
+.tu-route-line .fa-arrow-right-long { color: var(--tu-primary); }
+.tu-at-stn {
+  color: var(--tu-primary-700);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.tu-coach-hint {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--tu-ink-3);
+  font-weight: 600;
+}
+
+/* horizontal scroll-snap coach strip */
+.tu-coach-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 2px 8px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.tu-coach {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 62px;
+  padding: 12px 10px;
+  border: 1px solid var(--tu-border);
+  border-radius: 12px;
+  background: var(--tu-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.tu-coach .c-code {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--tu-text);
+}
+.tu-coach .c-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--tu-ink-3);
+  font-weight: 600;
+}
+/* special coach kinds */
+.tu-coach[data-kind='L'],
+.tu-coach[data-kind='EOG'] {
+  background: var(--tu-signal-wash);
+  border-color: var(--tu-primary);
+}
+.tu-coach[data-kind='L'] .c-code,
+.tu-coach[data-kind='EOG'] .c-code { color: var(--tu-primary-700); }
+.tu-coach[data-kind='PC'] {
+  background: var(--tu-delay-wash);
+  border-color: var(--tu-delay);
+}
+.tu-coach[data-kind='PC'] .c-code { color: var(--tu-delay); }
+
+.tu-disclaimer {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--tu-ink-3);
+}

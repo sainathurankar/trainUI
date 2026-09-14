@@ -3,7 +3,6 @@
 /* ============================ HERO ============================ */
 .tu-hero {
   position: relative;
-  overflow: hidden;
   padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
   isolation: isolate;
 }
@@ -12,8 +11,9 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+  overflow: hidden; /* clip the decorative blobs/grid here, NOT on .tu-hero, so the search autocomplete dropdown can overflow the hero */
   background:
-    radial-gradient(1200px 500px at 50% -10%, rgba(124, 58, 237, 0.10), transparent 60%),
+    radial-gradient(1200px 500px at 50% -10%, rgba(20, 160, 120, 0.10), transparent 60%),
     linear-gradient(180deg, var(--tu-hero-top, #f6f7fe) 0%, var(--tu-bg) 100%);
 }
 
@@ -25,20 +25,20 @@
   animation: tu-float 9s ease-in-out infinite;
 }
 .tu-blob-1 { width: 320px; height: 320px; top: -60px; left: -40px;
-  background: radial-gradient(circle at 30% 30%, #6366f1, transparent 70%); }
+  background: radial-gradient(circle at 30% 30%, var(--tu-primary), transparent 70%); }
 .tu-blob-2 { width: 380px; height: 380px; top: 40px; right: -80px;
-  background: radial-gradient(circle at 30% 30%, #06b6d4, transparent 70%);
+  background: radial-gradient(circle at 30% 30%, var(--tu-primary), transparent 70%);
   animation-delay: 1.5s; }
 .tu-blob-3 { width: 260px; height: 260px; bottom: -80px; left: 40%;
-  background: radial-gradient(circle at 30% 30%, #a855f7, transparent 70%);
+  background: radial-gradient(circle at 30% 30%, var(--tu-accent), transparent 70%);
   animation-delay: 3s; }
 
 .tu-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(79, 70, 229, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79, 70, 229, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(20, 160, 120, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 160, 120, 0.045) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 75%);
@@ -52,8 +52,8 @@
   gap: 0.5rem;
   padding: 0.45rem 1rem;
   border-radius: 999px;
-  background: rgba(79, 70, 229, 0.08);
-  border: 1px solid rgba(79, 70, 229, 0.18);
+  background: rgba(20, 160, 120, 0.08);
+  border: 1px solid rgba(20, 160, 120, 0.18);
   color: var(--tu-primary-700);
   font-weight: 600;
   font-size: 0.85rem;
@@ -62,7 +62,7 @@
 .tu-hero-badge i { color: var(--tu-amber); }
 
 .tu-hero-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--tu-font-display), sans-serif;
   font-weight: 800;
   font-size: clamp(2.1rem, 5.5vw, 3.6rem);
   line-height: 1.08;
@@ -81,6 +81,8 @@
 .tu-search-wrap {
   max-width: 960px;
   margin: 0 auto;
+  position: relative;
+  z-index: 5; /* keep the station autocomplete dropdown above the later .tu-stats sibling (both are transformed = stacking contexts) */
 }
 
 /* ---- Stats ---- */
@@ -93,7 +95,7 @@
 }
 .tu-stat { display: flex; flex-direction: column; align-items: center; }
 .tu-stat-num {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--tu-font-display), sans-serif;
   font-weight: 700;
   font-size: 1.6rem;
   color: var(--tu-indigo-900);
@@ -134,9 +136,9 @@
   font-size: 1.25rem;
   color: #fff;
 }
-.tu-icon-indigo { background: linear-gradient(135deg, #6366f1, #4338ca); }
-.tu-icon-cyan   { background: linear-gradient(135deg, #22d3ee, #0891b2); }
-.tu-icon-amber  { background: linear-gradient(135deg, #fbbf24, #d97706); }
+.tu-icon-indigo { background: var(--tu-primary); }
+.tu-icon-cyan   { background: var(--tu-accent); }
+.tu-icon-amber  { background: var(--tu-amber); }
 
 @media (max-width: 575px) {
   .tu-stats { gap: 1.4rem 2.2rem; }

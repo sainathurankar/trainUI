@@ -1,0 +1,19 @@
+@if (entries.length) {
+  <div class="tu-recent">
+    <div class="tu-recent-head">
+      <span class="tu-recent-label"><i class="fas fa-clock-rotate-left"></i> Recent</span>
+      <button type="button" class="tu-recent-clear" (click)="clear.emit()">Clear</button>
+    </div>
+    <div class="tu-recent-chips">
+      @for (e of entries; track e.value + (e.extra || '')) {
+        <button type="button" class="tu-recent-chip" (click)="pick.emit(e)" [title]="(e.label || '') + ' ' + e.value">
+          <i class="fas fa-train tu-recent-ico"></i>
+          <span class="tu-recent-text">
+            @if (e.label) { <span class="l">{{ e.label }}</span> }
+            <span class="v tu-mono">{{ e.value }}@if (e.extra) {<span class="x"> · {{ e.extra }}</span>}</span>
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+}

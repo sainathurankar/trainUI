@@ -8,7 +8,9 @@ import {
   LiveStatusResponse,
   PnrStatusResponse,
   TrainScheduleResponse,
+  TrainSearchResponse,
 } from 'src/app/models/ris.models';
+import { map } from 'rxjs/operators';
 
 /**
  * Rail information services: PNR status, live running status, train schedule
@@ -63,6 +65,33 @@ export class RisService {
     }
     return this.http.get<CoachPositionResponse>(
       `${environment.apiUrl}/ris/coach/${encodeURIComponent(trainNo)}?stn=${encodeURIComponent(stn)}`
+    );
+  }
+
+  /**
+   * Autocomplete for train number / name. In mock mode the full list is
+   * fetched once and filtered client-side; live mode hits the backend.
+   */
+  searchTrains(query: string): Observable<TrainSearchResponse> {
+    const q = query.trim().toLowerCase();
+    if (environment.mock) {
+      return this.http
+        .get<TrainSearchResponse>('assets/mockjson/ris-trains.json')
+        .pipe(
+          delay(250),
+          map((res) => ({
+            results: (res?.results ?? [])
+              .filter(
+                (t) =>
+                  t.trainNumber.toLowerCase().includes(q) ||
+                  t.trainName.toLowerCase().includes(q)
+              )
+              .slice(0, 8),
+          }))
+        );
+    }
+    return this.http.get<TrainSearchResponse>(
+      `${environment.apiUrl}/ris/trains?query=${encodeURIComponent(query)}`
     );
   }
 }

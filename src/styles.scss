@@ -10,63 +10,86 @@
 
 /* ---- Design Tokens ---------------------------------------- */
 :root {
+  /* ── "Signal" design system ──────────────────────────────────
+     Rail-signage inspired: single signal-green accent (the "Go"
+     proceed aspect), ink-on-paper neutrals, semantic amber/red for
+     delays. All component `--tu-*` tokens are remapped here so the
+     whole app reskins from this one block. */
+
   /* Brand palette */
-  --tu-indigo-900: #0f172a;
-  --tu-indigo-800: #1e293b;
-  --tu-primary:    #4f46e5;   /* indigo-600 */
-  --tu-primary-600:#4338ca;
-  --tu-primary-700:#3730a3;
-  --tu-accent:     #06b6d4;   /* cyan-500  */
-  --tu-accent-600: #0891b2;
-  --tu-amber:      #f59e0b;
-  --tu-rose:       #f43f5e;
-  --tu-emerald:    #10b981;
+  --tu-indigo-900: oklch(24% 0.03 260);    /* headings/times ink */
+  --tu-indigo-800: oklch(30% 0.025 260);
+  --tu-primary:    oklch(62% 0.15 162);    /* signal green */
+  --tu-primary-600:oklch(56% 0.14 162);
+  --tu-primary-700:oklch(45% 0.12 162);    /* signal ink (text on wash) */
+  --tu-accent:     oklch(60% 0.13 250);    /* info blue */
+  --tu-accent-600: oklch(54% 0.13 250);
+  --tu-amber:      oklch(70% 0.15 75);
+  --tu-rose:       oklch(64% 0.17 40);     /* delay warm red */
+  --tu-emerald:    oklch(62% 0.15 162);    /* on-time = signal green */
+  --tu-signal-wash:oklch(95% 0.03 162);
+
+  /* Semantic (rail signalling) — shared by RIS pages */
+  --tu-ontime:     oklch(62% 0.15 162);    /* on-time = signal green */
+  --tu-delay:      oklch(64% 0.17 40);     /* delayed = warm amber-red */
+  --tu-delay-wash: oklch(95% 0.04 45);
+  --tu-info:       oklch(60% 0.13 250);    /* AC coach blue */
+  --tu-ink-3:      oklch(60% 0.015 260);   /* faint text / codes */
 
   /* Neutrals */
-  --tu-bg:         #f4f6fb;
-  --tu-surface:    #ffffff;
-  --tu-surface-2:  #f8fafc;
-  --tu-border:     #e6e9f2;
-  --tu-text:       #1e293b;
-  --tu-text-muted: #64748b;
+  --tu-bg:         oklch(98.5% 0.004 260); /* paper */
+  --tu-surface:    oklch(100% 0 0);
+  --tu-surface-2:  oklch(96.5% 0.006 260);
+  --tu-border:     oklch(90% 0.008 260);
+  --tu-border-strong: oklch(80% 0.012 260);
+  --tu-font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  --tu-text:       oklch(24% 0.03 260);    /* ink */
+  --tu-text-muted: oklch(45% 0.02 260);
 
-  /* Gradients */
-  --tu-grad-hero:  linear-gradient(135deg, #4f46e5 0%, #7c3aed 45%, #06b6d4 100%);
-  --tu-grad-brand: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  /* Accents are now flat signal-green (no tech gradient) */
+  --tu-grad-hero:  oklch(62% 0.15 162);
+  --tu-grad-brand: oklch(62% 0.15 162);
 
   /* Elevation */
-  --tu-shadow-sm:  0 1px 3px rgba(15, 23, 42, 0.08);
-  --tu-shadow:     0 6px 20px rgba(15, 23, 42, 0.08);
-  --tu-shadow-lg:  0 18px 45px rgba(15, 23, 42, 0.14);
+  --tu-shadow-sm:  0 1px 2px oklch(24% 0.03 260 / 0.08);
+  --tu-shadow:     0 8px 24px oklch(24% 0.03 260 / 0.06);
+  --tu-shadow-lg:  0 12px 40px oklch(24% 0.03 260 / 0.14);
 
   /* Shape */
-  --tu-radius:     16px;
-  --tu-radius-sm:  12px;
-  --tu-radius-lg:  24px;
+  --tu-radius:     14px;
+  --tu-radius-sm:  9px;
+  --tu-radius-lg:  22px;
 
   /* Motion */
-  --tu-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --tu-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* Bootstrap overrides */
-  --bs-primary: #4f46e5;
-  --bs-body-font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  --bs-primary: oklch(62% 0.15 162);
+  --bs-body-font-family: 'Inter', system-ui, sans-serif;
+
+  /* Type scale */
+  --tu-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --tu-font-ui: 'Inter', system-ui, sans-serif;
 }
 
 /* ---- Dark theme overrides --------------------------------- */
 [data-theme='dark'] {
-  --tu-bg:         #0b1120;
-  --tu-surface:    #131c31;
-  --tu-surface-2:  #1b2540;
-  --tu-border:     #263149;
-  --tu-text:       #e2e8f0;
-  --tu-text-muted: #94a3b8;
+  --tu-bg:         oklch(20% 0.02 260);
+  --tu-surface:    oklch(25% 0.02 260);
+  --tu-surface-2:  oklch(29% 0.02 260);
+  --tu-border:     oklch(35% 0.02 260);
+  --tu-text:       oklch(95% 0.008 260);
+  --tu-text-muted: oklch(72% 0.015 260);
 
   /* Headings / train names / times / fares use these fixed-dark tokens in
      light mode; remap them to light values so they stay legible in dark mode. */
-  --tu-indigo-900: #f1f5f9;
-  --tu-indigo-800: #e2e8f0;
-  --tu-primary-700: #a5b4fc;
-  --tu-hero-top: #101a30;
+  --tu-indigo-900: oklch(97% 0.005 260);
+  --tu-indigo-800: oklch(90% 0.008 260);
+  --tu-primary-700: oklch(78% 0.13 162);   /* brighter signal ink on dark */
+  --tu-signal-wash: oklch(32% 0.05 162);
+  --tu-delay-wash: oklch(34% 0.06 45);
+  --tu-ink-3:      oklch(60% 0.02 260);
+  --tu-hero-top: oklch(23% 0.03 162);
 
   --tu-shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.4);
   --tu-shadow:     0 6px 20px rgba(0, 0, 0, 0.45);
@@ -111,11 +134,11 @@ body {
 }
 
 h1, h2, h3, h4, h5, .brand-name {
-  font-family: 'Poppins', 'Inter', sans-serif;
+  font-family: var(--tu-font-display), 'Inter', sans-serif;
   letter-spacing: -0.01em;
 }
 
-::selection { background: rgba(79, 70, 229, 0.18); }
+::selection { background: oklch(62% 0.15 162 / 0.18); }
 
 /* Nice scrollbars */
 * { scrollbar-width: thin; scrollbar-color: #c7cbe0 transparent; }
@@ -124,10 +147,7 @@ h1, h2, h3, h4, h5, .brand-name {
 
 /* ---- Shared utility classes ------------------------------- */
 .tu-gradient-text {
-  background: var(--tu-grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--tu-primary);
 }
 
 .tu-card {
@@ -140,6 +160,102 @@ h1, h2, h3, h4, h5, .brand-name {
 .tu-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--tu-shadow-lg);
+}
+
+/* ---- Shared page shell for RIS pages (Signal mockup) ------ */
+.tu-page { max-width: 820px; margin: 0 auto; padding: 26px 16px 40px; }
+.tu-mono { font-family: var(--tu-font-mono); font-variant-numeric: tabular-nums; }
+.tu-tnum { font-variant-numeric: tabular-nums; }
+.tu-page-head { margin-bottom: 20px; }
+.tu-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 600;
+  color: var(--tu-primary-700); background: var(--tu-signal-wash);
+  padding: 5px 11px; border-radius: 999px; margin-bottom: 12px;
+}
+[data-theme='dark'] .tu-eyebrow { color: var(--tu-text); }
+.tu-page-head h1 {
+  font-family: var(--tu-font-display), sans-serif;
+  font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 6px;
+}
+.tu-page-head p { color: var(--tu-text-muted); font-size: 15px; }
+@media (max-width: 640px) { .tu-page-head h1 { font-size: 24px; } }
+/* head row: title block + share button */
+.tu-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.tu-share-btn {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--tu-border);
+  background: var(--tu-surface);
+  color: var(--tu-primary-700);
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 4px;
+  transition: border-color 0.2s var(--tu-ease), background 0.2s var(--tu-ease), transform 0.2s var(--tu-ease);
+}
+.tu-share-btn:hover {
+  border-color: var(--tu-primary);
+  background: var(--tu-signal-wash);
+  transform: translateY(-1px);
+}
+[data-theme='dark'] .tu-share-btn { color: var(--tu-text); }
+.tu-head-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.tu-head-actions .tu-share-btn { margin-top: 0; }
+/* Flat card (no hover-lift) for dense data pages */
+.tu-card-flat {
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+  border-radius: var(--tu-radius);
+  padding: 20px;
+}
+.tu-card-flat + .tu-card-flat { margin-top: 16px; }
+@media (max-width: 640px) { .tu-card-flat { padding: 16px; } }
+/* status pill */
+.tu-status-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-weight: 700; font-size: 13px; padding: 6px 13px; border-radius: 999px;
+}
+.tu-status-pill.cnf { background: var(--tu-signal-wash); color: var(--tu-primary-700); }
+[data-theme='dark'] .tu-status-pill.cnf { color: #fff; }
+.tu-status-pill.wl { background: var(--tu-delay-wash); color: var(--tu-delay); }
+
+/* shared field/search/summary/error bits for RIS pages */
+.tu-field-label {
+  display: block; font-size: 12.5px; font-weight: 600;
+  color: var(--tu-text-muted); margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.tu-search-row { display: flex; flex-direction: column; gap: 0.75rem; }
+@media (min-width: 576px) { .tu-search-row { flex-direction: row; } }
+.tu-search-row .flex-1 { flex: 1; }
+.tu-form-error { color: var(--tu-delay); font-size: 0.85rem; margin-top: 0.5rem; }
+.tu-error-card { border-left: 4px solid var(--tu-delay); }
+.tu-error-card p { color: var(--tu-delay); font-weight: 600; }
+.tu-summary {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--tu-border);
+}
+.tu-summary .tu-stat .k {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--tu-ink-3); font-weight: 600;
+}
+.tu-summary .tu-stat .v {
+  font-family: var(--tu-font-display), sans-serif; font-weight: 700;
+  font-size: 17px; margin-top: 2px; color: var(--tu-text);
 }
 
 /* Modern buttons — self-contained (no longer extends Bootstrap's .btn).
@@ -169,13 +285,21 @@ h1, h2, h3, h4, h5, .brand-name {
 .btn-sm { padding: 0.35rem 0.7rem; font-size: 0.875rem; }
 
 .btn-gradient {
-  background: var(--tu-grad-brand);
+  background: var(--tu-primary);
   border: none;
   color: #fff;
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 6px 18px oklch(62% 0.15 162 / 0.30);
 }
-.btn-gradient:hover { color: #fff; filter: brightness(1.05); box-shadow: 0 10px 26px rgba(79, 70, 229, 0.45); }
+.btn-gradient:hover { color: #fff; filter: brightness(1.04); box-shadow: 0 8px 22px oklch(62% 0.15 162 / 0.40); }
 .btn-gradient:disabled { filter: grayscale(0.4) opacity(0.7); box-shadow: none; }
+
+/* Ghost/secondary button — outlined, neutral */
+.btn-ghost {
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+  color: var(--tu-text);
+}
+.btn-ghost:hover { border-color: var(--tu-primary); color: var(--tu-primary-700); background: var(--tu-signal-wash); }
 
 /* Form controls — self-contained replacement for Bootstrap .form-control/.form-select */
 .form-control, .form-select {
@@ -194,7 +318,7 @@ h1, h2, h3, h4, h5, .brand-name {
 .form-control:focus, .form-select:focus {
   outline: 0;
   border-color: var(--tu-primary);
-  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+  box-shadow: 0 0 0 0.2rem rgba(20, 160, 120, 0.15);
 }
 .form-control.is-invalid { border-color: var(--tu-rose); }
 
@@ -271,13 +395,28 @@ ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 1rem;
+  margin: 0.5rem;
   pointer-events: none;
+}
+@media (min-width: 576px) {
+  .modal-dialog { max-width: 500px; margin: 1.75rem auto; }
+  .modal-sm { max-width: 300px; }
+}
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl { max-width: 800px; }
+}
+@media (min-width: 1200px) {
+  .modal-xl { max-width: 1140px; }
 }
 .modal-dialog-centered {
   display: flex;
   align-items: center;
-  min-height: calc(100% - 2rem);
+  justify-content: center;
+  min-height: calc(100% - 1rem);
+}
+@media (min-width: 576px) {
+  .modal-dialog-centered { min-height: calc(100% - 3.5rem); }
 }
 .modal-content {
   position: relative;
@@ -293,6 +432,72 @@ ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
   outline: 0;
   overflow: hidden;
 }
+
+/* Header / body / footer chrome (Bootstrap-equivalent, self-contained) */
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--tu-border);
+}
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--tu-border);
+}
+.modal-title { margin: 0; line-height: 1.4; }
+
+/* Scrollable variant — body scrolls, header/footer stay pinned */
+.modal-dialog-scrollable { height: calc(100% - 1rem); }
+@media (min-width: 576px) {
+  .modal-dialog-scrollable { height: calc(100% - 3.5rem); }
+}
+.modal-dialog-scrollable .modal-content { max-height: 100%; overflow: hidden; }
+.modal-dialog-scrollable .modal-body { overflow-y: auto; }
+
+/* Let a modal opt out of content clipping so the station autocomplete
+   dropdown inside Modify-search is not cut off. */
+.tu-modal-overflow .modal-content { overflow: visible; }
+.tu-modal-overflow .modal-body { overflow: visible; }
+
+/* Modify-search modal: strip the search component's own card chrome
+   (it already sits inside the modal card) and stack fields vertically so
+   inputs have full width and never overflow the dialog. */
+.tu-modal-overflow .tu-search {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+.tu-modal-overflow .tu-fields {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: stretch;
+}
+.tu-modal-overflow .tu-search-col,
+.tu-modal-overflow .tu-search-btn { width: 100% !important; }
+.tu-modal-overflow .tu-search-btn { justify-content: center; }
+.tu-modal-overflow .tu-swap-col { padding-bottom: 0; }
+.tu-modal-overflow .tu-field { width: 100%; }
+.tu-modal-overflow .tu-input { width: 100% !important; }
+.tu-modal-overflow .tu-swap-col { justify-content: center; margin: -0.2rem 0; width: 100%; }
+.tu-modal-overflow .tu-swap-btn { transform: rotate(90deg); }
+.tu-modal-overflow .tu-swap-btn:hover:not(:disabled) { transform: rotate(270deg); }
 
 /* Fullscreen variant used by the 2-weeks availability modal */
 .modal-fullscreen {
@@ -321,7 +526,7 @@ ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
 .tu-input:focus {
   outline: none;
   border-color: var(--tu-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+  box-shadow: 0 0 0 3px rgba(20, 160, 120, 0.18);
 }
 .tu-input::placeholder { color: var(--tu-text-muted); }
 
@@ -353,7 +558,7 @@ ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
   background: var(--tu-surface);
   border: 1px solid var(--tu-border);
 }
-.tu-coach-queried { border-color: var(--tu-primary); box-shadow: 0 0 0 2px rgba(79,70,229,0.25); }
+.tu-coach-queried { border-color: var(--tu-primary); box-shadow: 0 0 0 2px rgba(20, 160, 120,0.25); }
 
 /* Live-status timeline */
 .tu-timeline-dot {
@@ -364,4 +569,9 @@ ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
   flex-shrink: 0;
 }
 .tu-timeline-dot.done { background: var(--tu-emerald); }
-.tu-timeline-dot.current { background: var(--tu-primary); box-shadow: 0 0 0 4px rgba(79,70,229,0.25); }
+.tu-timeline-dot.current { background: var(--tu-primary); box-shadow: 0 0 0 4px rgba(20, 160, 120,0.25); }
+
+/* Reserve space for the mobile bottom tab bar */
+@media (max-width: 767.98px) {
+  body { padding-bottom: 6rem; }
+}

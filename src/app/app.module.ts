@@ -22,6 +22,8 @@ import { PnrStatusComponent } from './components/pnr-status/pnr-status.component
 import { LiveStatusComponent } from './components/live-status/live-status.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { CoachPositionComponent } from './components/coach-position/coach-position.component';
+import { TrainInputComponent } from './components/train-input/train-input.component';
+import { RecentChipsComponent } from './components/recent-chips/recent-chips.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -43,6 +45,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         LiveStatusComponent,
         ScheduleComponent,
         CoachPositionComponent,
+        TrainInputComponent,
+        RecentChipsComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

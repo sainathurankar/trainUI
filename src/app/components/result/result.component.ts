@@ -1,8 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SearchInput } from 'src/app/services/search/search-input';
 import { SearchService } from 'src/app/services/search/search.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { ShareService } from 'src/app/services/share/share.service';
 import { Helper } from 'src/app/common/helper';
 import { Offer, SearchResponse, Train } from 'src/app/models/train.models';
 
@@ -22,6 +24,8 @@ export class ResultComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private toast = inject(ToastService);
   private cdr = inject(ChangeDetectorRef);
+  private modal = inject(NgbModal);
+  private shareSvc = inject(ShareService);
 
   src = '';
   dst = '';
@@ -80,6 +84,11 @@ export class ResultComponent implements OnInit {
 
   retry() {
     this.getSearchResults();
+  }
+
+  /** Share this results page (deep link carries src/dst/doj). */
+  share(): void {
+    void this.shareSvc.share(`Trains ${this.src} → ${this.dst} — RailGo`);
   }
 
   /** Real (non-alternate) trains from the raw response. */
@@ -181,6 +190,17 @@ export class ResultComponent implements OnInit {
       || this.depWindow !== 'all' || this.quotaFilter !== 'all';
   }
 
+  /** Count of non-default filters, for the icon badge. */
+  get activeFilterCount(): number {
+    let n = 0;
+    if (this.availFilter !== 'all') n++;
+    if (this.classFilter !== 'all') n++;
+    if (this.sortKey !== 'departure') n++;
+    if (this.depWindow !== 'all') n++;
+    if (this.quotaFilter !== 'all') n++;
+    return n;
+  }
+
   setSort(key: SortKey): void {
     this.sortKey = key;
   }
@@ -201,7 +221,13 @@ export class ResultComponent implements OnInit {
     this.quotaFilter = 'all';
   }
 
-  toggleFilters(): void {
-    this.showFilters = !this.showFilters;
+  /** Open the filters & sort modal. */
+  openFilters(content: TemplateRef<unknown>): void {
+    this.modal.open(content, { centered: true, scrollable: true, size: 'lg' });
+  }
+
+  /** Open the modify-search modal; close it once a new search navigates away. */
+  openModify(content: TemplateRef<unknown>): void {
+    this.modal.open(content, { centered: true, scrollable: false, size: 'lg', windowClass: 'tu-modal-overflow' });
   }
 }

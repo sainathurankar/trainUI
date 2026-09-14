@@ -1,0 +1,24 @@
+{
+  "results": [
+    { "trainNumber": "12951", "trainName": "Mumbai Rajdhani Express", "from": "MMCT", "to": "NDLS" },
+    { "trainNumber": "12953", "trainName": "August Kranti Rajdhani", "from": "MMCT", "to": "NZM" },
+    { "trainNumber": "12009", "trainName": "Shatabdi Express", "from": "MMCT", "to": "ADI" },
+    { "trainNumber": "12259", "trainName": "Sealdah Duronto Express", "from": "NDLS", "to": "SDAH" },
+    { "trainNumber": "12301", "trainName": "Howrah Rajdhani Express", "from": "HWH", "to": "NDLS" },
+    { "trainNumber": "12302", "trainName": "New Delhi Rajdhani Express", "from": "NDLS", "to": "HWH" },
+    { "trainNumber": "12621", "trainName": "Tamil Nadu Express", "from": "MAS", "to": "NDLS" },
+    { "trainNumber": "12626", "trainName": "Kerala Express", "from": "TVC", "to": "NDLS" },
+    { "trainNumber": "12723", "trainName": "Telangana Express", "from": "HYB", "to": "NDLS" },
+    { "trainNumber": "12726", "trainName": "Siddaganga Express", "from": "UBL", "to": "SBC" },
+    { "trainNumber": "12002", "trainName": "Bhopal Shatabdi Express", "from": "NDLS", "to": "HBJ" },
+    { "trainNumber": "12137", "trainName": "Punjab Mail", "from": "CSMT", "to": "FZR" },
+    { "trainNumber": "12952", "trainName": "New Delhi Rajdhani Express", "from": "NDLS", "to": "MMCT" },
+    { "trainNumber": "12903", "trainName": "Golden Temple Mail", "from": "MMCT", "to": "ASR" },
+    { "trainNumber": "12615", "trainName": "Grand Trunk Express", "from": "MAS", "to": "NDLS" },
+    { "trainNumber": "16536", "trainName": "Golgumbaz Express", "from": "SBC", "to": "SUR" },
+    { "trainNumber": "16590", "trainName": "Rani Chennamma Express", "from": "SBC", "to": "KOP" },
+    { "trainNumber": "16591", "trainName": "Hampi Express", "from": "SBC", "to": "UBL" },
+    { "trainNumber": "20662", "trainName": "SBC Vande Bharat Express", "from": "SBC", "to": "MAO" },
+    { "trainNumber": "12080", "trainName": "Janshatabdi Express", "from": "SBC", "to": "UBL" }
+  ]
+}

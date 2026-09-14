@@ -1,75 +1,89 @@
-<div class="mx-auto w-full max-w-[900px] px-4 py-8">
-  <div class="mb-6">
-    <h1 class="text-2xl font-bold mb-1"><i class="fas fa-ticket me-2"></i>PNR Status</h1>
-    <p class="text-sm opacity-70">Check the current booking status of your ticket.</p>
+<div class="tu-page">
+  <div class="tu-page-head">
+    <div class="tu-head-row">
+      <div>
+        <span class="tu-eyebrow"><i class="fas fa-ticket"></i> Ticket status</span>
+        <h1>PNR Status</h1>
+        <p>Check the current booking status of your ticket.</p>
+      </div>
+      @if (result) {
+        <div class="tu-head-actions">
+          @if (!editing) {
+            <button type="button" class="tu-share-btn" (click)="toggleEdit()" aria-label="Edit search" title="Edit search">
+              <i class="fas fa-pen"></i>
+            </button>
+          }
+          <button type="button" class="tu-share-btn" (click)="share()" aria-label="Share this page" title="Share">
+            <i class="fas fa-share-nodes"></i>
+          </button>
+        </div>
+      }
+    </div>
   </div>
 
-  <div class="tu-card p-4 mb-6">
-    <label for="pnrInput" class="block text-sm font-medium mb-1">10-digit PNR number</label>
-    <div class="flex flex-col sm:flex-row gap-3">
+  @if (!result || editing) {
+  <div class="tu-card-flat tu-pnr-search">
+    <label for="pnrInput" class="tu-field-label">10-digit PNR number</label>
+    <div class="tu-search-row">
       <input id="pnrInput" type="text" inputmode="numeric" maxlength="10"
-        class="tu-input flex-1" placeholder="e.g. 2957493812"
+        class="tu-input tu-mono flex-1" placeholder="e.g. 2957493812"
         [(ngModel)]="pnr" (keydown.enter)="search()" />
       <button class="btn btn-gradient px-4" type="button" (click)="search()" [disabled]="loading">
         <i class="fas fa-magnifying-glass me-1"></i> {{ loading ? 'Checking…' : 'Check Status' }}
       </button>
     </div>
     @if (submitted && !valid) {
-      <p class="text-sm text-red-500 mt-2">Enter a valid 10-digit PNR number.</p>
+      <p class="tu-form-error">Enter a valid 10-digit PNR number.</p>
     }
+    <app-recent-chips [entries]="recent" (pick)="pickRecent($event)" (clear)="clearRecent()"></app-recent-chips>
   </div>
+  }
+
 
   @if (loading) {
     <app-loader></app-loader>
   }
 
   @if (error) {
-    <div class="tu-card p-4 border-l-4 border-red-500">
-      <p class="text-red-500 font-medium"><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
+    <div class="tu-card-flat tu-error-card">
+      <p><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
     </div>
   }
 
   @if (result) {
-    <div class="tu-card p-4">
-      <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
-        <div>
-          <span class="text-lg font-bold">{{ result.trainNumber }}</span>
-          <span class="ms-2">{{ result.trainName }}</span>
-        </div>
-        <span class="tu-badge">{{ result.journeyClass }}</span>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm mb-4">
-        <div><div class="opacity-60">From</div><div class="font-medium">{{ result.boardingPoint }}</div></div>
-        <div><div class="opacity-60">To</div><div class="font-medium">{{ result.reservationUpto }}</div></div>
-        <div><div class="opacity-60">Date</div><div class="font-medium">{{ result.doj }}</div></div>
-        <div><div class="opacity-60">Chart</div><div class="font-medium">{{ result.chartPrepared ? 'Prepared' : 'Not prepared' }}</div></div>
+    <div class="tu-card-flat">
+      <div class="tu-pnr-hero">
+        <span class="tu-tno tu-mono">{{ result.trainNumber }}</span>
+        <span class="tu-tname">{{ result.trainName }}</span>
+        <span class="tu-status-pill cnf tu-pnr-chart">
+          <i class="fas fa-circle-check"></i>
+          {{ result.chartPrepared ? 'Confirmed · Chart prepared' : 'Chart not prepared' }}
+        </span>
       </div>
 
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="text-left opacity-70 border-b border-[var(--tu-border)]">
-            <th class="py-2">#</th>
-            <th class="py-2">Booking status</th>
-            <th class="py-2">Current status</th>
-            <th class="py-2">Coach</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (p of result.passengers; track p.passengerSerialNumber) {
-            <tr class="border-b border-[var(--tu-border)]">
-              <td class="py-2">{{ p.passengerSerialNumber }}</td>
-              <td class="py-2">{{ p.bookingStatus }}</td>
-              <td class="py-2">
-                <span [class.text-green-500]="isConfirmed(p.currentStatus)"
-                      [class.font-semibold]="isConfirmed(p.currentStatus)">
-                  {{ p.currentStatus }}
-                </span>
-              </td>
-              <td class="py-2">{{ p.coachPosition }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
+      <div class="tu-summary">
+        <div class="tu-stat"><div class="k">From</div><div class="v">{{ result.boardingPoint }}</div></div>
+        <div class="tu-stat"><div class="k">To</div><div class="v">{{ result.reservationUpto }}</div></div>
+        <div class="tu-stat"><div class="k">Date</div><div class="v tu-tnum">{{ fmtDate(result.doj) }}</div></div>
+        <div class="tu-stat"><div class="k">Class</div><div class="v">{{ result.journeyClass }}</div></div>
+      </div>
+
+      <div class="tu-pax">
+        @for (p of result.passengers; track p.passengerSerialNumber) {
+          <div class="tu-paxcard">
+            <div class="row1">
+              <span class="who">Passenger {{ p.passengerSerialNumber }}</span>
+              <span class="tu-status-pill" [class.cnf]="isConfirmed(p.currentStatus)"
+                [class.wl]="!isConfirmed(p.currentStatus)">
+                @if (isConfirmed(p.currentStatus)) { <i class="fas fa-circle-check"></i> }
+                {{ p.currentStatus }}
+              </span>
+            </div>
+            <div class="berth">{{ p.coachPosition || p.currentStatus }}</div>
+            <div class="meta">Booking: {{ p.bookingStatus }}</div>
+          </div>
+        }
+      </div>
     </div>
   }
 </div>

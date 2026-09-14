@@ -1,4 +1,4 @@
-<nav class="tu-navbar" [class.scrolled]="scrolled">
+<nav class="tu-navbar" [class.scrolled]="scrolled" [class.tu-navbar-mobile-hidden]="!isHome">
   <div class="mx-auto w-full max-w-[1200px] px-4 flex items-center justify-between">
     <a class="tu-brand" (click)="navigateToHome()" (keydown.enter)="navigateToHome()"
       role="button" tabindex="0" aria-label="RailGo home">
@@ -31,9 +31,28 @@
         [attr.aria-pressed]="theme() === 'dark'" title="Toggle theme">
         <i class="fas" [ngClass]="theme() === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
       </button>
-      <button class="btn btn-gradient btn-sm px-3 tu-cta" (click)="navigateToHome()">
+      <button class="btn btn-ghost btn-sm px-3 tu-cta" (click)="navigateToHome()">
         <i class="fas fa-bolt me-1"></i> Book Now
       </button>
     </div>
   </div>
+</nav>
+
+<!-- Mobile bottom tab bar (nav is desktop-only above; this restores mobile access) -->
+<nav class="tu-tabbar md:hidden" aria-label="Primary">
+  <a class="tu-tab" (click)="navigateToHome()" (keydown.enter)="navigateToHome()" role="button" tabindex="0">
+    <i class="fas fa-magnifying-glass"></i><span>Search</span>
+  </a>
+  <a class="tu-tab" routerLink="/pnr" routerLinkActive="active">
+    <i class="fas fa-ticket"></i><span>PNR</span>
+  </a>
+  <a class="tu-tab" routerLink="/live-status" routerLinkActive="active">
+    <i class="fas fa-location-crosshairs"></i><span>Live</span>
+  </a>
+  <a class="tu-tab" routerLink="/schedule" routerLinkActive="active">
+    <i class="fas fa-clock"></i><span>Schedule</span>
+  </a>
+  <a class="tu-tab" routerLink="/coach-position" routerLinkActive="active">
+    <i class="fas fa-train-subway"></i><span>Coach</span>
+  </a>
 </nav>

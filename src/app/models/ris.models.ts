@@ -98,6 +98,8 @@ export interface LiveStation {
   delayArr?: number;
   delayDep?: number;
   isItQueriedStation?: boolean;
+  hasArrived?: boolean;
+  hasDeparted?: boolean;
 }
 
 export interface CoachPositionResponse {
@@ -110,4 +112,17 @@ export interface CoachPositionResponse {
   listOfStations?: { stationName?: string; stationCode?: string }[];
   errorcode?: string;
   errormsg?: string;
+}
+
+/** A train suggestion for the train-number autocomplete. */
+export interface TrainSuggestion {
+  trainNumber: string;
+  trainName: string;
+  from?: string;
+  to?: string;
+}
+
+/** Train autocomplete response. */
+export interface TrainSearchResponse {
+  results: TrainSuggestion[];
 }

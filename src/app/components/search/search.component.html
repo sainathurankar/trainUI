@@ -2,25 +2,36 @@
   <form class="tu-search-form" (ngSubmit)="onClickSearch()">
     <div class="tu-fields">
       <!-- FROM -->
-      <div class="tu-field position-relative">
+      <div class="tu-field">
         <label class="tu-field-label" for="from"><i class="fas fa-circle-dot text-[color:var(--tu-primary)]"></i> From</label>
-        <input type="text" id="from" name="from" class="form-control tu-input"
-          [class.is-invalid]="submitted && !fromValid"
-          placeholder="Enter source station"
-          [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off"
-          role="combobox" aria-autocomplete="list" aria-controls="from-suggestions"
-          [attr.aria-expanded]="fromsuggestions.length > 0">
+        <div class="tu-input-wrap">
+          <input type="text" id="from" name="from" class="form-control tu-input"
+            [class.is-invalid]="submitted && !fromValid"
+            placeholder="Enter source station"
+            [(ngModel)]="frominputValue" (keyup)="onInput('from')" autocomplete="off"
+            role="combobox" aria-autocomplete="list" aria-controls="from-suggestions"
+            [attr.aria-expanded]="fromsuggestions.length > 0">
+          @if (fromLoading) {
+            <span class="tu-input-spinner" aria-hidden="true"></span>
+          }
+        </div>
         <ul class="tu-suggestions" id="from-suggestions" role="listbox"
-          [class.show]="fromsuggestions.length > 0">
-          @for (suggestion of fromsuggestions; track suggestion) {
-            <li class="tu-suggestion"
-              role="option" tabindex="0" [attr.aria-selected]="false"
-              (click)="onSelectSuggestion(suggestion, 'from')"
-              (keydown.enter)="onSelectSuggestion(suggestion, 'from')"
-              (keydown.space)="onSelectSuggestion(suggestion, 'from'); $event.preventDefault()">
-              <i class="fas fa-train-subway text-[color:var(--tu-text-muted)]"></i>
-              <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+          [class.show]="fromLoading || fromsuggestions.length > 0">
+          @if (fromLoading) {
+            <li class="tu-suggestion-status" aria-live="polite">
+              <span class="tu-input-spinner"></span> Searching stations…
             </li>
+          } @else {
+            @for (suggestion of fromsuggestions; track suggestion) {
+              <li class="tu-suggestion"
+                role="option" tabindex="0" [attr.aria-selected]="false"
+                (click)="onSelectSuggestion(suggestion, 'from')"
+                (keydown.enter)="onSelectSuggestion(suggestion, 'from')"
+                (keydown.space)="onSelectSuggestion(suggestion, 'from'); $event.preventDefault()">
+                <i class="fas fa-train-subway text-[color:var(--tu-text-muted)]"></i>
+                <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+              </li>
+            }
           }
         </ul>
         @if (submitted && !fromValid) {
@@ -40,25 +51,36 @@
       </div>
 
       <!-- TO -->
-      <div class="tu-field position-relative">
+      <div class="tu-field">
         <label class="tu-field-label" for="to"><i class="fas fa-location-dot text-danger"></i> To</label>
-        <input type="text" id="to" name="to" class="form-control tu-input"
-          [class.is-invalid]="submitted && (!toValid || sameStation)"
-          placeholder="Enter destination station"
-          [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off"
-          role="combobox" aria-autocomplete="list" aria-controls="to-suggestions"
-          [attr.aria-expanded]="tosuggestions.length > 0">
+        <div class="tu-input-wrap">
+          <input type="text" id="to" name="to" class="form-control tu-input"
+            [class.is-invalid]="submitted && (!toValid || sameStation)"
+            placeholder="Enter destination station"
+            [(ngModel)]="toinputValue" (keyup)="onInput('to')" autocomplete="off"
+            role="combobox" aria-autocomplete="list" aria-controls="to-suggestions"
+            [attr.aria-expanded]="tosuggestions.length > 0">
+          @if (toLoading) {
+            <span class="tu-input-spinner" aria-hidden="true"></span>
+          }
+        </div>
         <ul class="tu-suggestions" id="to-suggestions" role="listbox"
-          [class.show]="tosuggestions.length > 0">
-          @for (suggestion of tosuggestions; track suggestion) {
-            <li class="tu-suggestion"
-              role="option" tabindex="0" [attr.aria-selected]="false"
-              (click)="onSelectSuggestion(suggestion, 'to')"
-              (keydown.enter)="onSelectSuggestion(suggestion, 'to')"
-              (keydown.space)="onSelectSuggestion(suggestion, 'to'); $event.preventDefault()">
-              <i class="fas fa-train-subway text-[color:var(--tu-text-muted)]"></i>
-              <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+          [class.show]="toLoading || tosuggestions.length > 0">
+          @if (toLoading) {
+            <li class="tu-suggestion-status" aria-live="polite">
+              <span class="tu-input-spinner"></span> Searching stations…
             </li>
+          } @else {
+            @for (suggestion of tosuggestions; track suggestion) {
+              <li class="tu-suggestion"
+                role="option" tabindex="0" [attr.aria-selected]="false"
+                (click)="onSelectSuggestion(suggestion, 'to')"
+                (keydown.enter)="onSelectSuggestion(suggestion, 'to')"
+                (keydown.space)="onSelectSuggestion(suggestion, 'to'); $event.preventDefault()">
+                <i class="fas fa-train-subway text-[color:var(--tu-text-muted)]"></i>
+                <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
+              </li>
+            }
           }
         </ul>
         @if (submitted && !toValid) {
@@ -79,13 +101,19 @@
         <input class="form-control tu-input" type="date" [(ngModel)]="dateOfTravel"
           name="date" id="date" #date [min]="minDate">
       </div>
+    </div>
 
-      <!-- SEARCH -->
+    <!-- ACTION ROW: quick dates + search, grouped and aligned -->
+    <div class="tu-action-row">
+      <div class="tu-date-quick">
+        <button type="button" class="tu-date-chip" [class.active]="isToday" (click)="setToday()">Today</button>
+        <button type="button" class="tu-date-chip" [class.active]="isTomorrow" (click)="setTomorrow()">Tomorrow</button>
+      </div>
       <div class="tu-search-col">
         <button type="submit"
-          class="btn btn-gradient tu-search-btn">
+          class="btn btn-gradient tu-search-btn" aria-label="Search trains" title="Search trains">
           <i class="fas fa-magnifying-glass"></i>
-          <span>Search trains</span>
+          <span class="tu-search-btn-label">Search trains</span>
         </button>
       </div>
     </div>

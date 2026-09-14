@@ -18,6 +18,10 @@ import { NextAvailabiltyComponent } from './components/next-availabilty/next-ava
 import { NextAvailabilityModalComponent } from './components/next-availability-modal/next-availability-modal.component';
 import { ToastContainerComponent } from './components/toast-container/toast-container.component';
 import { AvailabilitySparklineComponent } from './components/availability-sparkline/availability-sparkline.component';
+import { PnrStatusComponent } from './components/pnr-status/pnr-status.component';
+import { LiveStatusComponent } from './components/live-status/live-status.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { CoachPositionComponent } from './components/coach-position/coach-position.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -35,6 +39,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         NextAvailabilityModalComponent,
         ToastContainerComponent,
         AvailabilitySparklineComponent,
+        PnrStatusComponent,
+        LiveStatusComponent,
+        ScheduleComponent,
+        CoachPositionComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

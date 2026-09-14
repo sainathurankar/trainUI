@@ -1,0 +1,77 @@
+<div class="mx-auto w-full max-w-[900px] px-4 py-8">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold mb-1"><i class="fas fa-location-crosshairs me-2"></i>Live Train Status</h1>
+    <p class="text-sm opacity-70">Track where a train is right now, with per-station delays.</p>
+  </div>
+
+  <div class="tu-card p-4 mb-6">
+    <label for="liveInput" class="block text-sm font-medium mb-1">Train number</label>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <input id="liveInput" type="text" inputmode="numeric" maxlength="6"
+        class="tu-input flex-1" placeholder="e.g. 12951"
+        [(ngModel)]="trainNo" (keydown.enter)="search()" />
+      <button class="btn btn-gradient px-4" type="button" (click)="search()" [disabled]="loading">
+        <i class="fas fa-satellite-dish me-1"></i> {{ loading ? 'Locating…' : 'Track' }}
+      </button>
+    </div>
+    @if (submitted && !valid) {
+      <p class="text-sm text-red-500 mt-2">Enter a valid train number (4–6 digits).</p>
+    }
+  </div>
+
+  @if (loading) { <app-loader></app-loader> }
+
+  @if (error) {
+    <div class="tu-card p-4 border-l-4 border-red-500">
+      <p class="text-red-500 font-medium"><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
+    </div>
+  }
+
+  @if (result) {
+    <div class="tu-card p-4 mb-4">
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+        <div>
+          <span class="text-lg font-bold">{{ result.trainNumber }}</span>
+          <span class="ms-2">{{ result.trainName }}</span>
+        </div>
+        <span class="tu-badge" [class.tu-badge-delayed]="delayed" [class.tu-badge-ontime]="!delayed">
+          {{ result.runningStatus?.header || (delayed ? 'Delayed' : 'On time') }}
+        </span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+        <div><div class="opacity-60">Currently at</div><div class="font-medium">{{ result.currentlyAt || '—' }}</div></div>
+        <div><div class="opacity-60">Next stop</div><div class="font-medium">{{ result.upcomingStation || '—' }}</div></div>
+        <div><div class="opacity-60">Delay</div><div class="font-medium">{{ result.totalLateMins }} min</div></div>
+      </div>
+      @if (result.ltsLastUpdatedTime) {
+        <p class="text-xs opacity-60 mt-2">Updated: {{ result.ltsLastUpdatedTime }}</p>
+      }
+    </div>
+
+    <div class="tu-card p-4">
+      <h2 class="font-semibold mb-3">Station timeline</h2>
+      <div class="flex flex-col gap-0">
+        @for (s of result.stations; track s.stationCode) {
+          <div class="flex items-start gap-3 py-2 border-b border-[var(--tu-border)] last:border-0">
+            <div class="tu-timeline-dot mt-1" [class.current]="s.isItQueriedStation" [class.done]="!s.isItQueriedStation"></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between flex-wrap gap-1">
+                <span class="font-medium">{{ s.stationName }} <span class="opacity-50 text-xs">({{ s.stationCode }})</span></span>
+                <span class="text-xs opacity-70">{{ s.distanceFromOrigin }}</span>
+              </div>
+              <div class="text-xs opacity-70 mt-0.5">
+                Arr {{ s.arrivalTime || '—' }} · Dep {{ s.departureTime || '—' }}
+                @if (s.delayDep && s.delayDep > 0) {
+                  <span class="text-red-500 ms-1">+{{ s.delayDep }}m</span>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      @if (result.disclaimerMsg) {
+        <p class="text-xs opacity-50 mt-3">{{ result.disclaimerMsg }}</p>
+      }
+    </div>
+  }
+</div>

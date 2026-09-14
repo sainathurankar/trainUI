@@ -1,0 +1,1867 @@
+{
+  "trainNumber": "12951",
+  "trainName": "NDLS TEJAS RAJ",
+  "consideredRunningDate": "20260914",
+  "trainRunningDates": {
+    "heading": "Train Starting Date",
+    "dates": [
+      {
+        "date": "20260911",
+        "day": "Friday"
+      },
+      {
+        "date": "20260912",
+        "day": "Saturday"
+      },
+      {
+        "date": "20260913",
+        "day": "Sunday"
+      },
+      {
+        "date": "20260914",
+        "day": "Monday"
+      },
+      {
+        "date": "20260915",
+        "day": "Tuesday"
+      }
+    ]
+  },
+  "isStationQueried": false,
+  "stations": [
+    {
+      "stationName": "MUMBAI CENTRAL",
+      "isStationCancelled": "",
+      "stationCode": "MMCT",
+      "distanceFromOrigin": "0 kms",
+      "originDst": 0,
+      "platform": "PLATFORM NA",
+      "scheduledArrivalTime": "SOURCE",
+      "arrivalTime": "SOURCE",
+      "scheduledDepartureTime": "17:00",
+      "departureTime": "17:00",
+      "dayCount": 1,
+      "arrivalDate": "20260914",
+      "departureDate": "20260914",
+      "delayArr": 0,
+      "delayDep": 0,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Mahalakshmi",
+          "stationCode": "MX",
+          "scheduledTime": "17:01",
+          "distanceFromOrigin": "1 kms",
+          "originDst": 1
+        },
+        {
+          "stationName": "Lower Parel",
+          "stationCode": "PL",
+          "scheduledTime": "17:02",
+          "distanceFromOrigin": "3 kms",
+          "originDst": 3
+        },
+        {
+          "stationName": "Prabhadevi",
+          "stationCode": "PBHD",
+          "scheduledTime": "17:03",
+          "distanceFromOrigin": "5 kms",
+          "originDst": 5
+        },
+        {
+          "stationName": "Dadar Western",
+          "stationCode": "DDR",
+          "scheduledTime": "17:04",
+          "distanceFromOrigin": "6 kms",
+          "originDst": 6
+        },
+        {
+          "stationName": "Matunga Road",
+          "stationCode": "MRU",
+          "scheduledTime": "17:05",
+          "distanceFromOrigin": "7 kms",
+          "originDst": 7
+        },
+        {
+          "stationName": "Mahim Jn",
+          "stationCode": "MM",
+          "scheduledTime": "17:06",
+          "distanceFromOrigin": "9 kms",
+          "originDst": 9
+        },
+        {
+          "stationName": "Bandra",
+          "stationCode": "BA",
+          "scheduledTime": "17:07",
+          "distanceFromOrigin": "10 kms",
+          "originDst": 10
+        },
+        {
+          "stationName": "Khar Road",
+          "stationCode": "KHAR",
+          "scheduledTime": "17:08",
+          "distanceFromOrigin": "12 kms",
+          "originDst": 12
+        },
+        {
+          "stationName": "Santa Cruz",
+          "stationCode": "STC",
+          "scheduledTime": "17:09",
+          "distanceFromOrigin": "13 kms",
+          "originDst": 13
+        },
+        {
+          "stationName": "Ville Parle",
+          "stationCode": "VLP",
+          "scheduledTime": "17:10",
+          "distanceFromOrigin": "15 kms",
+          "originDst": 15
+        },
+        {
+          "stationName": "Andheri",
+          "stationCode": "ADH",
+          "scheduledTime": "17:12",
+          "distanceFromOrigin": "17 kms",
+          "originDst": 17
+        },
+        {
+          "stationName": "Jogeshwari",
+          "stationCode": "JOS",
+          "scheduledTime": "17:13",
+          "distanceFromOrigin": "19 kms",
+          "originDst": 19
+        },
+        {
+          "stationName": "Ram Mandir",
+          "stationCode": "RMAR",
+          "scheduledTime": "17:14",
+          "distanceFromOrigin": "21 kms",
+          "originDst": 21
+        },
+        {
+          "stationName": "Goregaon",
+          "stationCode": "GMN",
+          "scheduledTime": "17:15",
+          "distanceFromOrigin": "22 kms",
+          "originDst": 22
+        },
+        {
+          "stationName": "Malad",
+          "stationCode": "MDD",
+          "scheduledTime": "17:17",
+          "distanceFromOrigin": "25 kms",
+          "originDst": 25
+        },
+        {
+          "stationName": "Kandivli",
+          "stationCode": "KILE",
+          "scheduledTime": "17:18",
+          "distanceFromOrigin": "27 kms",
+          "originDst": 27
+        },
+        {
+          "stationName": "Kandivli EMU Shed",
+          "stationCode": "KDKC",
+          "scheduledTime": "17:19",
+          "distanceFromOrigin": "28 kms",
+          "originDst": 28
+        }
+      ],
+      "hasArrived": true,
+      "hasDeparted": true,
+      "delayStatus": "",
+      "currDelayStatus": "ONTIME"
+    },
+    {
+      "stationName": "BORIVALI",
+      "isStationCancelled": "",
+      "stationCode": "BVI",
+      "distanceFromOrigin": "30 kms",
+      "originDst": 30,
+      "platform": "PLATFORM 6",
+      "scheduledArrivalTime": "17:20",
+      "arrivalTime": "17:31",
+      "scheduledDepartureTime": "17:22",
+      "departureTime": "17:34",
+      "dayCount": 1,
+      "arrivalDate": "20260914",
+      "departureDate": "20260914",
+      "delayArr": 11,
+      "delayDep": 12,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Dahisar",
+          "stationCode": "DIC",
+          "scheduledTime": "17:23",
+          "distanceFromOrigin": "32 kms",
+          "originDst": 32
+        },
+        {
+          "stationName": "Mira Road",
+          "stationCode": "MIRA",
+          "scheduledTime": "17:25",
+          "distanceFromOrigin": "35 kms",
+          "originDst": 35
+        },
+        {
+          "stationName": "Bhayandar",
+          "stationCode": "BYR",
+          "scheduledTime": "17:28",
+          "distanceFromOrigin": "39 kms",
+          "originDst": 39
+        },
+        {
+          "stationName": "Naigaon",
+          "stationCode": "NIG",
+          "scheduledTime": "17:30",
+          "distanceFromOrigin": "43 kms",
+          "originDst": 43
+        },
+        {
+          "stationName": "Vasai Road",
+          "stationCode": "BSR",
+          "scheduledTime": "17:33",
+          "distanceFromOrigin": "47 kms",
+          "originDst": 47
+        },
+        {
+          "stationName": "Nalla Sopara",
+          "stationCode": "NSP",
+          "scheduledTime": "17:35",
+          "distanceFromOrigin": "51 kms",
+          "originDst": 51
+        },
+        {
+          "stationName": "Virar Carshed",
+          "stationCode": "VCSV",
+          "scheduledTime": "17:36",
+          "distanceFromOrigin": "53 kms",
+          "originDst": 53
+        },
+        {
+          "stationName": "Virar",
+          "stationCode": "VR",
+          "scheduledTime": "17:38",
+          "distanceFromOrigin": "55 kms",
+          "originDst": 55
+        },
+        {
+          "stationName": "Vaitarna",
+          "stationCode": "VTN",
+          "scheduledTime": "17:43",
+          "distanceFromOrigin": "64 kms",
+          "originDst": 64
+        },
+        {
+          "stationName": "Saphale",
+          "stationCode": "SAH",
+          "scheduledTime": "17:48",
+          "distanceFromOrigin": "72 kms",
+          "originDst": 72
+        },
+        {
+          "stationName": "Kelve Road",
+          "stationCode": "KLV",
+          "scheduledTime": "17:51",
+          "distanceFromOrigin": "78 kms",
+          "originDst": 78
+        },
+        {
+          "stationName": "Palghar",
+          "stationCode": "PLG",
+          "scheduledTime": "17:56",
+          "distanceFromOrigin": "87 kms",
+          "originDst": 87
+        },
+        {
+          "stationName": "Umroli",
+          "stationCode": "UOI",
+          "scheduledTime": "18:00",
+          "distanceFromOrigin": "93 kms",
+          "originDst": 93
+        },
+        {
+          "stationName": "Boisar",
+          "stationCode": "BOR",
+          "scheduledTime": "18:03",
+          "distanceFromOrigin": "98 kms",
+          "originDst": 98
+        },
+        {
+          "stationName": "Vangaon",
+          "stationCode": "VGN",
+          "scheduledTime": "18:09",
+          "distanceFromOrigin": "107 kms",
+          "originDst": 107
+        },
+        {
+          "stationName": "Dahanu Road",
+          "stationCode": "DRD",
+          "scheduledTime": "18:16",
+          "distanceFromOrigin": "120 kms",
+          "originDst": 120
+        },
+        {
+          "stationName": "Gholvad",
+          "stationCode": "GVD",
+          "scheduledTime": "18:23",
+          "distanceFromOrigin": "131 kms",
+          "originDst": 131
+        },
+        {
+          "stationName": "Bordi Road",
+          "stationCode": "BRRD",
+          "scheduledTime": "18:26",
+          "distanceFromOrigin": "136 kms",
+          "originDst": 136
+        },
+        {
+          "stationName": "Umargam Road",
+          "stationCode": "UBR",
+          "scheduledTime": "18:29",
+          "distanceFromOrigin": "140 kms",
+          "originDst": 140
+        },
+        {
+          "stationName": "Sanjan",
+          "stationCode": "SJN",
+          "scheduledTime": "18:32",
+          "distanceFromOrigin": "145 kms",
+          "originDst": 145
+        },
+        {
+          "stationName": "Bhilad",
+          "stationCode": "BLD",
+          "scheduledTime": "18:39",
+          "distanceFromOrigin": "157 kms",
+          "originDst": 157
+        },
+        {
+          "stationName": "Karambeli",
+          "stationCode": "KEB",
+          "scheduledTime": "18:42",
+          "distanceFromOrigin": "162 kms",
+          "originDst": 162
+        },
+        {
+          "stationName": "Vapi",
+          "stationCode": "VAPI",
+          "scheduledTime": "18:46",
+          "distanceFromOrigin": "168 kms",
+          "originDst": 168
+        },
+        {
+          "stationName": "Bagwada",
+          "stationCode": "BAGD",
+          "scheduledTime": "18:50",
+          "distanceFromOrigin": "175 kms",
+          "originDst": 175
+        },
+        {
+          "stationName": "Udvada",
+          "stationCode": "UVD",
+          "scheduledTime": "18:52",
+          "distanceFromOrigin": "178 kms",
+          "originDst": 178
+        },
+        {
+          "stationName": "Pardi",
+          "stationCode": "PAD",
+          "scheduledTime": "18:55",
+          "distanceFromOrigin": "184 kms",
+          "originDst": 184
+        },
+        {
+          "stationName": "Atul",
+          "stationCode": "ATUL",
+          "scheduledTime": "18:57",
+          "distanceFromOrigin": "187 kms",
+          "originDst": 187
+        },
+        {
+          "stationName": "Valsad",
+          "stationCode": "BL",
+          "scheduledTime": "19:01",
+          "distanceFromOrigin": "194 kms",
+          "originDst": 194
+        },
+        {
+          "stationName": "Dungri",
+          "stationCode": "DGI",
+          "scheduledTime": "19:07",
+          "distanceFromOrigin": "203 kms",
+          "originDst": 203
+        },
+        {
+          "stationName": "Joravasan",
+          "stationCode": "JRS",
+          "scheduledTime": "19:10",
+          "distanceFromOrigin": "208 kms",
+          "originDst": 208
+        },
+        {
+          "stationName": "Bilimora Jn",
+          "stationCode": "BIM",
+          "scheduledTime": "19:12",
+          "distanceFromOrigin": "212 kms",
+          "originDst": 212
+        },
+        {
+          "stationName": "Amalsad",
+          "stationCode": "AML",
+          "scheduledTime": "19:16",
+          "distanceFromOrigin": "218 kms",
+          "originDst": 218
+        },
+        {
+          "stationName": "Ancheli",
+          "stationCode": "ACL",
+          "scheduledTime": "19:18",
+          "distanceFromOrigin": "222 kms",
+          "originDst": 222
+        },
+        {
+          "stationName": "Vedchha",
+          "stationCode": "VDH",
+          "scheduledTime": "19:20",
+          "distanceFromOrigin": "225 kms",
+          "originDst": 225
+        },
+        {
+          "stationName": "Hansapore",
+          "stationCode": "HXR",
+          "scheduledTime": "19:22",
+          "distanceFromOrigin": "229 kms",
+          "originDst": 229
+        },
+        {
+          "stationName": "Gandhi Smriti",
+          "stationCode": "GNST",
+          "scheduledTime": "19:23",
+          "distanceFromOrigin": "230 kms",
+          "originDst": 230
+        },
+        {
+          "stationName": "Navsari",
+          "stationCode": "NVS",
+          "scheduledTime": "19:25",
+          "distanceFromOrigin": "233 kms",
+          "originDst": 233
+        },
+        {
+          "stationName": "Maroli",
+          "stationCode": "MRL",
+          "scheduledTime": "19:30",
+          "distanceFromOrigin": "242 kms",
+          "originDst": 242
+        },
+        {
+          "stationName": "Sachin",
+          "stationCode": "SCH",
+          "scheduledTime": "19:34",
+          "distanceFromOrigin": "249 kms",
+          "originDst": 249
+        },
+        {
+          "stationName": "Bhestan",
+          "stationCode": "BHET",
+          "scheduledTime": "19:37",
+          "distanceFromOrigin": "254 kms",
+          "originDst": 254
+        },
+        {
+          "stationName": "Udhna Bypass Cabin",
+          "stationCode": "XX-UDNB",
+          "scheduledTime": "19:39",
+          "distanceFromOrigin": "256 kms",
+          "originDst": 256
+        },
+        {
+          "stationName": "Udhna Jn",
+          "stationCode": "UDN",
+          "scheduledTime": "19:41",
+          "distanceFromOrigin": "259 kms",
+          "originDst": 259
+        }
+      ],
+      "hasArrived": true,
+      "hasDeparted": true,
+      "avgDelay": 23,
+      "runsConsidered": 7,
+      "delayText": "23 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "MIDDELAY"
+    },
+    {
+      "stationName": "SURAT",
+      "isStationCancelled": "",
+      "stationCode": "ST",
+      "distanceFromOrigin": "263 kms",
+      "originDst": 263,
+      "platform": "PLATFORM 1",
+      "scheduledArrivalTime": "19:43",
+      "arrivalTime": "19:46",
+      "scheduledDepartureTime": "19:48",
+      "departureTime": "19:52",
+      "dayCount": 1,
+      "arrivalDate": "20260914",
+      "departureDate": "20260914",
+      "delayArr": 3,
+      "delayDep": 4,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Utran",
+          "stationCode": "URN",
+          "scheduledTime": "19:50",
+          "distanceFromOrigin": "267 kms",
+          "originDst": 267
+        },
+        {
+          "stationName": "Kosad",
+          "stationCode": "KSE",
+          "scheduledTime": "19:52",
+          "distanceFromOrigin": "270 kms",
+          "originDst": 270
+        },
+        {
+          "stationName": "Gothangam",
+          "stationCode": "GTX",
+          "scheduledTime": "19:54",
+          "distanceFromOrigin": "274 kms",
+          "originDst": 274
+        },
+        {
+          "stationName": "Sayan",
+          "stationCode": "SYN",
+          "scheduledTime": "19:56",
+          "distanceFromOrigin": "277 kms",
+          "originDst": 277
+        },
+        {
+          "stationName": "Kudsad",
+          "stationCode": "KDSD",
+          "scheduledTime": "20:01",
+          "distanceFromOrigin": "284 kms",
+          "originDst": 284
+        },
+        {
+          "stationName": "Kim",
+          "stationCode": "KIM",
+          "scheduledTime": "20:02",
+          "distanceFromOrigin": "287 kms",
+          "originDst": 287
+        },
+        {
+          "stationName": "Kosamba Jn",
+          "stationCode": "KSB",
+          "scheduledTime": "20:07",
+          "distanceFromOrigin": "294 kms",
+          "originDst": 294
+        },
+        {
+          "stationName": "Hathuran",
+          "stationCode": "HAT",
+          "scheduledTime": "20:09",
+          "distanceFromOrigin": "299 kms",
+          "originDst": 299
+        },
+        {
+          "stationName": "Panoli",
+          "stationCode": "PAO",
+          "scheduledTime": "20:12",
+          "distanceFromOrigin": "303 kms",
+          "originDst": 303
+        },
+        {
+          "stationName": "Sanjali",
+          "stationCode": "SNJL",
+          "scheduledTime": "20:15",
+          "distanceFromOrigin": "307 kms",
+          "originDst": 307
+        },
+        {
+          "stationName": "Ankleshwar Jn",
+          "stationCode": "AKV",
+          "scheduledTime": "20:18",
+          "distanceFromOrigin": "313 kms",
+          "originDst": 313
+        },
+        {
+          "stationName": "Concor Depot",
+          "stationCode": "CCTA",
+          "scheduledTime": "20:18",
+          "distanceFromOrigin": "314 kms",
+          "originDst": 314
+        },
+        {
+          "stationName": "Bharuch Jn",
+          "stationCode": "BH",
+          "scheduledTime": "20:24",
+          "distanceFromOrigin": "322 kms",
+          "originDst": 322
+        },
+        {
+          "stationName": "Baruch Bypass Cabin",
+          "stationCode": "XX-BHBC",
+          "scheduledTime": "20:24",
+          "distanceFromOrigin": "324 kms",
+          "originDst": 324
+        },
+        {
+          "stationName": "Chavaj",
+          "stationCode": "CVJ",
+          "scheduledTime": "20:27",
+          "distanceFromOrigin": "328 kms",
+          "originDst": 328
+        },
+        {
+          "stationName": "Nabipur",
+          "stationCode": "NIU",
+          "scheduledTime": "20:31",
+          "distanceFromOrigin": "334 kms",
+          "originDst": 334
+        },
+        {
+          "stationName": "Varediya",
+          "stationCode": "VRE",
+          "scheduledTime": "20:35",
+          "distanceFromOrigin": "341 kms",
+          "originDst": 341
+        },
+        {
+          "stationName": "Palej",
+          "stationCode": "PLJ",
+          "scheduledTime": "20:39",
+          "distanceFromOrigin": "348 kms",
+          "originDst": 348
+        },
+        {
+          "stationName": "Lakodra Dethan",
+          "stationCode": "LKD",
+          "scheduledTime": "20:43",
+          "distanceFromOrigin": "355 kms",
+          "originDst": 355
+        },
+        {
+          "stationName": "Miyagam Karjan Jn",
+          "stationCode": "MYG",
+          "scheduledTime": "20:48",
+          "distanceFromOrigin": "363 kms",
+          "originDst": 363
+        },
+        {
+          "stationName": "Kashipura Sarar",
+          "stationCode": "KSPR",
+          "scheduledTime": "20:53",
+          "distanceFromOrigin": "371 kms",
+          "originDst": 371
+        },
+        {
+          "stationName": "Itola",
+          "stationCode": "ITA",
+          "scheduledTime": "20:55",
+          "distanceFromOrigin": "375 kms",
+          "originDst": 375
+        },
+        {
+          "stationName": "Varnama",
+          "stationCode": "VRM",
+          "scheduledTime": "20:57",
+          "distanceFromOrigin": "379 kms",
+          "originDst": 379
+        },
+        {
+          "stationName": "Makarpura",
+          "stationCode": "MPR",
+          "scheduledTime": "21:01",
+          "distanceFromOrigin": "384 kms",
+          "originDst": 384
+        },
+        {
+          "stationName": "Vishvamitri",
+          "stationCode": "VS",
+          "scheduledTime": "21:04",
+          "distanceFromOrigin": "390 kms",
+          "originDst": 390
+        }
+      ],
+      "hasArrived": true,
+      "hasDeparted": true,
+      "avgDelay": 29,
+      "runsConsidered": 7,
+      "delayText": "29 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "ONTIME"
+    },
+    {
+      "stationName": "VADODARA JN",
+      "isStationCancelled": "",
+      "stationCode": "BRC",
+      "distanceFromOrigin": "392 kms",
+      "originDst": 392,
+      "platform": "PLATFORM 2",
+      "scheduledArrivalTime": "21:06",
+      "arrivalTime": "21:13",
+      "scheduledDepartureTime": "21:16",
+      "departureTime": "21:21",
+      "dayCount": 1,
+      "arrivalDate": "20260914",
+      "departureDate": "20260914",
+      "delayArr": 7,
+      "delayDep": 5,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Vadodara D Cabin",
+          "stationCode": "BRGY",
+          "scheduledTime": "21:19",
+          "distanceFromOrigin": "397 kms",
+          "originDst": 397
+        },
+        {
+          "stationName": "Vadodara E Cabin",
+          "stationCode": "BRGZ",
+          "scheduledTime": "21:20",
+          "distanceFromOrigin": "399 kms",
+          "originDst": 399
+        },
+        {
+          "stationName": "Chhayapuri",
+          "stationCode": "CYI",
+          "scheduledTime": "21:22",
+          "distanceFromOrigin": "400 kms",
+          "originDst": 400
+        },
+        {
+          "stationName": "Pilol",
+          "stationCode": "PIO",
+          "scheduledTime": "21:26",
+          "distanceFromOrigin": "407 kms",
+          "originDst": 407
+        },
+        {
+          "stationName": "Alindra Road",
+          "stationCode": "AIR",
+          "scheduledTime": "21:31",
+          "distanceFromOrigin": "414 kms",
+          "originDst": 414
+        },
+        {
+          "stationName": "Samlaya Jn",
+          "stationCode": "SMLA",
+          "scheduledTime": "21:35",
+          "distanceFromOrigin": "419 kms",
+          "originDst": 419
+        },
+        {
+          "stationName": "Lotana",
+          "stationCode": "LAN",
+          "scheduledTime": "21:39",
+          "distanceFromOrigin": "425 kms",
+          "originDst": 425
+        },
+        {
+          "stationName": "Champaner Road",
+          "stationCode": "CPN",
+          "scheduledTime": "21:43",
+          "distanceFromOrigin": "431 kms",
+          "originDst": 431
+        },
+        {
+          "stationName": "Bakrol",
+          "stationCode": "BKRL",
+          "scheduledTime": "21:48",
+          "distanceFromOrigin": "437 kms",
+          "originDst": 437
+        },
+        {
+          "stationName": "Derol",
+          "stationCode": "DRL",
+          "scheduledTime": "21:52",
+          "distanceFromOrigin": "443 kms",
+          "originDst": 443
+        },
+        {
+          "stationName": "Baheriya Road",
+          "stationCode": "BOA",
+          "scheduledTime": "21:57",
+          "distanceFromOrigin": "450 kms",
+          "originDst": 450
+        },
+        {
+          "stationName": "Kharsaliya",
+          "stationCode": "KRSA",
+          "scheduledTime": "22:02",
+          "distanceFromOrigin": "456 kms",
+          "originDst": 456
+        },
+        {
+          "stationName": "Godhra Jn",
+          "stationCode": "GDA",
+          "scheduledTime": "22:09",
+          "distanceFromOrigin": "467 kms",
+          "originDst": 467
+        },
+        {
+          "stationName": "Kansudhi",
+          "stationCode": "KIZ",
+          "scheduledTime": "22:13",
+          "distanceFromOrigin": "471 kms",
+          "originDst": 471
+        },
+        {
+          "stationName": "Chanchelav",
+          "stationCode": "CCL",
+          "scheduledTime": "22:18",
+          "distanceFromOrigin": "478 kms",
+          "originDst": 478
+        },
+        {
+          "stationName": "Sant Road",
+          "stationCode": "SAT",
+          "scheduledTime": "22:24",
+          "distanceFromOrigin": "487 kms",
+          "originDst": 487
+        },
+        {
+          "stationName": "Piplod",
+          "stationCode": "PPD",
+          "scheduledTime": "22:33",
+          "distanceFromOrigin": "499 kms",
+          "originDst": 499
+        },
+        {
+          "stationName": "Limkheda",
+          "stationCode": "LMK",
+          "scheduledTime": "22:39",
+          "distanceFromOrigin": "507 kms",
+          "originDst": 507
+        },
+        {
+          "stationName": "Mangal Mahudi",
+          "stationCode": "MAM",
+          "scheduledTime": "22:46",
+          "distanceFromOrigin": "516 kms",
+          "originDst": 516
+        },
+        {
+          "stationName": "Usra",
+          "stationCode": "USRA",
+          "scheduledTime": "22:50",
+          "distanceFromOrigin": "522 kms",
+          "originDst": 522
+        },
+        {
+          "stationName": "Jekot",
+          "stationCode": "JKT",
+          "scheduledTime": "22:55",
+          "distanceFromOrigin": "529 kms",
+          "originDst": 529
+        },
+        {
+          "stationName": "Rentia",
+          "stationCode": "RET",
+          "scheduledTime": "22:59",
+          "distanceFromOrigin": "535 kms",
+          "originDst": 535
+        },
+        {
+          "stationName": "Dahod",
+          "stationCode": "DHD",
+          "scheduledTime": "23:02",
+          "distanceFromOrigin": "540 kms",
+          "originDst": 540
+        },
+        {
+          "stationName": "Dhamarda",
+          "stationCode": "DHMA",
+          "scheduledTime": "23:06",
+          "distanceFromOrigin": "545 kms",
+          "originDst": 545
+        },
+        {
+          "stationName": "Bordi",
+          "stationCode": "BIO",
+          "scheduledTime": "23:10",
+          "distanceFromOrigin": "550 kms",
+          "originDst": 550
+        },
+        {
+          "stationName": "Anas",
+          "stationCode": "ANAS",
+          "scheduledTime": "23:16",
+          "distanceFromOrigin": "558 kms",
+          "originDst": 558
+        },
+        {
+          "stationName": "Nahargarh",
+          "stationCode": "NRH",
+          "scheduledTime": "23:22",
+          "distanceFromOrigin": "567 kms",
+          "originDst": 567
+        },
+        {
+          "stationName": "Meghnagar",
+          "stationCode": "MGN",
+          "scheduledTime": "23:26",
+          "distanceFromOrigin": "573 kms",
+          "originDst": 573
+        },
+        {
+          "stationName": "Thandla Road",
+          "stationCode": "THDR",
+          "scheduledTime": "23:32",
+          "distanceFromOrigin": "581 kms",
+          "originDst": 581
+        },
+        {
+          "stationName": "Bajrang Garh",
+          "stationCode": "BJG",
+          "scheduledTime": "23:37",
+          "distanceFromOrigin": "588 kms",
+          "originDst": 588
+        },
+        {
+          "stationName": "Panch Piplia",
+          "stationCode": "PCN",
+          "scheduledTime": "23:42",
+          "distanceFromOrigin": "595 kms",
+          "originDst": 595
+        },
+        {
+          "stationName": "Amargarh",
+          "stationCode": "AGR",
+          "scheduledTime": "23:49",
+          "distanceFromOrigin": "604 kms",
+          "originDst": 604
+        },
+        {
+          "stationName": "Bamnia",
+          "stationCode": "BMI",
+          "scheduledTime": "23:52",
+          "distanceFromOrigin": "608 kms",
+          "originDst": 608
+        },
+        {
+          "stationName": "Bhairongarh",
+          "stationCode": "BOG",
+          "scheduledTime": "23:57",
+          "distanceFromOrigin": "615 kms",
+          "originDst": 615
+        },
+        {
+          "stationName": "Raoti",
+          "stationCode": "RTI",
+          "scheduledTime": "00:05",
+          "distanceFromOrigin": "626 kms",
+          "originDst": 626
+        },
+        {
+          "stationName": "Bildi",
+          "stationCode": "BILD",
+          "scheduledTime": "00:10",
+          "distanceFromOrigin": "634 kms",
+          "originDst": 634
+        },
+        {
+          "stationName": "Morwani",
+          "stationCode": "MRN",
+          "scheduledTime": "00:17",
+          "distanceFromOrigin": "643 kms",
+          "originDst": 643
+        },
+        {
+          "stationName": "Dr RK Nagar",
+          "stationCode": "DRRN",
+          "scheduledTime": "00:21",
+          "distanceFromOrigin": "649 kms",
+          "originDst": 649
+        },
+        {
+          "stationName": "Ratlam A Cabin",
+          "stationCode": "RTD",
+          "scheduledTime": "00:24",
+          "distanceFromOrigin": "652 kms",
+          "originDst": 652
+        }
+      ],
+      "hasArrived": true,
+      "hasDeparted": true,
+      "avgDelay": 35,
+      "runsConsidered": 7,
+      "delayText": "35 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "MIDDELAY"
+    },
+    {
+      "stationName": "RATLAM JN",
+      "isStationCancelled": "",
+      "stationCode": "RTM",
+      "distanceFromOrigin": "653 kms",
+      "originDst": 653,
+      "platform": "PLATFORM 5",
+      "scheduledArrivalTime": "00:25",
+      "arrivalTime": "00:23",
+      "scheduledDepartureTime": "00:28",
+      "departureTime": "00:32",
+      "dayCount": 2,
+      "arrivalDate": "20260915",
+      "departureDate": "20260915",
+      "delayArr": -2,
+      "delayDep": 4,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Ratlam East Cabin",
+          "stationCode": "RTME",
+          "scheduledTime": "00:31",
+          "distanceFromOrigin": "657 kms",
+          "originDst": 657
+        },
+        {
+          "stationName": "Bangrod",
+          "stationCode": "BOD",
+          "scheduledTime": "00:37",
+          "distanceFromOrigin": "663 kms",
+          "originDst": 663
+        },
+        {
+          "stationName": "Runkhera",
+          "stationCode": "RNH",
+          "scheduledTime": "00:44",
+          "distanceFromOrigin": "671 kms",
+          "originDst": 671
+        },
+        {
+          "stationName": "Khachrod",
+          "stationCode": "KUH",
+          "scheduledTime": "00:55",
+          "distanceFromOrigin": "681 kms",
+          "originDst": 681
+        },
+        {
+          "stationName": "Berawanya",
+          "stationCode": "BRNA",
+          "scheduledTime": "01:00",
+          "distanceFromOrigin": "687 kms",
+          "originDst": 687
+        }
+      ],
+      "hasArrived": false,
+      "hasDeparted": false,
+      "avgDelay": 32,
+      "runsConsidered": 7,
+      "delayText": "32 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "ONTIME"
+    },
+    {
+      "stationName": "NAGDA JN",
+      "isStationCancelled": "",
+      "stationCode": "NAD",
+      "distanceFromOrigin": "695 kms",
+      "originDst": 695,
+      "platform": "PLATFORM 1",
+      "scheduledArrivalTime": "01:08",
+      "arrivalTime": "01:02",
+      "scheduledDepartureTime": "01:10",
+      "departureTime": "01:10",
+      "dayCount": 2,
+      "arrivalDate": "20260915",
+      "departureDate": "20260915",
+      "delayArr": -6,
+      "delayDep": 0,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Rohal Khurd",
+          "stationCode": "RLK",
+          "scheduledTime": "01:16",
+          "distanceFromOrigin": "705 kms",
+          "originDst": 705
+        },
+        {
+          "stationName": "Mahidpur Road",
+          "stationCode": "MEP",
+          "scheduledTime": "01:19",
+          "distanceFromOrigin": "712 kms",
+          "originDst": 712
+        },
+        {
+          "stationName": "Luni Richha",
+          "stationCode": "LNR",
+          "scheduledTime": "01:25",
+          "distanceFromOrigin": "722 kms",
+          "originDst": 722
+        },
+        {
+          "stationName": "Vikramgarh Alot",
+          "stationCode": "VMA",
+          "scheduledTime": "01:32",
+          "distanceFromOrigin": "735 kms",
+          "originDst": 735
+        },
+        {
+          "stationName": "Thuria",
+          "stationCode": "THUR",
+          "scheduledTime": "01:37",
+          "distanceFromOrigin": "743 kms",
+          "originDst": 743
+        },
+        {
+          "stationName": "Talavli",
+          "stationCode": "TLZ",
+          "scheduledTime": "01:42",
+          "distanceFromOrigin": "752 kms",
+          "originDst": 752
+        },
+        {
+          "stationName": "Chaumahla",
+          "stationCode": "CMU",
+          "scheduledTime": "01:45",
+          "distanceFromOrigin": "757 kms",
+          "originDst": 757
+        },
+        {
+          "stationName": "Nathukheri",
+          "stationCode": "NKH",
+          "scheduledTime": "01:50",
+          "distanceFromOrigin": "767 kms",
+          "originDst": 767
+        },
+        {
+          "stationName": "Suwasra",
+          "stationCode": "SVA",
+          "scheduledTime": "01:53",
+          "distanceFromOrigin": "773 kms",
+          "originDst": 773
+        },
+        {
+          "stationName": "Hanspura",
+          "stationCode": "HNU",
+          "scheduledTime": "01:57",
+          "distanceFromOrigin": "780 kms",
+          "originDst": 780
+        },
+        {
+          "stationName": "Shamgarh",
+          "stationCode": "SGZ",
+          "scheduledTime": "02:01",
+          "distanceFromOrigin": "787 kms",
+          "originDst": 787
+        },
+        {
+          "stationName": "Garoth",
+          "stationCode": "GOH",
+          "scheduledTime": "02:07",
+          "distanceFromOrigin": "797 kms",
+          "originDst": 797
+        },
+        {
+          "stationName": "Kurlasi",
+          "stationCode": "KRLS",
+          "scheduledTime": "02:12",
+          "distanceFromOrigin": "807 kms",
+          "originDst": 807
+        },
+        {
+          "stationName": "Bhawani Mandi",
+          "stationCode": "BWM",
+          "scheduledTime": "02:19",
+          "distanceFromOrigin": "820 kms",
+          "originDst": 820
+        },
+        {
+          "stationName": "Dhuankheri",
+          "stationCode": "DKRA",
+          "scheduledTime": "02:25",
+          "distanceFromOrigin": "830 kms",
+          "originDst": 830
+        },
+        {
+          "stationName": "Jhalawar Road",
+          "stationCode": "JHW",
+          "scheduledTime": "02:28",
+          "distanceFromOrigin": "836 kms",
+          "originDst": 836
+        },
+        {
+          "stationName": "Ramganj Mandi Outer Cabin",
+          "stationCode": "XX-RMAO",
+          "scheduledTime": "02:34",
+          "distanceFromOrigin": "846 kms",
+          "originDst": 846
+        },
+        {
+          "stationName": "Ramganj Mandi Jn",
+          "stationCode": "RMA",
+          "scheduledTime": "02:35",
+          "distanceFromOrigin": "848 kms",
+          "originDst": 848
+        },
+        {
+          "stationName": "Morak",
+          "stationCode": "MKX",
+          "scheduledTime": "02:41",
+          "distanceFromOrigin": "858 kms",
+          "originDst": 858
+        },
+        {
+          "stationName": "Kanwalpura",
+          "stationCode": "KIW",
+          "scheduledTime": "02:44",
+          "distanceFromOrigin": "864 kms",
+          "originDst": 864
+        },
+        {
+          "stationName": "Dara",
+          "stationCode": "DARA",
+          "scheduledTime": "02:49",
+          "distanceFromOrigin": "872 kms",
+          "originDst": 872
+        },
+        {
+          "stationName": "Ravtha Road",
+          "stationCode": "RDT",
+          "scheduledTime": "02:56",
+          "distanceFromOrigin": "885 kms",
+          "originDst": 885
+        },
+        {
+          "stationName": "Concor Depot Siding Ravtha Road",
+          "stationCode": "CSRR",
+          "scheduledTime": "02:56",
+          "distanceFromOrigin": "886 kms",
+          "originDst": 886
+        },
+        {
+          "stationName": "Dhani Kasar",
+          "stationCode": "DKQ",
+          "scheduledTime": "02:59",
+          "distanceFromOrigin": "892 kms",
+          "originDst": 892
+        },
+        {
+          "stationName": "Alniya",
+          "stationCode": "ALNI",
+          "scheduledTime": "03:02",
+          "distanceFromOrigin": "897 kms",
+          "originDst": 897
+        },
+        {
+          "stationName": "Dadhdevi",
+          "stationCode": "DDV",
+          "scheduledTime": "03:06",
+          "distanceFromOrigin": "904 kms",
+          "originDst": 904
+        },
+        {
+          "stationName": "New Kota",
+          "stationCode": "NKOT",
+          "scheduledTime": "03:10",
+          "distanceFromOrigin": "911 kms",
+          "originDst": 911
+        },
+        {
+          "stationName": "Kota South Cabin",
+          "stationCode": "KTSC",
+          "scheduledTime": "03:13",
+          "distanceFromOrigin": "917 kms",
+          "originDst": 917
+        },
+        {
+          "stationName": "Kota Yard",
+          "stationCode": "KTTY",
+          "scheduledTime": "03:14",
+          "distanceFromOrigin": "918 kms",
+          "originDst": 918
+        }
+      ],
+      "hasArrived": false,
+      "hasDeparted": false,
+      "avgDelay": 30,
+      "runsConsidered": 7,
+      "delayText": "30 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "ONTIME"
+    },
+    {
+      "stationName": "KOTA JN",
+      "isStationCancelled": "",
+      "stationCode": "KOTA",
+      "distanceFromOrigin": "920 kms",
+      "originDst": 920,
+      "platform": "PLATFORM 1",
+      "scheduledArrivalTime": "03:15",
+      "arrivalTime": "03:18",
+      "scheduledDepartureTime": "03:20",
+      "departureTime": "03:20",
+      "dayCount": 2,
+      "arrivalDate": "20260915",
+      "departureDate": "20260915",
+      "delayArr": 3,
+      "delayDep": 0,
+      "isItQueriedStation": false,
+      "intermediateStations": [
+        {
+          "stationName": "Kota C Cabin",
+          "stationCode": "KCCN",
+          "scheduledTime": "03:21",
+          "distanceFromOrigin": "922 kms",
+          "originDst": 922
+        },
+        {
+          "stationName": "Gurla C Cabin",
+          "stationCode": "GCCN",
+          "scheduledTime": "03:22",
+          "distanceFromOrigin": "922 kms",
+          "originDst": 922
+        },
+        {
+          "stationName": "Gurla Jn",
+          "stationCode": "GQL",
+          "scheduledTime": "03:24",
+          "distanceFromOrigin": "926 kms",
+          "originDst": 926
+        },
+        {
+          "stationName": "Gurla N Cabin",
+          "stationCode": "GNCN",
+          "scheduledTime": "03:25",
+          "distanceFromOrigin": "928 kms",
+          "originDst": 928
+        },
+        {
+          "stationName": "Gurla North",
+          "stationCode": "GQLN",
+          "scheduledTime": "03:25",
+          "distanceFromOrigin": "928 kms",
+          "originDst": 928
+        },
+        {
+          "stationName": "Keshorai Patan",
+          "stationCode": "KPTN",
+          "scheduledTime": "03:29",
+          "distanceFromOrigin": "933 kms",
+          "originDst": 933
+        },
+        {
+          "stationName": "Arnetha",
+          "stationCode": "ARE",
+          "scheduledTime": "03:36",
+          "distanceFromOrigin": "944 kms",
+          "originDst": 944
+        },
+        {
+          "stationName": "Kapren",
+          "stationCode": "KPZ",
+          "scheduledTime": "03:42",
+          "distanceFromOrigin": "954 kms",
+          "originDst": 954
+        },
+        {
+          "stationName": "Ghat ka Varana",
+          "stationCode": "GKB",
+          "scheduledTime": "03:49",
+          "distanceFromOrigin": "964 kms",
+          "originDst": 964
+        },
+        {
+          "stationName": "Laban",
+          "stationCode": "LBN",
+          "scheduledTime": "03:56",
+          "distanceFromOrigin": "973 kms",
+          "originDst": 973
+        },
+        {
+          "stationName": "Lakheri",
+          "stationCode": "LKE",
+          "scheduledTime": "04:01",
+          "distanceFromOrigin": "981 kms",
+          "originDst": 981
+        },
+        {
+          "stationName": "Indargarh Sumerganj Mandi",
+          "stationCode": "IDG",
+          "scheduledTime": "04:08",
+          "distanceFromOrigin": "992 kms",
+          "originDst": 992
+        },
+        {
+          "stationName": "Amli",
+          "stationCode": "AMLI",
+          "scheduledTime": "04:17",
+          "distanceFromOrigin": "1005 kms",
+          "originDst": 1005
+        },
+        {
+          "stationName": "Rawanjna Dungar",
+          "stationCode": "RWJ",
+          "scheduledTime": "04:22",
+          "distanceFromOrigin": "1012 kms",
+          "originDst": 1012
+        },
+        {
+          "stationName": "Kushtala",
+          "stationCode": "KTA",
+          "scheduledTime": "04:27",
+          "distanceFromOrigin": "1021 kms",
+          "originDst": 1021
+        },
+        {
+          "stationName": "Sawai Madhopur Jn",
+          "stationCode": "SWM",
+          "scheduledTime": "04:32",
+          "distanceFromOrigin": "1028 kms",
+          "originDst": 1028
+        },
+        {
+          "stationName": "Sawai Madhopur D Cabin",
+          "stationCode": "SMDC",
+          "scheduledTime": "04:34",
+          "distanceFromOrigin": "1031 kms",
+          "originDst": 1031
+        },
+        {
+          "stationName": "Ranthambhore",
+          "stationCode": "RNT",
+          "scheduledTime": "04:39",
+          "distanceFromOrigin": "1038 kms",
+          "originDst": 1038
+        },
+        {
+          "stationName": "Mokholi",
+          "stationCode": "MXL",
+          "scheduledTime": "04:45",
+          "distanceFromOrigin": "1047 kms",
+          "originDst": 1047
+        },
+        {
+          "stationName": "Malarna",
+          "stationCode": "MLZ",
+          "scheduledTime": "04:52",
+          "distanceFromOrigin": "1058 kms",
+          "originDst": 1058
+        },
+        {
+          "stationName": "Nimoda",
+          "stationCode": "NMD",
+          "scheduledTime": "04:57",
+          "distanceFromOrigin": "1065 kms",
+          "originDst": 1065
+        },
+        {
+          "stationName": "Narayanpur Tatwara",
+          "stationCode": "NNW",
+          "scheduledTime": "05:04",
+          "distanceFromOrigin": "1075 kms",
+          "originDst": 1075
+        },
+        {
+          "stationName": "Lalpur Umri",
+          "stationCode": "LRU",
+          "scheduledTime": "05:11",
+          "distanceFromOrigin": "1085 kms",
+          "originDst": 1085
+        },
+        {
+          "stationName": "Gangapur City Jn",
+          "stationCode": "GGC",
+          "scheduledTime": "05:15",
+          "distanceFromOrigin": "1092 kms",
+          "originDst": 1092
+        },
+        {
+          "stationName": "Chhoti Odai",
+          "stationCode": "COO",
+          "scheduledTime": "05:24",
+          "distanceFromOrigin": "1104 kms",
+          "originDst": 1104
+        },
+        {
+          "stationName": "Piloda",
+          "stationCode": "PDZ",
+          "scheduledTime": "05:29",
+          "distanceFromOrigin": "1112 kms",
+          "originDst": 1112
+        },
+        {
+          "stationName": "Khandip",
+          "stationCode": "KNDP",
+          "scheduledTime": "05:33",
+          "distanceFromOrigin": "1119 kms",
+          "originDst": 1119
+        },
+        {
+          "stationName": "Shri Mahaveerji",
+          "stationCode": "SMVJ",
+          "scheduledTime": "05:38",
+          "distanceFromOrigin": "1126 kms",
+          "originDst": 1126
+        },
+        {
+          "stationName": "Sikroda Mina",
+          "stationCode": "SKDM",
+          "scheduledTime": "05:42",
+          "distanceFromOrigin": "1131 kms",
+          "originDst": 1131
+        },
+        {
+          "stationName": "Hindaun City",
+          "stationCode": "HAN",
+          "scheduledTime": "05:45",
+          "distanceFromOrigin": "1136 kms",
+          "originDst": 1136
+        },
+        {
+          "stationName": "Dhindora Hukmikhera",
+          "stationCode": "DNHK",
+          "scheduledTime": "05:50",
+          "distanceFromOrigin": "1144 kms",
+          "originDst": 1144
+        },
+        {
+          "stationName": "Fateh Singhpura",
+          "stationCode": "FSP",
+          "scheduledTime": "05:54",
+          "distanceFromOrigin": "1149 kms",
+          "originDst": 1149
+        },
+        {
+          "stationName": "Dumariya",
+          "stationCode": "DY",
+          "scheduledTime": "06:01",
+          "distanceFromOrigin": "1160 kms",
+          "originDst": 1160
+        },
+        {
+          "stationName": "Bayana Jn",
+          "stationCode": "BXN",
+          "scheduledTime": "06:07",
+          "distanceFromOrigin": "1169 kms",
+          "originDst": 1169
+        },
+        {
+          "stationName": "Salabad",
+          "stationCode": "SABD",
+          "scheduledTime": "06:12",
+          "distanceFromOrigin": "1176 kms",
+          "originDst": 1176
+        },
+        {
+          "stationName": "Kela Devi",
+          "stationCode": "KEV",
+          "scheduledTime": "06:15",
+          "distanceFromOrigin": "1181 kms",
+          "originDst": 1181
+        },
+        {
+          "stationName": "Pingora",
+          "stationCode": "PNGR",
+          "scheduledTime": "06:21",
+          "distanceFromOrigin": "1190 kms",
+          "originDst": 1190
+        },
+        {
+          "stationName": "Jaicholi",
+          "stationCode": "JCU",
+          "scheduledTime": "06:24",
+          "distanceFromOrigin": "1195 kms",
+          "originDst": 1195
+        },
+        {
+          "stationName": "Sewar",
+          "stationCode": "SWAR",
+          "scheduledTime": "06:28",
+          "distanceFromOrigin": "1201 kms",
+          "originDst": 1201
+        },
+        {
+          "stationName": "Bharatpur Chord Cabin",
+          "stationCode": "XX-BTEC",
+          "scheduledTime": "06:33",
+          "distanceFromOrigin": "1208 kms",
+          "originDst": 1208
+        },
+        {
+          "stationName": "Bharatpur Jn",
+          "stationCode": "BTE",
+          "scheduledTime": "06:35",
+          "distanceFromOrigin": "1211 kms",
+          "originDst": 1211
+        },
+        {
+          "stationName": "Dhaurmui Jaghina",
+          "stationCode": "DUM",
+          "scheduledTime": "06:40",
+          "distanceFromOrigin": "1219 kms",
+          "originDst": 1219
+        },
+        {
+          "stationName": "Ranikund Rarah",
+          "stationCode": "RKR",
+          "scheduledTime": "06:43",
+          "distanceFromOrigin": "1223 kms",
+          "originDst": 1223
+        },
+        {
+          "stationName": "Jajan Patti",
+          "stationCode": "JJA",
+          "scheduledTime": "06:46",
+          "distanceFromOrigin": "1227 kms",
+          "originDst": 1227
+        },
+        {
+          "stationName": "Churaman Nagri",
+          "stationCode": "CRG",
+          "scheduledTime": "06:50",
+          "distanceFromOrigin": "1233 kms",
+          "originDst": 1233
+        },
+        {
+          "stationName": "Murhesi Rampur",
+          "stationCode": "MSRP",
+          "scheduledTime": "06:51",
+          "distanceFromOrigin": "1236 kms",
+          "originDst": 1236
+        },
+        {
+          "stationName": "Mathura Jn",
+          "stationCode": "MTJ",
+          "scheduledTime": "06:57",
+          "distanceFromOrigin": "1244 kms",
+          "originDst": 1244
+        },
+        {
+          "stationName": "Bhuteshwar",
+          "stationCode": "BTSR",
+          "scheduledTime": "06:59",
+          "distanceFromOrigin": "1247 kms",
+          "originDst": 1247
+        },
+        {
+          "stationName": "Vrindaban Road",
+          "stationCode": "VRBD",
+          "scheduledTime": "07:04",
+          "distanceFromOrigin": "1255 kms",
+          "originDst": 1255
+        },
+        {
+          "stationName": "Ajhai",
+          "stationCode": "AJH",
+          "scheduledTime": "07:12",
+          "distanceFromOrigin": "1266 kms",
+          "originDst": 1266
+        },
+        {
+          "stationName": "Chata",
+          "stationCode": "CHJ",
+          "scheduledTime": "07:18",
+          "distanceFromOrigin": "1276 kms",
+          "originDst": 1276
+        },
+        {
+          "stationName": "Kosi Kalan",
+          "stationCode": "KSV",
+          "scheduledTime": "07:25",
+          "distanceFromOrigin": "1286 kms",
+          "originDst": 1286
+        },
+        {
+          "stationName": "Hodal",
+          "stationCode": "HDL",
+          "scheduledTime": "07:33",
+          "distanceFromOrigin": "1298 kms",
+          "originDst": 1298
+        },
+        {
+          "stationName": "Banchari",
+          "stationCode": "BNCR",
+          "scheduledTime": "07:38",
+          "distanceFromOrigin": "1305 kms",
+          "originDst": 1305
+        },
+        {
+          "stationName": "Sholaka",
+          "stationCode": "SHLK",
+          "scheduledTime": "07:40",
+          "distanceFromOrigin": "1309 kms",
+          "originDst": 1309
+        },
+        {
+          "stationName": "Rundhi",
+          "stationCode": "RDE",
+          "scheduledTime": "07:47",
+          "distanceFromOrigin": "1319 kms",
+          "originDst": 1319
+        },
+        {
+          "stationName": "Palwal",
+          "stationCode": "PWL",
+          "scheduledTime": "07:54",
+          "distanceFromOrigin": "1328 kms",
+          "originDst": 1328
+        },
+        {
+          "stationName": "Asaoti",
+          "stationCode": "AST",
+          "scheduledTime": "08:01",
+          "distanceFromOrigin": "1340 kms",
+          "originDst": 1340
+        },
+        {
+          "stationName": "Piyala Block Hut",
+          "stationCode": "PYLA",
+          "scheduledTime": "08:04",
+          "distanceFromOrigin": "1344 kms",
+          "originDst": 1344
+        },
+        {
+          "stationName": "Ballabh Garh",
+          "stationCode": "BVH",
+          "scheduledTime": "08:08",
+          "distanceFromOrigin": "1350 kms",
+          "originDst": 1350
+        },
+        {
+          "stationName": "Faridabad New Town",
+          "stationCode": "FDN",
+          "scheduledTime": "08:11",
+          "distanceFromOrigin": "1354 kms",
+          "originDst": 1354
+        },
+        {
+          "stationName": "Faridabad",
+          "stationCode": "FDB",
+          "scheduledTime": "08:13",
+          "distanceFromOrigin": "1357 kms",
+          "originDst": 1357
+        },
+        {
+          "stationName": "Tughlakabad Cabin",
+          "stationCode": "TKDC",
+          "scheduledTime": "08:16",
+          "distanceFromOrigin": "1362 kms",
+          "originDst": 1362
+        },
+        {
+          "stationName": "Tuglakabad",
+          "stationCode": "TKD",
+          "scheduledTime": "08:20",
+          "distanceFromOrigin": "1368 kms",
+          "originDst": 1368
+        },
+        {
+          "stationName": "Tuglakabad East Cabin",
+          "stationCode": "TKEC",
+          "scheduledTime": "08:23",
+          "distanceFromOrigin": "1372 kms",
+          "originDst": 1372
+        },
+        {
+          "stationName": "Okhla",
+          "stationCode": "OKA",
+          "scheduledTime": "08:25",
+          "distanceFromOrigin": "1375 kms",
+          "originDst": 1375
+        },
+        {
+          "stationName": "Okhla Bypass B Cabin",
+          "stationCode": "OKAC",
+          "scheduledTime": "08:26",
+          "distanceFromOrigin": "1376 kms",
+          "originDst": 1376
+        },
+        {
+          "stationName": "Hazrat Nizamuddin",
+          "stationCode": "NZM",
+          "scheduledTime": "08:27",
+          "distanceFromOrigin": "1378 kms",
+          "originDst": 1378
+        },
+        {
+          "stationName": "Pragati Maidan",
+          "stationCode": "PGMD",
+          "scheduledTime": "08:29",
+          "distanceFromOrigin": "1382 kms",
+          "originDst": 1382
+        },
+        {
+          "stationName": "Tilak Bridge",
+          "stationCode": "TKJ",
+          "scheduledTime": "08:30",
+          "distanceFromOrigin": "1383 kms",
+          "originDst": 1383
+        },
+        {
+          "stationName": "Shivaji Bridge",
+          "stationCode": "CSB",
+          "scheduledTime": "08:31",
+          "distanceFromOrigin": "1385 kms",
+          "originDst": 1385
+        }
+      ],
+      "hasArrived": false,
+      "hasDeparted": false,
+      "avgDelay": 35,
+      "runsConsidered": 7,
+      "delayText": "35 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "ONTIME"
+    },
+    {
+      "stationName": "NEW DELHI",
+      "isStationCancelled": "",
+      "stationCode": "NDLS",
+      "distanceFromOrigin": "1384 kms",
+      "originDst": 1384,
+      "platform": "PLATFORM 3",
+      "scheduledArrivalTime": "08:32",
+      "arrivalTime": "08:25",
+      "scheduledDepartureTime": "DESTINATION",
+      "departureTime": "DESTINATION",
+      "dayCount": 2,
+      "arrivalDate": "20260915",
+      "departureDate": "20260915",
+      "delayArr": -7,
+      "delayDep": 0,
+      "isItQueriedStation": false,
+      "intermediateStations": null,
+      "hasArrived": false,
+      "hasDeparted": false,
+      "avgDelay": 29,
+      "runsConsidered": 7,
+      "delayText": "29 mins average delay (last 7 runs)",
+      "delayStatus": "OFTENLATE",
+      "currDelayStatus": "ONTIME"
+    }
+  ],
+  "disclaimerMsg": "This train running information is not affiliated with or endorsed by Indian Railways or IRCTC.",
+  "currentlyAt": "GODHRA JN",
+  "currentlyAtCode": "GDA",
+  "lastHaltStation": "VADODARA JN",
+  "lastHaltStationCode": "BRC",
+  "currentScheduledDepartureTime": "22:18",
+  "lastStationDepartureTme": "22:18",
+  "runningStatus": {
+    "header": "DELAYED BY 7M",
+    "status": "Delayed",
+    "runningStatusMessage": "Crossed"
+  },
+  "ltsLastUpdated": "Last updated at ",
+  "ltsLastUpdatedTime": "10:21 PM September 14",
+  "cancelledFrom": "",
+  "cancelledTo": "",
+  "cancelledStatus": "",
+  "upcomingStation": "RATLAM JN",
+  "upcomingStationCode": "RTM",
+  "totalLateMins": 7,
+  "risDeeplink": "https://redrails.app.link/lts?trainNumber=12951&stationCode=",
+  "risWhatsAppText": "Hi,\n12951 NDLS TEJAS RAJ Crossed GODHRA JN at 22:18\n\nTrack your train now on redRail by clicking on below link:\nhttps://redrails.app.link/lts?trainNumber=12951&stationCode=\nTeam redRail by redBus.",
+  "currAvlCheck": {
+    "text": "Check train for Current availability",
+    "subText": "View"
+  }
+}

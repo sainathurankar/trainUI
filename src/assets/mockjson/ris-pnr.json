@@ -1,0 +1,24 @@
+{
+  "pnr": "2957493812",
+  "trainNumber": "12951",
+  "trainName": "MMCT TEJAS RAJDHANI",
+  "boardingPoint": "Mumbai Central",
+  "reservationUpto": "New Delhi",
+  "doj": "20260925",
+  "journeyClass": "3A",
+  "chartPrepared": true,
+  "passengers": [
+    {
+      "passengerSerialNumber": 1,
+      "bookingStatus": "CNF/B2/34/LB",
+      "currentStatus": "CNF/B2/34/LB",
+      "coachPosition": "B2"
+    },
+    {
+      "passengerSerialNumber": 2,
+      "bookingStatus": "CNF/B2/35/MB",
+      "currentStatus": "CNF/B2/35/MB",
+      "coachPosition": "B2"
+    }
+  ]
+}

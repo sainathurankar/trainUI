@@ -306,3 +306,62 @@ ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
   border: 0;
   border-radius: 0;
 }
+
+
+/* ── RIS features (PNR, live status, schedule, coach) ───────────────── */
+.tu-input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: var(--tu-surface);
+  color: var(--tu-text);
+  border: 1px solid var(--tu-border);
+  border-radius: var(--tu-radius-sm);
+  transition: border-color 0.2s var(--tu-ease), box-shadow 0.2s var(--tu-ease);
+}
+.tu-input:focus {
+  outline: none;
+  border-color: var(--tu-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+}
+.tu-input::placeholder { color: var(--tu-text-muted); }
+
+.tu-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+  color: var(--tu-text);
+}
+.tu-badge-ontime { background: rgba(16, 185, 129, 0.15); border-color: var(--tu-emerald); color: var(--tu-emerald); }
+.tu-badge-delayed { background: rgba(244, 63, 94, 0.15); border-color: var(--tu-rose); color: var(--tu-rose); }
+
+/* Coach position chips */
+.tu-coach {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  padding: 0.5rem 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: var(--tu-radius-sm);
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+}
+.tu-coach-queried { border-color: var(--tu-primary); box-shadow: 0 0 0 2px rgba(79,70,229,0.25); }
+
+/* Live-status timeline */
+.tu-timeline-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: var(--tu-border);
+  flex-shrink: 0;
+}
+.tu-timeline-dot.done { background: var(--tu-emerald); }
+.tu-timeline-dot.current { background: var(--tu-primary); box-shadow: 0 0 0 4px rgba(79,70,229,0.25); }

@@ -1,0 +1,61 @@
+<div class="mx-auto w-full max-w-[900px] px-4 py-8">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold mb-1"><i class="fas fa-train-subway me-2"></i>Coach Position</h1>
+    <p class="text-sm opacity-70">See the coach layout so you know where to stand on the platform.</p>
+  </div>
+
+  <div class="tu-card p-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="sm:col-span-1">
+        <label for="cpTrain" class="block text-sm font-medium mb-1">Train number</label>
+        <input id="cpTrain" type="text" inputmode="numeric" maxlength="6"
+          class="tu-input" placeholder="e.g. 12951"
+          [(ngModel)]="trainNo" (keydown.enter)="search()" />
+      </div>
+      <div class="sm:col-span-1">
+        <label for="cpStn" class="block text-sm font-medium mb-1">Station code</label>
+        <input id="cpStn" type="text" maxlength="6"
+          class="tu-input uppercase" placeholder="e.g. NDLS"
+          [(ngModel)]="stn" (keydown.enter)="search()" />
+      </div>
+      <div class="sm:col-span-1 flex items-end">
+        <button class="btn btn-gradient px-4 w-full" type="button" (click)="search()" [disabled]="loading">
+          <i class="fas fa-magnifying-glass me-1"></i> {{ loading ? 'Loading…' : 'Show Layout' }}
+        </button>
+      </div>
+    </div>
+    @if (submitted && !valid) {
+      <p class="text-sm text-red-500 mt-2">Enter a valid train number and station code.</p>
+    }
+  </div>
+
+  @if (loading) { <app-loader></app-loader> }
+
+  @if (error) {
+    <div class="tu-card p-4 border-l-4 border-red-500">
+      <p class="text-red-500 font-medium"><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
+    </div>
+  }
+
+  @if (result) {
+    <div class="tu-card p-4">
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-1">
+        <div>
+          <span class="text-lg font-bold">{{ result.trainNumber }}</span>
+          <span class="ms-2">{{ result.trainName }}</span>
+        </div>
+        <span class="tu-badge">at {{ result.queriedStation }}</span>
+      </div>
+      <p class="text-sm opacity-70 mb-4">{{ result.source }} → {{ result.destination }}</p>
+
+      <div class="flex items-center gap-2 mb-2 text-xs opacity-70">
+        <i class="fas fa-arrow-left"></i> Engine side · direction of travel
+      </div>
+      <div class="flex flex-wrap gap-2">
+        @for (c of result.coachPosition; track $index) {
+          <div class="tu-coach" [title]="coachLabel(c)">{{ c }}</div>
+        }
+      </div>
+    </div>
+  }
+</div>

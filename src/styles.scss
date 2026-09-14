@@ -3,20 +3,10 @@
    A modern, cohesive theme layered on top of Bootstrap 5.
    ============================================================ */
 
-/* Bootstrap must be @use'd at the top of the file, before any other rules.
-   Brand overrides are passed as configuration (replaces the old pattern of
-   declaring $vars above an @import). */
-@use 'bootstrap/scss/bootstrap' with (
-  $primary: #4f46e5,
-  $info:    #06b6d4,
-  $danger:  #f43f5e,
-  $success: #10b981,
-  $warning: #f59e0b,
-  $border-radius: 0.75rem,
-  $border-radius-lg: 1rem,
-  $card-border-radius: 16px,
-  $enable-shadows: false
-);
+/* Tailwind CSS (preflight + utilities) is loaded ahead of this file via
+   angular.json (src/tailwind.css). Bootstrap has been fully removed; the small
+   set of component primitives it used to provide (buttons, form controls and
+   the ng-bootstrap modal shell) are re-homed at the bottom of this file. */
 
 /* ---- Design Tokens ---------------------------------------- */
 :root {
@@ -152,13 +142,31 @@ h1, h2, h3, h4, h5, .brand-name {
   box-shadow: var(--tu-shadow-lg);
 }
 
-/* Modern buttons */
+/* Modern buttons — self-contained (no longer extends Bootstrap's .btn).
+   Tailwind's preflight resets button appearance, so define everything here. */
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
   font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tu-text);
+  background-color: transparent;
+  border: 1px solid transparent;
   border-radius: 12px;
-  transition: transform 0.2s var(--tu-ease), box-shadow 0.2s var(--tu-ease), filter 0.2s var(--tu-ease);
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  transition: transform 0.2s var(--tu-ease), box-shadow 0.2s var(--tu-ease),
+    filter 0.2s var(--tu-ease), background-color 0.2s var(--tu-ease),
+    border-color 0.2s var(--tu-ease);
 }
 .btn:active { transform: translateY(1px); }
+.btn:disabled { cursor: not-allowed; opacity: 0.7; }
+.btn-sm { padding: 0.35rem 0.7rem; font-size: 0.875rem; }
 
 .btn-gradient {
   background: var(--tu-grad-brand);
@@ -169,18 +177,26 @@ h1, h2, h3, h4, h5, .brand-name {
 .btn-gradient:hover { color: #fff; filter: brightness(1.05); box-shadow: 0 10px 26px rgba(79, 70, 229, 0.45); }
 .btn-gradient:disabled { filter: grayscale(0.4) opacity(0.7); box-shadow: none; }
 
-/* Form controls */
+/* Form controls — self-contained replacement for Bootstrap .form-control/.form-select */
 .form-control, .form-select {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tu-text);
+  background-color: var(--tu-surface);
+  border: 1px solid var(--tu-border);
   border-radius: 12px;
-  border-color: var(--tu-border);
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
   transition: border-color 0.2s var(--tu-ease), box-shadow 0.2s var(--tu-ease);
 }
+.form-control::placeholder { color: var(--tu-text-muted); }
 .form-control:focus, .form-select:focus {
+  outline: 0;
   border-color: var(--tu-primary);
   box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
 }
+.form-control.is-invalid { border-color: var(--tu-rose); }
 
 /* ---- Global animations ------------------------------------ */
 @keyframes tu-fade-up {
@@ -217,4 +233,76 @@ h1, h2, h3, h4, h5, .brand-name {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ---- ng-bootstrap modal shell -----------------------------
+   @ng-bootstrap renders <ngb-modal-window class="modal fade show …"> plus a
+   <ngb-modal-backdrop class="modal-backdrop …">. Those used to be styled by
+   Bootstrap's CSS; provide a minimal self-contained equivalent. The modal is
+   opened with { centered: true, size: 'fullscreen' }. */
+ngb-modal-backdrop.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background-color: rgba(15, 23, 42, 0.55);
+  opacity: 0;
+  transition: opacity 0.2s var(--tu-ease);
+}
+ngb-modal-backdrop.modal-backdrop.show { opacity: 1; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+.modal.fade .modal-dialog {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform 0.25s var(--tu-ease), opacity 0.25s var(--tu-ease);
+}
+.modal.show .modal-dialog { opacity: 1; transform: none; }
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 1rem;
+  pointer-events: none;
+}
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 2rem);
+}
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: var(--tu-surface);
+  color: var(--tu-text);
+  border: 1px solid var(--tu-border);
+  border-radius: var(--tu-radius);
+  box-shadow: var(--tu-shadow-lg);
+  outline: 0;
+  overflow: hidden;
+}
+
+/* Fullscreen variant used by the 2-weeks availability modal */
+.modal-fullscreen {
+  width: 100vw;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+.modal-fullscreen .modal-content {
+  height: 100%;
+  border: 0;
+  border-radius: 0;
 }

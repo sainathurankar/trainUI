@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+/* Brand design tokens exposed to Tailwind utilities (text-primary, bg-accent, …).
+   Mirrors the --tu-* CSS variables used by the component SCSS. */
+@theme {
+  --color-primary: #4f46e5;
+  --color-primary-600: #4338ca;
+  --color-primary-700: #3730a3;
+  --color-accent: #06b6d4;
+  --color-amber: #f59e0b;
+  --color-rose: #f43f5e;
+  --color-emerald: #10b981;
+}

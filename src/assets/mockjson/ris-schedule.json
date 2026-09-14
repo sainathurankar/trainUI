@@ -1,0 +1,120 @@
+{
+  "TrainName": "NDLS TEJAS RAJ",
+  "TrainNo": 12951,
+  "TrainNumberString": "12951",
+  "TrainType": "Express",
+  "Source": "Mumbai Central",
+  "Destination": "New Delhi",
+  "SourceCode": "MMCT",
+  "DestinationCode": "NDLS",
+  "DaysOfRun": {
+    "Mon": true,
+    "Tue": true,
+    "Wed": true,
+    "Thu": true,
+    "Fri": true,
+    "Sat": true,
+    "Sun": true
+  },
+  "Classes": [
+    "2A",
+    "1A",
+    "3A"
+  ],
+  "Schedule": [
+    {
+      "StationName": "MUMBAI CENTRAL",
+      "StationCode": "MMCT",
+      "StopNumber": 1,
+      "ArrivalTime": "SOURCE",
+      "DepartureTime": "17:00",
+      "HaltMinutes": "0",
+      "Day": 1,
+      "DistanceFromOrigin": "0 kms",
+      "ExpectedPlatformNo": "NA"
+    },
+    {
+      "StationName": "BORIVALI",
+      "StationCode": "BVI",
+      "StopNumber": 2,
+      "ArrivalTime": "17:20",
+      "DepartureTime": "17:22",
+      "HaltMinutes": "02:00",
+      "Day": 1,
+      "DistanceFromOrigin": "30 kms",
+      "ExpectedPlatformNo": "6"
+    },
+    {
+      "StationName": "SURAT",
+      "StationCode": "ST",
+      "StopNumber": 3,
+      "ArrivalTime": "19:43",
+      "DepartureTime": "19:48",
+      "HaltMinutes": "05:00",
+      "Day": 1,
+      "DistanceFromOrigin": "263 kms",
+      "ExpectedPlatformNo": "1"
+    },
+    {
+      "StationName": "VADODARA JN",
+      "StationCode": "BRC",
+      "StopNumber": 4,
+      "ArrivalTime": "21:06",
+      "DepartureTime": "21:16",
+      "HaltMinutes": "10:00",
+      "Day": 1,
+      "DistanceFromOrigin": "392 kms",
+      "ExpectedPlatformNo": "2"
+    },
+    {
+      "StationName": "RATLAM JN",
+      "StationCode": "RTM",
+      "StopNumber": 5,
+      "ArrivalTime": "00:25",
+      "DepartureTime": "00:28",
+      "HaltMinutes": "03:00",
+      "Day": 2,
+      "DistanceFromOrigin": "653 kms",
+      "ExpectedPlatformNo": "5"
+    },
+    {
+      "StationName": "NAGDA JN",
+      "StationCode": "NAD",
+      "StopNumber": 6,
+      "ArrivalTime": "01:08",
+      "DepartureTime": "01:10",
+      "HaltMinutes": "02:00",
+      "Day": 2,
+      "DistanceFromOrigin": "695 kms",
+      "ExpectedPlatformNo": "1"
+    },
+    {
+      "StationName": "KOTA JN",
+      "StationCode": "KOTA",
+      "StopNumber": 7,
+      "ArrivalTime": "03:15",
+      "DepartureTime": "03:20",
+      "HaltMinutes": "05:00",
+      "Day": 2,
+      "DistanceFromOrigin": "920 kms",
+      "ExpectedPlatformNo": "1"
+    },
+    {
+      "StationName": "NEW DELHI",
+      "StationCode": "NDLS",
+      "StopNumber": 8,
+      "ArrivalTime": "08:32",
+      "DepartureTime": "DESTINATION",
+      "HaltMinutes": "0",
+      "Day": 2,
+      "DistanceFromOrigin": "1384 kms",
+      "ExpectedPlatformNo": "3"
+    }
+  ],
+  "TotalDuration": 932,
+  "TotalDistance": "1384 kms",
+  "TotalNumberOfStops": "8",
+  "risDeepLink": "https://redrails.app.link/trainsch?trainNumber=12951",
+  "risWhatsAppText": "Hi,\nGet the latest train schedule of 12951 NDLS TEJAS RAJ on redRail.\n\nClick at the below link to check now:\nhttps://redrails.app.link/trainsch?trainNumber=12951\nTeam redRail by redBus.",
+  "DisclaimerMsg": "This feature has no affiliation with IRCTC. Neither redBus nor IRCTC will be responsible for any liability occuring due to this information."
+}

@@ -1,0 +1,68 @@
+{
+  "listOfStations": [
+    {
+      "stationName": "MUMBAI CENTRAL",
+      "stationCode": "MMCT"
+    },
+    {
+      "stationName": "BORIVALI",
+      "stationCode": "BVI"
+    },
+    {
+      "stationName": "SURAT",
+      "stationCode": "ST"
+    },
+    {
+      "stationName": "VADODARA JN",
+      "stationCode": "BRC"
+    },
+    {
+      "stationName": "RATLAM JN",
+      "stationCode": "RTM"
+    },
+    {
+      "stationName": "NAGDA JN",
+      "stationCode": "NAD"
+    },
+    {
+      "stationName": "KOTA JN",
+      "stationCode": "KOTA"
+    },
+    {
+      "stationName": "NEW DELHI",
+      "stationCode": "NDLS"
+    }
+  ],
+  "queriedStation": "NDLS",
+  "coachPosition": [
+    "L",
+    "LPR",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8",
+    "B9",
+    "B10",
+    "B11",
+    "PC",
+    "H1",
+    "AE1",
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "LPR",
+    "VP"
+  ],
+  "trainName": "NDLS TEJAS RAJ",
+  "trainNumber": "12951",
+  "source": "MUMBAI CENTRAL",
+  "destination": "NEW DELHI",
+  "risDeepLink": "https://redrails.app.link/coachpos?trainNumber=12951&stationCode=NDLS",
+  "risWhatsAppText": "Hi,\nGet the most accurate information about the coach positions of 12951 NDLS TEJAS RAJ on redRail.\n\nClick at the below link to check now:\nhttps://redrails.app.link/coachpos?trainNumber=12951&stationCode=NDLS\nTeam redRail by redBus."
+}

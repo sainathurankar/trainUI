@@ -3,7 +3,7 @@
     <div class="tu-fields">
       <!-- FROM -->
       <div class="tu-field position-relative">
-        <label class="tu-field-label" for="from"><i class="fas fa-circle-dot text-primary"></i> From</label>
+        <label class="tu-field-label" for="from"><i class="fas fa-circle-dot text-[color:var(--tu-primary)]"></i> From</label>
         <input type="text" id="from" name="from" class="form-control tu-input"
           [class.is-invalid]="submitted && !fromValid"
           placeholder="Enter source station"
@@ -18,7 +18,7 @@
               (click)="onSelectSuggestion(suggestion, 'from')"
               (keydown.enter)="onSelectSuggestion(suggestion, 'from')"
               (keydown.space)="onSelectSuggestion(suggestion, 'from'); $event.preventDefault()">
-              <i class="fas fa-train-subway text-muted"></i>
+              <i class="fas fa-train-subway text-[color:var(--tu-text-muted)]"></i>
               <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
             </li>
           }
@@ -56,7 +56,7 @@
               (click)="onSelectSuggestion(suggestion, 'to')"
               (keydown.enter)="onSelectSuggestion(suggestion, 'to')"
               (keydown.space)="onSelectSuggestion(suggestion, 'to'); $event.preventDefault()">
-              <i class="fas fa-train-subway text-muted"></i>
+              <i class="fas fa-train-subway text-[color:var(--tu-text-muted)]"></i>
               <span>{{ suggestion.stationName }} <b>({{suggestion.stationCode}})</b></span>
             </li>
           }

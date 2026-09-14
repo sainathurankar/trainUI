@@ -6,57 +6,126 @@
   max-width: 960px;
 }
 
-.tu-results-head {
+/* Compact route strip */
+.tu-route-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.4rem;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 1.1rem;
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
+  border-radius: var(--tu-radius);
+  box-shadow: var(--tu-shadow-sm);
+  position: sticky;
+  top: 0.5rem;
+  z-index: 30;
 }
-.tu-results-title {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--tu-indigo-900);
-  margin: 0;
-}
-.tu-results-sub {
+.tu-route-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  flex: none;
+  border-radius: 9px;
+  border: 1px solid var(--tu-border);
   color: var(--tu-text-muted);
-  font-size: 0.9rem;
-  margin: 0.15rem 0 0;
+  text-decoration: none;
+  transition: color 0.15s var(--tu-ease), border-color 0.15s var(--tu-ease);
 }
+.tu-route-back:hover { color: var(--tu-primary-700); border-color: var(--tu-primary); }
 
-.tu-modify-btn {
+.tu-route-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.tu-route-od {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid var(--tu-border);
-  background: var(--tu-surface, #fff);
-  color: var(--tu-primary-700);
-  border-radius: 999px;
-  padding: 0.5rem 1.1rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  white-space: nowrap;
+  font-family: var(--tu-font-display), sans-serif;
+  font-size: 1.05rem;
+  color: var(--tu-indigo-900);
 }
-.tu-modify-btn:hover { border-color: var(--tu-primary); color: var(--tu-primary); }
-.tu-modify-btn.active { background: rgba(79, 70, 229, 0.08); border-color: var(--tu-primary); }
+.tu-route-od strong { font-weight: 700; }
+.tu-route-arrow { font-size: 0.8rem; color: var(--tu-primary); }
+.tu-route-date {
+  font-size: 0.8rem;
+  color: var(--tu-text-muted);
+  font-weight: 500;
+}
+.tu-route-date i { font-size: 0.72rem; margin-right: 2px; }
+.tu-route-count { margin-left: 2px; }
 
-/* Collapsible modify panel */
-.tu-modify-panel {
+.tu-route-actions { display: inline-flex; gap: 0.4rem; flex: none; }
+.tu-route-ico {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--tu-border);
+  background: var(--tu-surface);
+  color: var(--tu-text);
+  cursor: pointer;
+  transition: color 0.15s var(--tu-ease), border-color 0.15s var(--tu-ease), background-color 0.15s var(--tu-ease);
+}
+.tu-route-ico:hover { color: var(--tu-primary-700); border-color: var(--tu-primary); background: var(--tu-signal-wash); }
+.tu-route-ico.active { border-color: var(--tu-primary); color: var(--tu-primary-700); background: var(--tu-signal-wash); }
+.tu-route-badge {
+  position: absolute;
+  top: -6px; right: -6px;
+  min-width: 17px; height: 17px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--tu-primary);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
   display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s var(--tu-ease);
+  place-items: center;
 }
-.tu-modify-panel.open {
-  grid-template-rows: 1fr;
-  margin-bottom: 1.5rem;
+
+/* Modal chrome for filter / modify dialogs */
+.tu-modal-head {
+  border-bottom: 1px solid var(--tu-border);
+  align-items: center;
 }
-.tu-modify-panel > * { overflow: hidden; min-height: 0; }
-/* Once open, let children overflow so the station autocomplete dropdown
-   isn't clipped. Delay the switch until the 0.35s open animation finishes
-   so the grid-row collapse still clips cleanly. */
-.tu-modify-panel.open > * { overflow: visible; transition: overflow 0s 0.35s; }
+.tu-modal-head .modal-title {
+  font-family: var(--tu-font-display), sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--tu-indigo-900);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tu-modal-x {
+  border: 0;
+  background: transparent;
+  color: var(--tu-text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem 0.4rem;
+}
+.tu-modal-x:hover { color: var(--tu-text); }
+.tu-modal-foot {
+  border-top: 1px solid var(--tu-border);
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.tu-apply-btn { margin-left: auto; }
+
+@media (max-width: 576px) {
+  .tu-route-od { font-size: 0.95rem; }
+  .tu-route-back { width: 32px; height: 32px; }
+  .tu-route-ico { width: 34px; height: 34px; }
+}
 
 /* Empty / error states */
 .tu-empty {
@@ -106,82 +175,29 @@
   border: 1px solid var(--tu-border);
 }
 .tu-back-btn:hover {
-  background: rgba(79, 70, 229, 0.08);
+  background: rgba(20, 160, 120, 0.08);
   border-color: var(--tu-primary, #4f46e5);
   color: var(--tu-primary, #4f46e5);
 }
 
-/* ---- Filter & sort toolbar -------------------------------- */
-.tu-toolbar {
-  margin: 0 0 18px;
-  background: var(--tu-surface, #fff);
-  border: 1px solid var(--tu-border, #e6e9f2);
-  border-radius: var(--tu-radius, 16px);
-  box-shadow: var(--tu-shadow-sm, 0 1px 3px rgba(15,23,42,0.08));
-  overflow: hidden;
-}
-
-.tu-toolbar-summary {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  flex-wrap: wrap;
-}
-
-.tu-filter-toggle {
-  position: relative;
-  border: 1px solid var(--tu-border, #e6e9f2);
-  background: var(--tu-surface-2, #f8fafc);
-  color: var(--tu-text, #1e293b);
-  font-weight: 600;
-  font-size: 0.88rem;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: border-color .2s, background .2s, color .2s;
-}
-.tu-filter-toggle:hover, .tu-filter-toggle.active {
-  border-color: var(--tu-primary, #4f46e5);
-  color: var(--tu-primary, #4f46e5);
-}
-.tu-filter-toggle i { margin-right: 6px; }
-
-.tu-filter-dot {
-  position: absolute;
-  top: 6px; right: 6px;
-  width: 8px; height: 8px;
-  background: var(--tu-rose, #f43f5e);
-  border-radius: 50%;
-}
-
-.tu-count { font-size: 0.88rem; color: var(--tu-text-muted, #64748b); }
-.tu-count strong { color: var(--tu-text, #1e293b); }
-
+/* ---- Filter & sort chips (used inside the filters modal) ---- */
 .tu-clear-filters {
-  margin-left: auto;
   border: none;
   background: transparent;
-  color: var(--tu-primary, #4f46e5);
+  color: var(--tu-primary-700, #4f46e5);
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
   padding: 6px 8px;
   border-radius: 8px;
 }
-.tu-clear-filters:hover { background: rgba(79,70,229,0.08); }
-
-.tu-filter-panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .35s var(--tu-ease, cubic-bezier(0.22,1,0.36,1));
-}
-.tu-filter-panel.open { max-height: 520px; }
+.tu-clear-filters:hover { background: rgba(20, 160, 120,0.08); }
 
 .tu-filter-group {
-  padding: 10px 16px;
+  padding: 12px 0;
   border-top: 1px solid var(--tu-border, #e6e9f2);
 }
+.tu-filter-group:first-child { border-top: 0; padding-top: 0; }
 .tu-filter-label {
   display: block;
   font-size: 0.72rem;
@@ -286,42 +302,46 @@
   padding: 0.1rem 0.4rem;
 }
 
-/* Feature 5: recommended train */
+/* Feature 5: recommended train — mock .reco (tinted header band + seamless card) */
 .tu-recommended {
   position: relative;
   border: 1.5px solid var(--tu-primary);
   border-radius: var(--tu-radius);
-  padding: 0.5rem;
-  margin-bottom: 1.2rem;
-  background: linear-gradient(180deg, rgba(79, 70, 229, 0.06), transparent 60%);
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 18px var(--tu-signal-wash);
 }
 .tu-recommended-head {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0.2rem 0.3rem 0.6rem;
+  gap: 0.55rem;
+  padding: 11px 18px;
+  background: var(--tu-signal-wash);
+  margin: 0;
 }
 .tu-recommended-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.7rem;
-  font-weight: 700;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 800;
   letter-spacing: 0.03em;
-  color: #fff;
-  background: var(--tu-primary);
-  border-radius: 999px;
-  padding: 0.2rem 0.6rem;
+  color: var(--tu-primary-700);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
 }
 .tu-recommended-tag {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: var(--tu-primary-700);
-  background: var(--tu-surface-2);
+  color: var(--tu-text);
+  background: var(--tu-surface);
+  border: 1px solid var(--tu-border);
   border-radius: 999px;
-  padding: 0.15rem 0.55rem;
+  padding: 3px 9px;
 }
-/* The recommended card sits inside its own highlight; drop its outer margin */
+/* The recommended card sits inside its own highlight; drop border/radius/margin */
 .tu-recommended app-train-card .tu-train-card,
-.tu-recommended ::ng-deep .tu-train-card { margin-bottom: 0; }
+.tu-recommended ::ng-deep .tu-train-card { margin-bottom: 0; border: 0; border-radius: 0; }

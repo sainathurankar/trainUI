@@ -1,0 +1,81 @@
+:host { display: block; margin-top: 14px; }
+
+.tu-recent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.tu-recent-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tu-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tu-recent-label i { margin-right: 5px; }
+.tu-recent-clear {
+  background: none;
+  border: none;
+  color: var(--tu-ink-3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.tu-recent-clear:hover { color: var(--tu-delay); }
+
+.tu-recent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tu-recent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: 1px solid var(--tu-border);
+  border-radius: 999px;
+  background: var(--tu-surface);
+  cursor: pointer;
+  transition: border-color 0.15s var(--tu-ease), background 0.15s var(--tu-ease);
+  max-width: 100%;
+}
+.tu-recent-chip:hover {
+  border-color: var(--tu-primary);
+  background: var(--tu-signal-wash);
+}
+.tu-recent-ico {
+  font-size: 12px;
+  color: var(--tu-primary);
+  flex: 0 0 auto;
+}
+.tu-recent-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.25;
+  min-width: 0;
+}
+/* Primary line: train name (falls back to number when unnamed) */
+.tu-recent-chip .l {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tu-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 190px;
+}
+/* Secondary line: train number (+ optional station) */
+.tu-recent-chip .v {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--tu-primary-700);
+}
+[data-theme='dark'] .tu-recent-chip:hover .l { color: #fff; }
+.tu-recent-chip .x {
+  font-weight: 600;
+  color: var(--tu-text-muted);
+}

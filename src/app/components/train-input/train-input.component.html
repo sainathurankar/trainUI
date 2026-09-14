@@ -1,0 +1,39 @@
+<div class="tu-tinput-wrap">
+  <input
+    [id]="inputId"
+    type="text"
+    inputmode="numeric"
+    autocomplete="off"
+    class="tu-input tu-mono"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (ngModelChange)="onInput()"
+    (focus)="value.trim().length && suggestions.length ? (open = true) : null"
+    (blur)="close()"
+    (keydown.enter)="onEnter()"
+    aria-autocomplete="list"
+    role="combobox"
+    aria-controls="tuTrainListbox"
+    [attr.aria-expanded]="open" />
+
+  @if (loading) {
+    <span class="tu-tinput-spinner" aria-hidden="true"></span>
+  }
+
+  @if (open && (loading || suggestions.length)) {
+    <ul id="tuTrainListbox" class="tu-tinput-list" role="listbox">
+      @if (loading && !suggestions.length) {
+        <li class="tu-tinput-status" aria-live="polite">Searching trains…</li>
+      }
+      @for (s of suggestions; track s.trainNumber + s.trainName) {
+        <li class="tu-tinput-item" role="option" [attr.aria-selected]="false" (mousedown)="pick(s)">
+          <span class="tno tu-mono">{{ s.trainNumber }}</span>
+          <span class="tname">{{ s.trainName }}</span>
+          @if (s.from && s.to) {
+            <span class="route tu-mono">{{ s.from }} → {{ s.to }}</span>
+          }
+        </li>
+      }
+    </ul>
+  }
+</div>

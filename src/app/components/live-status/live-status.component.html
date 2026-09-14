@@ -1,76 +1,123 @@
-<div class="mx-auto w-full max-w-[900px] px-4 py-8">
-  <div class="mb-6">
-    <h1 class="text-2xl font-bold mb-1"><i class="fas fa-location-crosshairs me-2"></i>Live Train Status</h1>
-    <p class="text-sm opacity-70">Track where a train is right now, with per-station delays.</p>
+<div class="tu-page">
+  <div class="tu-page-head">
+    <div class="tu-head-row">
+      <div>
+        <span class="tu-eyebrow"><i class="fas fa-satellite-dish"></i> Running status</span>
+        <h1>Live Train Status</h1>
+        <p>Track where a train is right now and how it's running against schedule.</p>
+      </div>
+      @if (result) {
+        <div class="tu-head-actions">
+          @if (!editing) {
+            <button type="button" class="tu-share-btn" (click)="toggleEdit()" aria-label="Edit search" title="Edit search">
+              <i class="fas fa-pen"></i>
+            </button>
+          }
+          <button type="button" class="tu-share-btn" (click)="share()" aria-label="Share this page" title="Share">
+            <i class="fas fa-share-nodes"></i>
+          </button>
+        </div>
+      }
+    </div>
   </div>
 
-  <div class="tu-card p-4 mb-6">
-    <label for="liveInput" class="block text-sm font-medium mb-1">Train number</label>
-    <div class="flex flex-col sm:flex-row gap-3">
-      <input id="liveInput" type="text" inputmode="numeric" maxlength="6"
-        class="tu-input flex-1" placeholder="e.g. 12951"
-        [(ngModel)]="trainNo" (keydown.enter)="search()" />
+  @if (!result || editing) {
+  <div class="tu-card-flat">
+    <label for="lsTrain" class="tu-field-label">Train number</label>
+    <div class="tu-search-row">
+      <app-train-input class="flex-1" inputId="lsTrain"
+        [(value)]="trainNo" (committed)="search()"></app-train-input>
       <button class="btn btn-gradient px-4" type="button" (click)="search()" [disabled]="loading">
-        <i class="fas fa-satellite-dish me-1"></i> {{ loading ? 'Locating…' : 'Track' }}
+        <i class="fas fa-location-crosshairs me-1"></i> {{ loading ? 'Locating…' : 'Track' }}
       </button>
     </div>
     @if (submitted && !valid) {
-      <p class="text-sm text-red-500 mt-2">Enter a valid train number (4–6 digits).</p>
+      <p class="tu-form-error">Enter a valid 4–6 digit train number.</p>
     }
+    <app-recent-chips [entries]="recent" (pick)="pickRecent($event)" (clear)="clearRecent()"></app-recent-chips>
   </div>
+  }
+
 
   @if (loading) { <app-loader></app-loader> }
 
   @if (error) {
-    <div class="tu-card p-4 border-l-4 border-red-500">
-      <p class="text-red-500 font-medium"><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
+    <div class="tu-card-flat tu-error-card">
+      <p><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
     </div>
   }
 
   @if (result) {
-    <div class="tu-card p-4 mb-4">
-      <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+    <div class="tu-card-flat">
+      <div class="tu-live-hero">
         <div>
-          <span class="text-lg font-bold">{{ result.trainNumber }}</span>
-          <span class="ms-2">{{ result.trainName }}</span>
+          <div class="tu-tno tu-mono">{{ result.trainNumber }}</div>
+          <div class="tu-tname">{{ result.trainName }}</div>
         </div>
-        <span class="tu-badge" [class.tu-badge-delayed]="delayed" [class.tu-badge-ontime]="!delayed">
-          {{ result.runningStatus?.header || (delayed ? 'Delayed' : 'On time') }}
-        </span>
+        <div class="tu-delay-badge" [class.delayed]="delayed" [class.ontime]="!delayed">
+          <i class="fas" [class.fa-clock]="delayed" [class.fa-circle-check]="!delayed"></i>
+          {{ delayed ? 'Delayed ' + result.totalLateMins + ' min' : 'On time' }}
+        </div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
-        <div><div class="opacity-60">Currently at</div><div class="font-medium">{{ result.currentlyAt || '—' }}</div></div>
-        <div><div class="opacity-60">Next stop</div><div class="font-medium">{{ result.upcomingStation || '—' }}</div></div>
-        <div><div class="opacity-60">Delay</div><div class="font-medium">{{ result.totalLateMins }} min</div></div>
-      </div>
-      @if (result.ltsLastUpdatedTime) {
-        <p class="text-xs opacity-60 mt-2">Updated: {{ result.ltsLastUpdatedTime }}</p>
-      }
-    </div>
 
-    <div class="tu-card p-4">
-      <h2 class="font-semibold mb-3">Station timeline</h2>
-      <div class="flex flex-col gap-0">
-        @for (s of result.stations; track s.stationCode) {
-          <div class="flex items-start gap-3 py-2 border-b border-[var(--tu-border)] last:border-0">
-            <div class="tu-timeline-dot mt-1" [class.current]="s.isItQueriedStation" [class.done]="!s.isItQueriedStation"></div>
-            <div class="flex-1">
-              <div class="flex items-center justify-between flex-wrap gap-1">
-                <span class="font-medium">{{ s.stationName }} <span class="opacity-50 text-xs">({{ s.stationCode }})</span></span>
-                <span class="text-xs opacity-70">{{ s.distanceFromOrigin }}</span>
-              </div>
-              <div class="text-xs opacity-70 mt-0.5">
-                Arr {{ s.arrivalTime || '—' }} · Dep {{ s.departureTime || '—' }}
-                @if (s.delayDep && s.delayDep > 0) {
-                  <span class="text-red-500 ms-1">+{{ s.delayDep }}m</span>
+      <div class="tu-summary">
+        <div class="tu-stat">
+          <div class="k"><i class="fas fa-location-dot"></i> Currently at</div>
+          <div class="v">{{ result.currentlyAt || '—' }}</div>
+        </div>
+        <div class="tu-stat">
+          <div class="k"><i class="fas fa-flag-checkered"></i> Next stop</div>
+          <div class="v">{{ result.upcomingStation || '—' }}</div>
+        </div>
+        <div class="tu-stat">
+          <div class="k"><i class="fas fa-calendar-day"></i> For date</div>
+          <div class="v tu-tnum">{{ fmtDate(result.consideredRunningDate) }}</div>
+        </div>
+      </div>
+
+      @if (result.runningStatus?.runningStatusMessage) {
+        <p class="tu-live-msg"><i class="fas fa-circle-info me-1"></i> {{ result.runningStatus?.runningStatusMessage }}</p>
+      }
+
+      @if (result.stations?.length) {
+        <div class="tu-timeline">
+          @for (s of result.stations; track s.stationCode) {
+            <div class="tu-tl-row" [attr.data-state]="stationState(s)"
+              [class.here]="isHere(s)" [class.queried]="s.isItQueriedStation">
+              <div class="tu-tl-dot">
+                @if (isHere(s)) {
+                  <span class="tu-tl-train" aria-hidden="true"><i class="fas fa-train"></i></span>
                 }
               </div>
+              <div class="tu-tl-body">
+                <div class="tu-tl-top">
+                  <span class="name">{{ s.stationName }}
+                    <span class="code tu-mono">{{ s.stationCode }}</span>
+                  </span>
+                  @if (isHere(s)) {
+                    <span class="hereflag"><span class="pulse-dot"></span> Train here</span>
+                  } @else if (stationState(s) === 'done' && s.delayArr && s.delayArr > 0) {
+                    <span class="lateflag"><i class="fas fa-clock"></i> +{{ s.delayArr }}m</span>
+                  } @else if (stationState(s) === 'done') {
+                    <span class="okflag"><i class="fas fa-check"></i> on time</span>
+                  } @else if (s.delayArr && s.delayArr > 0) {
+                    <span class="predflag"><i class="fas fa-hourglass-half"></i> ~+{{ s.delayArr }}m</span>
+                  }
+                </div>
+                <div class="tu-tl-times tu-mono">
+                  <span><i class="fas fa-arrow-down-to-bracket"></i> {{ s.arrivalTime || s.scheduledArrivalTime || '—' }}</span>
+                  <span><i class="fas fa-arrow-up-from-bracket"></i> {{ s.departureTime || s.scheduledDepartureTime || '—' }}</span>
+                  @if (s.platform) { <span><i class="fas fa-train-subway"></i> PF {{ pf(s.platform) }}</span> }
+                  @if (s.dayCount) { <span class="daytag">Day {{ s.dayCount }}</span> }
+                </div>
+              </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      }
+
       @if (result.disclaimerMsg) {
-        <p class="text-xs opacity-50 mt-3">{{ result.disclaimerMsg }}</p>
+        <p class="tu-disclaimer">{{ result.disclaimerMsg }}</p>
       }
     </div>
   }

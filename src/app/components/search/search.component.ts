@@ -34,6 +34,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   fromsuggestions: Station[] = [];
   tosuggestions: Station[] = [];
+  fromLoading = false;
+  toLoading = false;
   minDate?: string;
 
   // Set to true after the user presses Search with an invalid form,
@@ -85,14 +87,26 @@ export class SearchComponent implements OnInit, OnDestroy {
         switchMap((q) => this.autocompleteService.getSuggestions(q)),
         takeUntil(this.destroy$)
       )
-      .subscribe((data: AutocompleteResponse) => {
-        const results = data?.results ?? [];
-        if (key === 'from') {
-          this.fromsuggestions = results;
-        } else {
-          this.tosuggestions = results;
+      .subscribe({
+        next: (data: AutocompleteResponse) => {
+          const results = data?.results ?? [];
+          if (key === 'from') {
+            this.fromsuggestions = results;
+            this.fromLoading = false;
+          } else {
+            this.tosuggestions = results;
+            this.toLoading = false;
+          }
+          this.cdr.markForCheck();
+        },
+        error: () => {
+          if (key === 'from') {
+            this.fromLoading = false;
+          } else {
+            this.toLoading = false;
+          }
+          this.cdr.markForCheck();
         }
-        this.cdr.markForCheck();
       });
   }
 
@@ -106,10 +120,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     const input = (key === 'from' ? this.frominputValue : this.toinputValue).trim();
     if (input.length > 1) {
+      if (key === 'from') {
+        this.fromLoading = true;
+      } else {
+        this.toLoading = true;
+      }
       (key === 'from' ? this.fromQuery$ : this.toQuery$).next(input);
     } else {
       this.fromsuggestions = [];
       this.tosuggestions = [];
+      this.fromLoading = false;
+      this.toLoading = false;
     }
   }
 
@@ -123,6 +144,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.fromsuggestions = [];  // Clear suggestions
     this.tosuggestions = [];
+    this.fromLoading = false;
+    this.toLoading = false;
   }
 
   /** A station field is valid only when a suggestion object with a code was picked. */
@@ -198,6 +221,34 @@ export class SearchComponent implements OnInit, OnDestroy {
   switchStations() {
     [this.frominputValue, this.toinputValue] = [this.toinputValue, this.frominputValue];
     [this.frominputObject, this.toinputObject] = [this.toinputObject, this.frominputObject];
+  }
+
+  /** Local YYYY-MM-DD for a date N days from today. */
+  private dateNDaysOut(n: number): string {
+    const d = new Date();
+    d.setDate(d.getDate() + n);
+    const y = d.getFullYear();
+    const m = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    return `${y}-${m}-${day}`;
+  }
+
+  get isToday(): boolean {
+    return this.dateOfTravel === this.dateNDaysOut(0);
+  }
+
+  get isTomorrow(): boolean {
+    return this.dateOfTravel === this.dateNDaysOut(1);
+  }
+
+  setToday(): void {
+    this.dateOfTravel = this.dateNDaysOut(0);
+    this.onClickSearch();
+  }
+
+  setTomorrow(): void {
+    this.dateOfTravel = this.dateNDaysOut(1);
+    this.onClickSearch();
   }
 
   ngOnDestroy(): void {

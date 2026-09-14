@@ -1,178 +1,105 @@
 :host { display: block; }
 
+/* Compact "departure board" fare box — mock .qbox */
 .tu-quota {
   position: relative;
   background: var(--tu-surface);
   border: 1px solid var(--tu-border);
-  border-left: 4px solid #cbd5e1;
-  border-radius: var(--tu-radius-sm);
-  min-height: 118px;
-  height: 100%;
+  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.25s var(--tu-ease), box-shadow 0.25s var(--tu-ease);
-  box-shadow: var(--tu-shadow-sm);
+  height: 100%;
+  transition: border-color 0.15s var(--tu-ease);
+  cursor: pointer;
 }
-.tu-quota:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--tu-shadow);
-}
-
-/* Status accent via Bootstrap border-* classes from the component */
-.tu-quota.border-success { border-left-color: var(--tu-emerald) !important; }
-.tu-quota.border-warning { border-left-color: var(--tu-amber) !important; }
-.tu-quota.border-danger  { border-left-color: var(--tu-rose) !important; }
+.tu-quota:hover { border-color: var(--tu-primary); }
+.tu-quota.guarantee { border-color: var(--tu-primary); }
 
 .tu-quota-body {
-  padding: 0.7rem 0.8rem;
   cursor: pointer;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
 }
 
-.tu-quota-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.4rem;
-}
-.tu-quota-type {
-  font-size: 0.7rem;
-  font-weight: 700;
+/* GUARANTEE / TATKAL — full-width top strip so it can never be clipped */
+.tu-flag {
+  display: block;
+  font-size: 8.5px;
+  font-weight: 800;
   letter-spacing: 0.05em;
-  color: var(--tu-text-muted);
-  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  background: var(--tu-primary);
+  padding: 2px 4px;
+  line-height: 1.3;
 }
-.tu-quota-class {
-  font-size: 0.8rem;
+.tu-flag-tatkal { background: var(--tu-emerald); }
+
+.tu-quota-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 8px 11px;
+}
+
+/* Class code */
+.tu-cls {
+  font-size: 11px;
   font-weight: 700;
-  color: var(--tu-indigo-900);
-  background: var(--tu-surface-2);
-  border-radius: 6px;
-  padding: 0.05rem 0.4rem;
+  letter-spacing: 0.03em;
+  color: var(--tu-text-muted);
 }
 
-.tu-quota-status { display: flex; align-items: baseline; gap: 0.3rem; flex-wrap: wrap; }
-.tu-seats { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; }
-.tu-status-label { font-size: 0.75rem; font-weight: 600; }
-/* Bootstrap text-* colors applied by component are respected automatically */
-.tu-quota-status.text-success { color: var(--tu-emerald) !important; }
-.tu-quota-status.text-warning { color: var(--tu-amber) !important; }
-.tu-quota-status.text-danger  { color: var(--tu-rose) !important; }
+/* Status line — seats + label, colour-coded */
+.tu-st {
+  font-family: var(--tu-font-display), sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 2px;
+}
+.tu-st .tu-st-seats { font-variant-numeric: tabular-nums; }
+.tu-st.text-success { color: var(--tu-emerald); }
+.tu-st.text-warning { color: var(--tu-amber); }
+.tu-st.text-danger  { color: var(--tu-rose); }
 
-.tu-quota-foot {
+/* Price */
+.tu-pr {
+  font-size: 12px;
+  color: var(--tu-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Feature 1: confirm-chance mini bar */
+.tu-pred {
+  margin-top: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-}
-.tu-fare { font-weight: 700; font-size: 0.9rem; color: var(--tu-indigo-900); }
-
-/* Feature 2: fare transparency */
-.tu-fare-wrap { display: inline-flex; align-items: baseline; gap: 0.35rem; flex-wrap: wrap; }
-.tu-fare-orig {
-  font-size: 0.72rem;
-  color: var(--tu-text-muted);
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
-}
-.tu-fare-save {
-  font-size: 0.6rem;
+  gap: 5px;
+  font-size: 10px;
   font-weight: 700;
-  color: var(--tu-emerald);
-  background: rgba(16, 185, 129, 0.12);
-  border-radius: 999px;
-  padding: 0.05rem 0.4rem;
-  white-space: nowrap;
 }
-
-/* Feature 1: confirmation-chance prediction pill */
-.tu-pred {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.62rem;
-  font-weight: 600;
-  border-radius: 999px;
-  padding: 0.1rem 0.5rem;
-  width: fit-content;
-  border: 1px solid transparent;
-}
-.tu-pred .tu-pred-val { font-weight: 800; }
-.tu-pred .tu-pred-lbl { opacity: 0.85; }
-.tu-pred-high   { color: var(--tu-emerald); background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3); }
-.tu-pred-medium { color: var(--tu-amber);   background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3); }
-.tu-pred-low    { color: var(--tu-rose);    background: rgba(244, 63, 94, 0.12);  border-color: rgba(244, 63, 94, 0.3); }
-.tu-pred-lb {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.6rem;
-  color: var(--tu-text-muted);
-}
-
-/* Feature 7: boarding / dropping override note */
-.tu-board-override {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: var(--tu-primary);
+.tu-pred-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 3px;
   background: var(--tu-surface-2);
-  border-radius: 6px;
-  padding: 0.12rem 0.4rem;
+  overflow: hidden;
 }
+.tu-pred-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+}
+.tu-pred-val { white-space: nowrap; }
 
-.tu-refresh {
-  display: inline-grid;
-  place-items: center;
-  width: 26px; height: 26px;
-  border-radius: 8px;
-  color: var(--tu-primary);
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.4s var(--tu-ease);
-}
-.tu-refresh:hover { background: rgba(79, 70, 229, 0.1); transform: rotate(180deg); }
-
-.tu-refresh-spinner {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  border: 2px solid rgba(79, 70, 229, 0.25);
-  border-top-color: var(--tu-primary);
-  animation: tu-spin 0.7s linear infinite;
-}
-@keyframes tu-spin { to { transform: rotate(360deg); } }
-
-.tu-updated {
-  font-size: 0.65rem;
-  color: var(--tu-text-muted);
-}
-
-/* Ribbons */
-.tu-ribbon {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #fff;
-  padding: 0.12rem 0.45rem;
-  border-radius: 999px;
-  z-index: 2;
-  box-shadow: var(--tu-shadow-sm);
-  white-space: nowrap;
-}
-.tu-ribbon-tatkal { background: var(--tu-emerald); }
-.tu-ribbon-guarantee { background: var(--tu-primary); }
+.tu-pred-high  { color: var(--tu-emerald); }
+.tu-pred-high  .tu-pred-bar i { background: var(--tu-emerald); }
+.tu-pred-medium { color: oklch(60% 0.13 70); }
+.tu-pred-medium .tu-pred-bar i { background: oklch(64% 0.14 70); }
+.tu-pred-low   { color: var(--tu-rose); }
+.tu-pred-low   .tu-pred-bar i { background: var(--tu-rose); }
 
 @media (max-width: 576px) {
-  .tu-quota { min-height: 100px; }
-  .tu-quota-body { padding: 0.55rem 0.6rem; }
-  .tu-seats { font-size: 0.9rem; }
-  .tu-status-label { font-size: 0.68rem; }
-  .tu-updated { font-size: 0.58rem; }
+  .tu-quota-main { padding: 7px 9px; }
+  .tu-st { font-size: 13px; }
 }

@@ -16,6 +16,11 @@
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
   background: rgba(255, 255, 255, 0.9);
 }
+/* On mobile, hide the top navbar for non-home pages to reclaim space;
+   the bottom tab bar keeps navigation available. Always visible on desktop. */
+@media (max-width: 767px) {
+  .tu-navbar.tu-navbar-mobile-hidden { display: none; }
+}
 
 .tu-brand {
   display: inline-flex;
@@ -34,11 +39,11 @@
   background: var(--tu-grad-brand);
   color: #fff;
   font-size: 1.1rem;
-  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 8px 18px rgba(20, 160, 120, 0.35);
   animation: tu-train-move 3.5s ease-in-out infinite;
 }
 .tu-brand-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--tu-font-display), sans-serif;
   font-weight: 800;
   font-size: 1.4rem;
   color: var(--tu-indigo-900);
@@ -102,3 +107,39 @@
 :host-context([data-theme='dark']) .tu-theme-toggle {
   background: var(--tu-surface-2, #1b2540);
 }
+
+/* Mobile bottom tab bar — desktop nav lives in the top navbar */
+.tu-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: var(--tu-surface);
+  border-top: 1px solid var(--tu-border);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+/* Hide the bottom tab bar on desktop (component-scoped rule beats the Tailwind md:hidden utility). */
+@media (min-width: 768px) {
+  .tu-tabbar { display: none; }
+}
+.tu-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.5rem 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--tu-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s var(--tu-ease);
+}
+.tu-tab i { font-size: 1.05rem; }
+.tu-tab.active,
+.tu-tab:hover { color: var(--tu-primary-700); }

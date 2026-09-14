@@ -1,122 +1,126 @@
 <div class="tu-results mx-auto w-full max-w-[1200px] px-4">
-  <div class="tu-results-head">
-    <div>
-      <h2 class="tu-results-title">Available trains</h2>
-      <p class="tu-results-sub">Live seat availability for your route</p>
+  <!-- Compact route strip -->
+  <div class="tu-route-bar">
+    <a class="tu-route-back" routerLink="/" title="Back to search" aria-label="Back to search"><i class="fas fa-arrow-left"></i></a>
+    <div class="tu-route-main">
+      <span class="tu-route-od">
+        <strong>{{ src }}</strong>
+        <i class="fas fa-arrow-right-long tu-route-arrow"></i>
+        <strong>{{ dst }}</strong>
+      </span>
+      <span class="tu-route-date">
+        <i class="fas fa-calendar-day"></i> {{ doj | date: 'EEE, d MMM' }}
+        @if (!loading && !error && totalCount > 0) {
+          <span class="tu-route-count">· {{ filteredCount }}/{{ totalCount }} trains</span>
+        }
+      </span>
     </div>
-    <button (click)="modifySearch = !modifySearch" class="btn tu-modify-btn" [class.active]="modifySearch">
-      <i class="fas" [ngClass]="modifySearch ? 'fa-xmark' : 'fa-sliders'"></i>
-      <span>{{ modifySearch ? 'Close' : 'Modify search' }}</span>
-    </button>
+    <div class="tu-route-actions">
+      <button type="button" class="tu-route-ico" (click)="share()"
+        title="Share these results" aria-label="Share these results">
+        <i class="fas fa-share-nodes"></i>
+      </button>
+      <button type="button" class="tu-route-ico" (click)="openFilters(filtersTpl)"
+        [class.active]="hasActiveFilters" title="Filters & sort" aria-label="Filters and sort">
+        <i class="fas fa-sliders"></i>
+        @if (activeFilterCount > 0) { <span class="tu-route-badge">{{ activeFilterCount }}</span> }
+      </button>
+      <button type="button" class="tu-route-ico" (click)="openModify(modifyTpl)"
+        title="Modify search" aria-label="Modify search">
+        <i class="fas fa-pen-to-square"></i>
+      </button>
+    </div>
   </div>
 
-  <div class="tu-modify-panel" [class.open]="modifySearch">
-    @if (modifySearch) {
+  <!-- Modify-search modal -->
+  <ng-template #modifyTpl let-m="close">
+    <div class="modal-header tu-modal-head">
+      <h5 class="modal-title"><i class="fas fa-pen-to-square"></i> Modify search</h5>
+      <button type="button" class="tu-modal-x" aria-label="Close" (click)="m()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
       <app-search></app-search>
-    }
-  </div>
-
-  <!-- Filter & sort toolbar -->
-  @if (!loading && !error && totalCount > 0) {
-    <div class="tu-toolbar">
-      <div class="tu-toolbar-summary">
-        <button class="tu-filter-toggle" (click)="toggleFilters()" [class.active]="showFilters"
-          [attr.aria-expanded]="showFilters" aria-controls="tu-filter-panel">
-          <i class="fas fa-sliders"></i> Filters &amp; sort
-          @if (hasActiveFilters) { <span class="tu-filter-dot"></span> }
-        </button>
-        <span class="tu-count">
-          Showing <strong>{{ filteredCount }}</strong> of {{ totalCount }} trains
-        </span>
-        @if (hasActiveFilters) {
-          <button class="tu-clear-filters" (click)="clearFilters()">
-            <i class="fas fa-rotate-left"></i> Reset
-          </button>
-        }
-      </div>
-
-      <div id="tu-filter-panel" class="tu-filter-panel" [class.open]="showFilters">
-        <div class="tu-filter-group">
-          <span class="tu-filter-label">Sort by</span>
-          <div class="tu-chip-row">
-            <button class="tu-chip" [class.active]="sortKey === 'departure'" (click)="setSort('departure')">Departure</button>
-            <button class="tu-chip" [class.active]="sortKey === 'arrival'" (click)="setSort('arrival')">Arrival</button>
-            <button class="tu-chip" [class.active]="sortKey === 'duration'" (click)="setSort('duration')">Duration</button>
-            <button class="tu-chip" [class.active]="sortKey === 'price'" (click)="setSort('price')">Price</button>
-            <button class="tu-chip" [class.active]="sortKey === 'availability'" (click)="setSort('availability')">Availability</button>
-          </div>
-        </div>
-
-        <div class="tu-filter-group">
-          <span class="tu-filter-label">Availability</span>
-          <div class="tu-chip-row">
-            <button class="tu-chip" [class.active]="availFilter === 'all'" (click)="setAvailFilter('all')">All</button>
-            <button class="tu-chip tu-chip-success" [class.active]="availFilter === 'available'" (click)="setAvailFilter('available')">Available</button>
-            <button class="tu-chip tu-chip-info" [class.active]="availFilter === 'rac'" (click)="setAvailFilter('rac')">RAC</button>
-            <button class="tu-chip tu-chip-warning" [class.active]="availFilter === 'waitlist'" (click)="setAvailFilter('waitlist')">Waitlist</button>
-          </div>
-        </div>
-
-        @if (availableClassOptions.length > 1) {
-          <div class="tu-filter-group">
-            <span class="tu-filter-label">Class</span>
-            <div class="tu-chip-row">
-              <button class="tu-chip" [class.active]="classFilter === 'all'" (click)="classFilter = 'all'">All</button>
-              @for (cls of availableClassOptions; track cls) {
-                <button class="tu-chip" [class.active]="classFilter === cls" (click)="classFilter = cls">{{ cls }}</button>
-              }
-            </div>
-          </div>
-        }
-
-        <!-- Feature 3: departure time-of-day window -->
-        <div class="tu-filter-group">
-          <span class="tu-filter-label">Departure</span>
-          <div class="tu-chip-row">
-            <button class="tu-chip" [class.active]="depWindow === 'all'" (click)="setDepWindow('all')">Any time</button>
-            <button class="tu-chip" [class.active]="depWindow === 'early'" (click)="setDepWindow('early')"><i class="fas fa-moon"></i> Before 6 AM</button>
-            <button class="tu-chip" [class.active]="depWindow === 'morning'" (click)="setDepWindow('morning')"><i class="fas fa-mug-hot"></i> 6 AM – 12 PM</button>
-            <button class="tu-chip" [class.active]="depWindow === 'afternoon'" (click)="setDepWindow('afternoon')"><i class="fas fa-sun"></i> 12 – 6 PM</button>
-            <button class="tu-chip" [class.active]="depWindow === 'night'" (click)="setDepWindow('night')"><i class="fas fa-star"></i> After 6 PM</button>
-          </div>
-        </div>
-
-        <!-- Feature 4: quota selector -->
-        @if (availableQuotaOptions.length > 1) {
-          <div class="tu-filter-group">
-            <span class="tu-filter-label">Quota</span>
-            <div class="tu-chip-row">
-              <button class="tu-chip" [class.active]="quotaFilter === 'all'" (click)="quotaFilter = 'all'">All</button>
-              @for (q of availableQuotaOptions; track q) {
-                <button class="tu-chip" [class.active]="quotaFilter === q" (click)="quotaFilter = q">{{ q }}</button>
-              }
-            </div>
-          </div>
-        }
-      </div>
     </div>
-  }
+  </ng-template>
 
-  <!-- Feature 8: promotional offers strip -->
-  @if (!loading && !error && offers.length > 0) {
-    <div class="tu-offers-strip">
-      @for (offer of offers; track offer) {
-        <div class="tu-offer" [title]="offer?.text">
-          <span class="tu-offer-icon"><i class="fas fa-tag"></i></span>
-          <span class="tu-offer-text">
-            <strong>{{ offer?.discountDisplayText || offer?.text }}</strong>
-            @if (offer?.code) { <span class="tu-offer-code">{{ offer?.code }}</span> }
-          </span>
+  <!-- Filters & sort modal -->
+  <ng-template #filtersTpl let-m="close">
+    <div class="modal-header tu-modal-head">
+      <h5 class="modal-title"><i class="fas fa-sliders"></i> Filters &amp; sort</h5>
+      <button type="button" class="tu-modal-x" aria-label="Close" (click)="m()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="tu-filter-group">
+        <span class="tu-filter-label">Sort by</span>
+        <div class="tu-chip-row">
+          <button class="tu-chip" [class.active]="sortKey === 'departure'" (click)="setSort('departure')">Departure</button>
+          <button class="tu-chip" [class.active]="sortKey === 'arrival'" (click)="setSort('arrival')">Arrival</button>
+          <button class="tu-chip" [class.active]="sortKey === 'duration'" (click)="setSort('duration')">Duration</button>
+          <button class="tu-chip" [class.active]="sortKey === 'price'" (click)="setSort('price')">Price</button>
+          <button class="tu-chip" [class.active]="sortKey === 'availability'" (click)="setSort('availability')">Availability</button>
+        </div>
+      </div>
+
+      <div class="tu-filter-group">
+        <span class="tu-filter-label">Availability</span>
+        <div class="tu-chip-row">
+          <button class="tu-chip" [class.active]="availFilter === 'all'" (click)="setAvailFilter('all')">All</button>
+          <button class="tu-chip tu-chip-success" [class.active]="availFilter === 'available'" (click)="setAvailFilter('available')">Available</button>
+          <button class="tu-chip tu-chip-info" [class.active]="availFilter === 'rac'" (click)="setAvailFilter('rac')">RAC</button>
+          <button class="tu-chip tu-chip-warning" [class.active]="availFilter === 'waitlist'" (click)="setAvailFilter('waitlist')">Waitlist</button>
+        </div>
+      </div>
+
+      @if (availableClassOptions.length > 1) {
+        <div class="tu-filter-group">
+          <span class="tu-filter-label">Class</span>
+          <div class="tu-chip-row">
+            <button class="tu-chip" [class.active]="classFilter === 'all'" (click)="classFilter = 'all'">All</button>
+            @for (cls of availableClassOptions; track cls) {
+              <button class="tu-chip" [class.active]="classFilter === cls" (click)="classFilter = cls">{{ cls }}</button>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Feature 3: departure time-of-day window -->
+      <div class="tu-filter-group">
+        <span class="tu-filter-label">Departure</span>
+        <div class="tu-chip-row">
+          <button class="tu-chip" [class.active]="depWindow === 'all'" (click)="setDepWindow('all')">Any time</button>
+          <button class="tu-chip" [class.active]="depWindow === 'early'" (click)="setDepWindow('early')"><i class="fas fa-moon"></i> Before 6 AM</button>
+          <button class="tu-chip" [class.active]="depWindow === 'morning'" (click)="setDepWindow('morning')"><i class="fas fa-mug-hot"></i> 6 AM – 12 PM</button>
+          <button class="tu-chip" [class.active]="depWindow === 'afternoon'" (click)="setDepWindow('afternoon')"><i class="fas fa-sun"></i> 12 – 6 PM</button>
+          <button class="tu-chip" [class.active]="depWindow === 'night'" (click)="setDepWindow('night')"><i class="fas fa-star"></i> After 6 PM</button>
+        </div>
+      </div>
+
+      <!-- Feature 4: quota selector -->
+      @if (availableQuotaOptions.length > 1) {
+        <div class="tu-filter-group">
+          <span class="tu-filter-label">Quota</span>
+          <div class="tu-chip-row">
+            <button class="tu-chip" [class.active]="quotaFilter === 'all'" (click)="quotaFilter = 'all'">All</button>
+            @for (q of availableQuotaOptions; track q) {
+              <button class="tu-chip" [class.active]="quotaFilter === q" (click)="quotaFilter = q">{{ q }}</button>
+            }
+          </div>
         </div>
       }
     </div>
-  }
+    <div class="modal-footer tu-modal-foot">
+      @if (hasActiveFilters) {
+        <button type="button" class="tu-clear-filters" (click)="clearFilters()"><i class="fas fa-rotate-left"></i> Reset all</button>
+      }
+      <button type="button" class="btn btn-gradient tu-apply-btn" (click)="m()">Show {{ filteredCount }} trains</button>
+    </div>
+  </ng-template>
 
   <!-- Feature 5: recommended train -->
   @if (!loading && !error && recommendation) {
     <div class="tu-recommended">
       <div class="tu-recommended-head">
-        <span class="tu-recommended-badge"><i class="fas fa-award"></i> Recommended</span>
+        <span class="tu-recommended-badge"><i class="fas fa-bolt"></i> Recommended for you</span>
         @for (tag of recommendationTags; track tag) {
           <span class="tu-recommended-tag">{{ tag }}</span>
         }

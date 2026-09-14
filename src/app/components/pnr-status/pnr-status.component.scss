@@ -1,0 +1,57 @@
+.tu-pnr-hero {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+.tu-pnr-hero .tu-tno {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--tu-primary-700);
+}
+.tu-pnr-hero .tu-tname {
+  font-family: var(--tu-font-display), sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--tu-text);
+}
+.tu-pnr-hero .tu-pnr-chart {
+  margin-left: auto;
+}
+
+.tu-pax {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+.tu-paxcard {
+  border: 1px solid var(--tu-border);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--tu-bg);
+}
+.tu-paxcard .row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tu-paxcard .who {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tu-text-muted);
+}
+.tu-paxcard .berth {
+  font-family: var(--tu-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--tu-text);
+  margin-top: 8px;
+}
+.tu-paxcard .meta {
+  font-size: 12px;
+  color: var(--tu-ink-3);
+  margin-top: 4px;
+}

@@ -1,86 +1,105 @@
-<div class="mx-auto w-full max-w-[900px] px-4 py-8">
-  <div class="mb-6">
-    <h1 class="text-2xl font-bold mb-1"><i class="fas fa-clock me-2"></i>Train Schedule</h1>
-    <p class="text-sm opacity-70">Full station-by-station timetable for any train.</p>
+<div class="tu-page">
+  <div class="tu-page-head">
+    <div class="tu-head-row">
+      <div>
+        <span class="tu-eyebrow"><i class="fas fa-route"></i> Timetable</span>
+        <h1>Train Schedule</h1>
+        <p>Full stop-by-stop timetable with arrival, departure and halts.</p>
+      </div>
+      @if (result) {
+        <div class="tu-head-actions">
+          @if (!editing) {
+            <button type="button" class="tu-share-btn" (click)="toggleEdit()" aria-label="Edit search" title="Edit search">
+              <i class="fas fa-pen"></i>
+            </button>
+          }
+          <button type="button" class="tu-share-btn" (click)="share()" aria-label="Share this page" title="Share">
+            <i class="fas fa-share-nodes"></i>
+          </button>
+        </div>
+      }
+    </div>
   </div>
 
-  <div class="tu-card p-4 mb-6">
-    <label for="schInput" class="block text-sm font-medium mb-1">Train number</label>
-    <div class="flex flex-col sm:flex-row gap-3">
-      <input id="schInput" type="text" inputmode="numeric" maxlength="6"
-        class="tu-input flex-1" placeholder="e.g. 12951"
-        [(ngModel)]="trainNo" (keydown.enter)="search()" />
+  @if (!result || editing) {
+  <div class="tu-card-flat">
+    <label for="schTrain" class="tu-field-label">Train number</label>
+    <div class="tu-search-row">
+      <app-train-input class="flex-1" inputId="schTrain"
+        [(value)]="trainNo" (committed)="search()"></app-train-input>
       <button class="btn btn-gradient px-4" type="button" (click)="search()" [disabled]="loading">
-        <i class="fas fa-list-ul me-1"></i> {{ loading ? 'Loading…' : 'Get Schedule' }}
+        <i class="fas fa-magnifying-glass me-1"></i> {{ loading ? 'Loading…' : 'View Schedule' }}
       </button>
     </div>
     @if (submitted && !valid) {
-      <p class="text-sm text-red-500 mt-2">Enter a valid train number (4–6 digits).</p>
+      <p class="tu-form-error">Enter a valid 4–6 digit train number.</p>
     }
+    <app-recent-chips [entries]="recent" (pick)="pickRecent($event)" (clear)="clearRecent()"></app-recent-chips>
   </div>
+  }
+
 
   @if (loading) { <app-loader></app-loader> }
 
   @if (error) {
-    <div class="tu-card p-4 border-l-4 border-red-500">
-      <p class="text-red-500 font-medium"><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
+    <div class="tu-card-flat tu-error-card">
+      <p><i class="fas fa-triangle-exclamation me-1"></i> {{ error }}</p>
     </div>
   }
 
   @if (result) {
-    <div class="tu-card p-4 mb-4">
-      <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
-        <div>
-          <span class="text-lg font-bold">{{ result.TrainNo }}</span>
-          <span class="ms-2">{{ result.TrainName }}</span>
-        </div>
-        <span class="tu-badge">{{ result.TrainType }}</span>
+    <div class="tu-card-flat">
+      <div class="tu-sch-hero">
+        <span class="tu-tno tu-mono">{{ result.TrainNumberString || result.TrainNo }}</span>
+        <span class="tu-tname">{{ result.TrainName }}</span>
+        @if (result.TrainType) { <span class="tu-type-chip">{{ result.TrainType }}</span> }
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm mb-3">
-        <div><div class="opacity-60">From</div><div class="font-medium">{{ result.Source }} ({{ result.SourceCode }})</div></div>
-        <div><div class="opacity-60">To</div><div class="font-medium">{{ result.Destination }} ({{ result.DestinationCode }})</div></div>
-        <div><div class="opacity-60">Duration</div><div class="font-medium">{{ formatDuration(result.TotalDuration) }}</div></div>
-        <div><div class="opacity-60">Distance</div><div class="font-medium">{{ result.TotalDistance }}</div></div>
-      </div>
-      <div class="flex flex-wrap gap-1.5 mb-2">
-        @for (c of result.Classes; track c) { <span class="tu-badge">{{ c }}</span> }
-      </div>
-      @if (runDays.length) {
-        <div class="text-xs opacity-70">Runs: {{ runDays.join(', ') }}</div>
-      }
-    </div>
 
-    <div class="tu-card p-4 overflow-x-auto">
-      <table class="w-full text-sm min-w-[520px]">
-        <thead>
-          <tr class="text-left opacity-70 border-b border-[var(--tu-border)]">
-            <th class="py-2">#</th>
-            <th class="py-2">Station</th>
-            <th class="py-2">Arr</th>
-            <th class="py-2">Dep</th>
-            <th class="py-2">Halt</th>
-            <th class="py-2">Day</th>
-            <th class="py-2">Dist</th>
-            <th class="py-2">PF</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="tu-route-line">
+        <span>{{ result.Source }} <b class="tu-mono">{{ result.SourceCode }}</b></span>
+        <i class="fas fa-arrow-right-long"></i>
+        <span>{{ result.Destination }} <b class="tu-mono">{{ result.DestinationCode }}</b></span>
+      </div>
+
+      <div class="tu-summary">
+        <div class="tu-stat"><div class="k">Distance</div><div class="v tu-tnum">{{ result.TotalDistance || '—' }}</div></div>
+        <div class="tu-stat"><div class="k">Duration</div><div class="v tu-tnum">{{ formatDuration(result.TotalDuration) }}</div></div>
+        <div class="tu-stat"><div class="k">Stops</div><div class="v tu-tnum">{{ result.TotalNumberOfStops ?? result.Schedule?.length ?? '—' }}</div></div>
+      </div>
+
+      @if (runDays.length) {
+        <div class="tu-days">
+          @for (d of runDays; track d) { <span class="tu-day-chip">{{ d }}</span> }
+        </div>
+      }
+
+      @if (result.Schedule?.length) {
+        <div class="tu-timeline tu-sch">
           @for (s of result.Schedule; track s.StopNumber) {
-            <tr class="border-b border-[var(--tu-border)]">
-              <td class="py-2">{{ s.StopNumber }}</td>
-              <td class="py-2 font-medium">{{ s.StationName }} <span class="opacity-50 text-xs">({{ s.StationCode }})</span></td>
-              <td class="py-2">{{ s.ArrivalTime }}</td>
-              <td class="py-2">{{ s.DepartureTime }}</td>
-              <td class="py-2">{{ s.HaltMinutes }}m</td>
-              <td class="py-2">{{ s.Day }}</td>
-              <td class="py-2">{{ s.DistanceFromOrigin }}</td>
-              <td class="py-2">{{ s.ExpectedPlatformNo }}</td>
-            </tr>
+            <div class="tu-tl-row" [attr.data-state]="'done'">
+              <div class="tu-tl-dot"></div>
+              <div class="tu-tl-body">
+                <div class="tu-tl-top">
+                  <span class="name">{{ s.StationName }}
+                    <span class="code tu-mono">{{ s.StationCode }}</span>
+                  </span>
+                  <span class="km tu-mono">{{ s.DistanceFromOrigin }}</span>
+                </div>
+                <div class="tu-tl-times tu-mono">
+                  <span>Arr {{ s.ArrivalTime || '—' }}</span>
+                  <span>Dep {{ s.DepartureTime || '—' }}</span>
+                  @if (s.HaltMinutes && s.HaltMinutes !== '0') { <span class="halt">Halt {{ s.HaltMinutes }}m</span> }
+                  @if (s.ExpectedPlatformNo && s.ExpectedPlatformNo !== '0') { <span>PF {{ s.ExpectedPlatformNo }}</span> }
+                  @if (s.Day) { <span class="day">Day {{ s.Day }}</span> }
+                </div>
+              </div>
+            </div>
           }
-        </tbody>
-      </table>
+        </div>
+      }
+
       @if (result.DisclaimerMsg) {
-        <p class="text-xs opacity-50 mt-3">{{ result.DisclaimerMsg }}</p>
+        <p class="tu-disclaimer">{{ result.DisclaimerMsg }}</p>
       }
     </div>
   }

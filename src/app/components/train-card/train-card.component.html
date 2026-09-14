@@ -1,20 +1,20 @@
 <div class="tu-train-card">
-  <!-- Header: train name + running days -->
-  <div class="tu-train-head">
-    <div class="tu-train-name">
-      <span class="tu-train-num">{{ train.trainNumber }}</span>
-      <span class="tu-train-title">{{ train.trainName }}</span>
-      <!-- Feature 6: journey badges -->
-      @if (train?.isFastest) {
-        <span class="tu-badge tu-badge-fastest" title="Fastest train on this route"><i class="fas fa-bolt"></i> Fastest</span>
-      }
-      @if (train?.isPopular) {
-        <span class="tu-badge tu-badge-popular" title="Popular choice on this route"><i class="fas fa-fire"></i> Popular</span>
-      }
-      @if (train?.distance) {
-        <span class="tu-badge tu-badge-distance" title="Distance"><i class="fas fa-route"></i> {{ train.distance }} km</span>
-      }
+  <!-- Header: num(→schedule) + name + FASTEST + RIS icons + running days -->
+  <div class="tu-train-top">
+    <a class="tu-train-num" [routerLink]="['/schedule']" [queryParams]="{ trainNo: train.trainNumber }"
+       title="View train schedule" aria-label="View train schedule">{{ train.trainNumber }}</a>
+    <span class="tu-train-title" [title]="train.trainName">{{ train.trainName }}</span>
+    @if (train?.isFastest) {
+      <span class="tu-tag tu-tag-fast">FASTEST</span>
+    }
+
+    <div class="tu-train-actions">
+      <a class="tu-ico-btn" [routerLink]="['/live-status']" [queryParams]="{ trainNo: train.trainNumber }"
+         title="Live running status" aria-label="Live running status"><i class="fas fa-location-crosshairs"></i></a>
+      <a class="tu-ico-btn" [routerLink]="['/coach-position']" [queryParams]="{ trainNo: train.trainNumber, stn: train.fromStationCode }"
+         title="Coach position" aria-label="Coach position"><i class="fas fa-train-subway"></i></a>
     </div>
+
     <div class="tu-run-days" title="Running days">
       <span [class.on]="train?.runningMon === 'Y'">M</span>
       <span [class.on]="train?.runningTue === 'Y'">T</span>
@@ -26,49 +26,40 @@
     </div>
   </div>
 
-  <!-- Journey visualization -->
-  <div class="tu-journey">
-    <div class="tu-stop tu-stop-start">
-      <p class="tu-time">{{ helper.convertTo12HourFormat(train.departureTime) }}</p>
-      <p class="tu-station">{{ train.fromStation }} <span class="tu-code">({{ train.fromStationCode }})</span></p>
-      <p class="tu-date">{{ helper.formatDateString(train.departureDate) }}</p>
-      @if (train?.boardingHaltTime) {
-        <p class="tu-halt" title="Halt at boarding station"><i class="fas fa-hourglass-half"></i> {{ train.boardingHaltTime }}</p>
-      }
+  <!-- Journey: departure board leg -->
+  <div class="tu-leg">
+    <div class="tu-pt" [title]="train.fromStation">
+      <div class="tu-t">{{ helper.convertTo12HourFormat(train.departureTime) }}</div>
+      <div class="tu-s">{{ train.fromStationCode }}</div>
     </div>
-
-    <div class="tu-journey-line">
-      <span class="tu-dot"></span>
-      <span class="tu-line"></span>
-      <span class="tu-duration"><i class="fa-regular fa-clock"></i> {{ train.duration }} hrs</span>
-      <span class="tu-line"></span>
-      <span class="tu-dot tu-dot-end"></span>
+    <div class="tu-mid">
+      <div class="tu-dur">{{ train.duration }} hrs</div>
+      <div class="tu-track"></div>
     </div>
-
-    <div class="tu-stop tu-stop-end">
-      <p class="tu-time">{{ helper.convertTo12HourFormat(train.arrivalTime) }}</p>
-      <p class="tu-station">{{ train.toStation }} <span class="tu-code">({{ train.toStationCode }})</span></p>
-      <p class="tu-date">{{ helper.formatDateString(train.arrivalDate) }}</p>
-      @if (train?.droppingHaltTime) {
-        <p class="tu-halt" title="Halt at destination station"><i class="fas fa-hourglass-half"></i> {{ train.droppingHaltTime }}</p>
-      }
+    <div class="tu-pt" [title]="train.toStation">
+      <div class="tu-t">{{ helper.convertTo12HourFormat(train.arrivalTime) }}</div>
+      <div class="tu-s">{{ train.toStationCode }}</div>
     </div>
   </div>
 
-  <!-- Availability quota cards -->
+  <!-- Availability fare boxes — swipeable carousel + compact 2-week link -->
   @if (showNextAvail) {
-    <div class="tu-avail-wrap">
-      <div class="tu-avail-grid">
+    <div class="tu-avail-carousel">
+      <button type="button" class="tu-avail-nav tu-avail-prev" (click)="scrollFares(-1)"
+        [class.show]="overflowing" [disabled]="atStart"
+        aria-label="Previous classes"><i class="fas fa-chevron-left"></i></button>
+
+      <div class="tu-avail" #fareTrack (scroll)="onFareScroll()">
         @for (avail of train.availabilitiesList; track avail) {
-          <div class="tu-avail-item">
-            <app-availability-card [avail]="avail" [train]="train" [doj]="doj ?? ''"></app-availability-card>
-          </div>
+          <app-availability-card [avail]="avail" [train]="train" [doj]="doj ?? ''"></app-availability-card>
         }
       </div>
-    </div>
-  }
 
-  @if (showNextAvail) {
+      <button type="button" class="tu-avail-nav tu-avail-next" (click)="scrollFares(1)"
+        [class.show]="overflowing" [disabled]="atEnd"
+        aria-label="More classes"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
     <app-next-availabilty [train]="train" [doj]="doj ?? ''"></app-next-availabilty>
   }
 </div>

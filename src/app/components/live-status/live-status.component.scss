@@ -1,0 +1,219 @@
+.tu-live-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.tu-live-hero .tu-tno {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--tu-primary-700);
+}
+.tu-live-hero .tu-tname {
+  font-family: var(--tu-font-display), sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--tu-text);
+  margin-top: 2px;
+}
+.tu-delay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+.tu-delay-badge.ontime {
+  background: var(--tu-signal-wash);
+  color: var(--tu-primary-700);
+}
+.tu-delay-badge.delayed {
+  background: var(--tu-delay-wash);
+  color: var(--tu-delay);
+}
+[data-theme='dark'] .tu-delay-badge.ontime { color: #fff; }
+
+.tu-live-msg {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--tu-bg);
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--tu-text-muted);
+}
+
+/* vertical station timeline */
+.tu-timeline {
+  margin-top: 20px;
+  position: relative;
+  padding-left: 6px;
+}
+.tu-tl-row {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: 0 0 20px 20px;
+}
+.tu-tl-row::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: -6px;
+  width: 2px;
+  background: var(--tu-border);
+}
+.tu-tl-row:last-child::before { display: none; }
+.tu-tl-dot {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tu-surface);
+  border: 2px solid var(--tu-border);
+  z-index: 1;
+}
+.tu-tl-row[data-state='done'] .tu-tl-dot {
+  background: var(--tu-ontime);
+  border-color: var(--tu-ontime);
+}
+/* Completed legs: solid green connector line */
+.tu-tl-row[data-state='done']::before {
+  background: var(--tu-ontime);
+}
+/* The live "current" station: pulsing green dot with a moving train icon */
+.tu-tl-row.here .tu-tl-dot {
+  background: var(--tu-primary);
+  border-color: var(--tu-primary);
+  width: 16px;
+  height: 16px;
+  left: -2px;
+  top: 3px;
+  box-shadow: 0 0 0 0 rgba(20, 160, 120, 0.5);
+  animation: tu-pulse 1.8s var(--tu-ease) infinite;
+}
+.tu-tl-train {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 8px;
+  line-height: 1;
+  animation: tu-train-bob 1.4s ease-in-out infinite;
+}
+@keyframes tu-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(20, 160, 120, 0.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(20, 160, 120, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(20, 160, 120, 0); }
+}
+@keyframes tu-train-bob {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  50%      { transform: translate(-50%, -60%) rotate(-6deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tu-tl-row.here .tu-tl-dot { animation: none; }
+  .tu-tl-train { animation: none; }
+}
+.tu-tl-row.queried .tu-tl-dot {
+  background: var(--tu-primary);
+  border-color: var(--tu-primary);
+  box-shadow: 0 0 0 4px var(--tu-signal-wash);
+  width: 14px;
+  height: 14px;
+  left: -1px;
+}
+.tu-tl-body { flex: 1; }
+.tu-tl-row.queried .tu-tl-body { font-weight: 600; }
+.tu-tl-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tu-tl-top .name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--tu-text);
+}
+.tu-tl-top .code {
+  font-size: 12px;
+  color: var(--tu-ink-3);
+  margin-left: 4px;
+}
+.tu-tl-top .lateflag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tu-delay);
+  font-variant-numeric: tabular-nums;
+}
+.tu-tl-top .okflag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tu-primary-700);
+}
+.tu-tl-top .okflag i { margin-right: 3px; font-size: 10px; }
+.tu-tl-top .lateflag i { margin-right: 3px; font-size: 10px; }
+/* Predicted (not-yet-reached) delay: muted amber */
+.tu-tl-top .predflag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tu-delay);
+  opacity: 0.75;
+}
+.tu-tl-top .predflag i { margin-right: 3px; font-size: 10px; }
+/* "Train here" pulsing flag */
+.tu-tl-top .hereflag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tu-primary-700);
+  background: var(--tu-signal-wash);
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+[data-theme='dark'] .tu-tl-top .hereflag { color: #fff; }
+.hereflag .pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tu-primary);
+  animation: tu-pulse-dot 1.4s ease-in-out infinite;
+}
+@keyframes tu-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hereflag .pulse-dot { animation: none; }
+}
+/* Upcoming stops are dimmed until reached */
+.tu-tl-row[data-state='upcoming'] .tu-tl-top .name,
+.tu-tl-row[data-state='upcoming'] .tu-tl-times { opacity: 0.62; }
+.tu-tl-times i { margin-right: 3px; font-size: 10px; color: var(--tu-ink-3); }
+.tu-tl-times .daytag {
+  font-weight: 700;
+  color: var(--tu-primary-700);
+}
+.tu-tl-times {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--tu-text-muted);
+}
+.tu-disclaimer {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--tu-ink-3);
+}

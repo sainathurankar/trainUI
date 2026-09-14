@@ -123,4 +123,56 @@ describe('Helper (feature-ui-enhancements additions)', () => {
       expect(Helper.departureWindow('18:00')).toBe('night');
     });
   });
+
+  describe('convertTo12HourFormat', () => {
+    it('converts 24h times to 12h with period', () => {
+      expect(Helper.convertTo12HourFormat('13:40')).toBe('1:40 PM');
+      expect(Helper.convertTo12HourFormat('00:05')).toBe('12:05 AM');
+      expect(Helper.convertTo12HourFormat('12:00')).toBe('12:00 PM');
+    });
+    it('returns empty string for undefined/empty', () => {
+      expect(Helper.convertTo12HourFormat(undefined)).toBe('');
+      expect(Helper.convertTo12HourFormat('')).toBe('');
+    });
+  });
+
+  describe('convertDateToString', () => {
+    it('converts dd-mm-yyyy to yyyymmdd', () => {
+      expect(Helper.convertDateToString('29-12-2023')).toBe('20231229');
+    });
+    it('returns empty string for undefined/empty', () => {
+      expect(Helper.convertDateToString(undefined)).toBe('');
+      expect(Helper.convertDateToString('')).toBe('');
+    });
+  });
+
+  describe('nextDayDate', () => {
+    it('advances one day and returns yyyymmdd, rolling over month end', () => {
+      expect(Helper.nextDayDate('31-12-2023')).toBe('20240101');
+      expect(Helper.nextDayDate('01-01-2024')).toBe('20240102');
+    });
+  });
+
+  describe('formatDateString', () => {
+    it('formats dd-mm-yyyy into a human weekday/month/day string', () => {
+      // 29-12-2023 is a Friday
+      expect(Helper.formatDateString('29-12-2023')).toBe('Friday, Dec 29');
+    });
+    it('returns empty string for undefined/empty', () => {
+      expect(Helper.formatDateString(undefined)).toBe('');
+      expect(Helper.formatDateString('')).toBe('');
+    });
+  });
+
+  describe('buildRedBusHyperLink', () => {
+    it('builds a query string with all params', () => {
+      const url = Helper.buildRedBusHyperLink('UBL', 'HLN', '20231229', '17302', '1A', 'GN', 'Some Exp', 'GENERAL');
+      expect(url).toContain('src=UBL');
+      expect(url).toContain('dst=HLN');
+      expect(url).toContain('doj=20231229');
+      expect(url).toContain('trainNo=17302');
+      expect(url).toContain('cls=1A');
+      expect(url).toContain('q=GN');
+    });
+  });
 });

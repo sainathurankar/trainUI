@@ -45,6 +45,7 @@
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/regular.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/brands.min.css",
+              "src/tailwind.css",
               "src/styles.scss"
             ],
             "scripts": [
